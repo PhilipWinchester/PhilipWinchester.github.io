@@ -18,7 +18,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 locale                   : "en-US"
 title                    : "Site Title"
 title_separator          : "-"
-name                     : "Your Name"
+name                     : "Philip Winchester"
 description              : "An amazing website."
 url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -109,7 +109,7 @@ author:
   name             : "Your Name"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I am an amazing person."
-  location         : "Somewhere"
+  location         : "London, UK"
   email            :
   links:
     - label: "Email"
@@ -293,3 +293,11 @@ defaults:
       comments: # true
       share: true
       related: true
+
+      # _pages
+      - scope:
+          path: ""
+          type: pages
+        values:
+          layout: single
+          author_profile: true
