@@ -1,10 +1,10 @@
-#---
-#layout: archive
-#permalink: /fantasy-premier-league/
-#title: "Fantasy Premier League Posts by Tags"
-#author_profile: true
-#header:
-#  image:
+---
+layout: archive
+permalink: /fantasy-premier-league/
+title: "Fantasy Premier League Posts by Tags"
+author_profile: true
+header:
+  image:
 ---
 
 {% include group-by-array collection=site.posts field="tags" %}
