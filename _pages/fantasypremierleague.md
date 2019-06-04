@@ -1,7 +1,7 @@
 ---
 layout: archive
-permalink: /fantasy-premier-league/
-title: "Fantasy Premier League Posts by Tags"
+permalink: /tags/
+title: "Posts by Tags"
 author_profile: true
 header:
   image:

@@ -2,8 +2,8 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Fantasy Premier League"
-    url: /fantasy-premier-league/
+  - title: "Tags"
+    url: /tags/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
