@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /fantasy-premier-league/
-title: "Fantasy Premier League"
+title: "Fantasy Premier League Posts by Tags"
 author_profile: true
 #header:
 #  image:
