@@ -1,11 +1,13 @@
----
-layout: archive
-permalink: /fantasy-premier-league/
-title: "Fantasy Premier League Posts by Tags"
-author_profile: true
+#---
+#layout: archive
+#permalink: /fantasy-premier-league/
+#title: "Fantasy Premier League Posts by Tags"
+#author_profile: true
 #header:
 #  image:
 ---
+
+{% include group-by-array collection=site.posts field="tags" %}
 
 {% for tag in group_names %}
   {% assign posts = group_items[forloop.index0] %}
