@@ -23,3 +23,9 @@ After playing FPL for a number of years, I have developed a squad structure whic
 Below is a picture of my squad going into gameweek 16. Hopefully the structure mentioned above is clear.
 
 <img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/My squad.jpg" alt="">
+
+Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend to sit on the bench. The key decisions to make is who out of the middle men joins them. For gameweek 16, it looks like it might be Mooy, as Huddersfield face Arsenal away.
+
+For any FPL analysis, thinking about upcoming fixtures is crucial and the table below outlines how difficult I believe each team is to face home and away (higher score = harder).
+
+<img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/Table 1.jpg" alt="Table 1. Difficulty of playing each team home and away.">
