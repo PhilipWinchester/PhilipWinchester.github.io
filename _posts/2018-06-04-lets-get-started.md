@@ -28,4 +28,4 @@ Hence, we have:
 
 Combining the above gives us:
 
-$${450 \choose 13} \times {50 \choose 2} \times (2({8 \choose 3} - 3) + 4{8 \choose 2} + 8{5 \choose 3}) \times 2{12 \choose 2} \times 35 \approx 1.1 \times 10^{34}$$
+$${450 \choose 13} \times {50 \choose 2} \times \Big((2\Big({8 \choose 3} - 3\Big) + 4{8 \choose 2} + 8{5 \choose 3}\Big) \times 2{12 \choose 2} \times 35 \approx 1.1 \times 10^{34}$$
