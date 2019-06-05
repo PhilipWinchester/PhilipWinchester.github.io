@@ -9,3 +9,12 @@ header:
   overlay_filter: 0.4
 classes: wide
 ---
+**You are hopefully confident your squad will score highly in each gameweek and given your transfer limitations, perhaps also in a few gameweeks to come. How can you be confident in this? What are the factors you consider/should consider before selecting your squad? These are the ideas we need to quantify before we can move on to any kind of machine learning. In this post I will talk about the general squad structure I aim for and introduce a program I use to optimise this.**
+
+After playing FPL for a number of years, I have developed a squad structure which I am happy with and rarely diverge from. Usually I have:
+
+1. Two starting goalkeepers outside the "Big Six". In recent years I have found "Big Six" goalkeepers overpriced and having two mid-table goalkeepers to rotate with respect to favourable fixtures is usually the better option and allows you to spend money elsewhere.
+2. Three premium defenders. These players are usually accompanied by a price tag of £5.5m+, but have proven well worth the investment in recent years. In todays football, we see fullbacks bombing forwards and the likes of Alonso, Robertson, Trippier and Mendy have all been excellent selections this year.
+3. Two budget defenders. With the three premium options, there is no need to throw any more cash on the backline. Wan-Bissaka and Bennett always play for their respective teams and with their modest price tag of around £4.0m, they have been trustworthy substitutes for me this season.
+4. Three premium options. The squad is not complete without your Hazards, Agueros, Salas, and Kanes. This is where you expect to get the big points.
+5. The rest. There are five picks left spanning the attack and midfield. Usually, I select these in the £5.5m-£7.5m range depending on how much I have spent on the above. I will refer to these as the middle men and today we are going to make them count. 
