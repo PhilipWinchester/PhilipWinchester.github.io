@@ -108,16 +108,16 @@ analytics:
 author:
   name             : "Philip Winchester"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I think about maths alot."
+  bio              : "Mathematician and amature data scientist who likes football"
   location         : "London, UK"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: mailto:philipwinchester16@email.com
+      url: mailto:philipwinchester16@gmail.com
     - label: "Website"
-      icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      icon: "fas fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/philip-winchester-398572135/"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
