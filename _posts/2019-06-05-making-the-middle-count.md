@@ -105,5 +105,3 @@ For any FPL analysis, thinking about upcoming fixtures is crucial and the table 
   </tbody>
 </table>
 </div>
-
-#<img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/Table 1.jpg" alt="Table 1. Difficulty of playing each team home and away.">
