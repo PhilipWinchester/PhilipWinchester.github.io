@@ -107,7 +107,7 @@ analytics:
 # Site Author
 author:
   name             : "Philip Winchester"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/images/Me.jpg"
   bio              : "Mathematician and amature data scientist who likes football"
   location         : "London, UK"
   email            :
