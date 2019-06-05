@@ -28,4 +28,82 @@ Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend 
 
 For any FPL analysis, thinking about upcoming fixtures is crucial and the table below outlines how difficult I believe each team is to face home and away (higher score = harder).
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/Table 1.jpg" alt="Table 1. Difficulty of playing each team home and away.">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Team</th>
+      <th>MCI</th>
+      <th>LIV</th>
+      <th>CHE</th>
+      <th>TOT</th>
+      <th>ARS</th>
+      <th>MNU</th>
+      <th>WOL</th>
+      <th>EVE</th>
+      <th>WHU</th>
+      <th>BOU</th>
+      <th>LEI</th>
+      <th>WAT</th>
+      <th>BHA</th>
+      <th>BUR</th>
+      <th>CRY</th>
+      <th>NEW</th>
+      <th>FUL</th>
+      <th>SOU</th>
+      <th>HUD</th>
+      <th>CAR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>H Difficulty</th>
+      <th>80.0</th>
+      <th>73.0</th>
+      <th>71.0</th>
+      <th>70.0</th>
+      <th>63.0</th>
+      <th>62.0</th>
+      <th>55.0</th>
+      <th>51.0</th>
+      <th>50.0</th>
+      <th>46.0</th>
+      <th>46.0</th>
+      <th>44.0</th>
+      <th>42.0</th>
+      <th>42.0</th>
+      <th>42.0</th>
+      <th>40.0</th>
+      <th>39.0</th>
+      <th>38.0</th>
+      <th>34.0</th>
+      <th>33.0</th>
+    </tr>
+    <tr>
+    <th>A Difficulty</th>
+    <th>104.0</th>
+    <th>94.9</th>
+    <th>92.3</th>
+    <th>91.0</th>
+    <th>81.9</th>
+    <th>80.6</th>
+    <th>71.5</th>
+    <th>66.3</th>
+    <th>65.0</th>
+    <th>59.8</th>
+    <th>59.8</th>
+    <th>57.2</th>
+    <th>54.6</th>
+    <th>54.6</th>
+    <th>54.6</th>
+    <th>52.0</th>
+    <th>50.7</th>
+    <th>49.4</th>
+    <th>44.2</th>
+    <th>42.9</th>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+#<img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/Table 1.jpg" alt="Table 1. Difficulty of playing each team home and away.">
