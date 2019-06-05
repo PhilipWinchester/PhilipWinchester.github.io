@@ -21,6 +21,5 @@ After playing FPL for a number of years, I have developed a squad structure whic
 5. The rest. There are five picks left spanning the attack and midfield. Usually, I select these in the £5.5m-£7.5m range depending on how much I have spent on the above. I will refer to these as the middle men and today we are going to make them count.
 
 Below is a picture of my squad going into gameweek 16. Hopefully the structure mentioned above is clear.
-<img src="{{ site.url }}{{ site.baseurl }}/images/perceptron/linsep.jpg" alt="linearly separable data">
 
-<img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/Richarlison.jpg" alt="">
+<img src="{{ site.url }}{{ site.baseurl }}/images/Making the middle count/My squad.jpg" alt="">
