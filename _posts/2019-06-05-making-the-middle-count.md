@@ -24,7 +24,7 @@ Below is a picture of my squad going into gameweek 16. Hopefully the structure m
 
 <img src="/images/Making the middle count/My squad.jpg" alt="" width="600" height="450">
 
-![image-center](/images/Making the middle count/My squad.jpg){: .align-center}
+![image-center](/images/Making the middle count/My squad.jpg){: .align-center .width-half}
 
 Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend to sit on the bench. The key decisions to make is who out of the middle men joins them. For gameweek 16, it looks like it might be Mooy, as Huddersfield face Arsenal away.
 
