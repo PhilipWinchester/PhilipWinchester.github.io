@@ -29,7 +29,7 @@ Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend 
 For any FPL analysis, thinking about upcoming fixtures is crucial and the table below outlines how difficult I believe each team is to face home and away (higher score = harder).
 
 <div>
-<table border="1" class="dataframe">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>Difficulty</th>
