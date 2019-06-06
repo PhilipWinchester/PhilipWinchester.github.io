@@ -255,4 +255,4 @@ After the above code, "FPL" is a dataframe which only includes teams with player
 
 ## Appendix
 
-<img src="/images/Making the middle count/My squad.jpg" alt="Figure 1. Data frame after delating teams with no interesting teams and some rearranging.  ">
+<img src="/images/Making the middle count/Figure 1.jpg" alt="Figure 1. Data frame after delating teams with no interesting teams and some rearranging.">
