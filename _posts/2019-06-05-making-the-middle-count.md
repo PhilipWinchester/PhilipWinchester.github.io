@@ -113,7 +113,7 @@ When picking your middle men, it is desirable always to have the option to field
 The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
 
 <div>
-<table border="1" class="dataframe" style="width:30%">
+<table border="1" class="dataframe" style="width:40%">
   <thead>
     <tr style="text-align: right;">
       <th>Player</th>
@@ -168,3 +168,5 @@ The table on the below displays the difficulty of the next five fixtures played 
   </tbody>
 </table>
 </div>
+
+## 
