@@ -113,7 +113,7 @@ When picking your middle men, it is desirable always to have the option to field
 The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
 
 <div>
-<table border="1" class="dataframe" style="width:40%">
+<table border="1" class="dataframe" style="width:43%">
   <thead>
     <tr style="text-align: right;">
       <th>Player</th>
@@ -169,4 +169,60 @@ The table on the below displays the difficulty of the next five fixtures played 
 </table>
 </div>
 
-## 
+## The code
+**It would be useful to calculate the above score for all possible combinations of five middle men.** This will be the the goal of this section.* It is of course not necessary to consider all midfielders and forwards in £5.5m-£7.5m range, but perhaps a subset of players who are in good form and are likely to play well going forward. I have decided to look at players who have at least 48 total points or 5 in the FPL form rating. The bellow table displays which teams have players under this condition. In total, there are 30 players we wish to consider.
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ARS</th>
+      <th>BOU</th>
+      <th>BHA</th>
+      <th>BUR</th>
+      <th>CAR</th>
+      <th>CHE</th>
+      <th>CRY</th>
+      <th>EVE</th>
+      <th>FUL</th>
+      <th>HUD</th>
+      <th>LEI</th>
+      <th>LIV</th>
+      <th>MCI</th>
+      <th>MNU</th>
+      <th>NEW</th>
+      <th>SOU</th>
+      <th>TOT</th>
+      <th>WAT</th>
+      <th>WHU</th>
+      <th>WOL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Players</th>
+      <th>0</th>
+      <th>3</th>
+      <th>2</th>
+      <th>1</th>
+      <th>1</th>
+      <th>3</th>
+      <th>2</th>
+      <th>3</th>
+      <th>2</th>
+      <th>1</th>
+      <th>1</th>
+      <th>2</th>
+      <th>1</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>1</th>
+      <th>1</th>
+      <th>2</th>
+      <th>1</th>
+    </tr>
+  </tbody>
+</table>
+</div>
