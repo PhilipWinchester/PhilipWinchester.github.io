@@ -8,6 +8,17 @@ header:
   overlay_image: "/images/Making the middle count/Richarlison.jpg"
   overlay_filter: 0.4
 classes: wide
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
 ---
 
 **You are hopefully confident your squad will score highly in each gameweek and given your transfer limitations, perhaps also in a few gameweeks to come. How can you be confident in this? What are the factors you consider/should consider before selecting your squad? These are the ideas we need to quantify before we can move on to any kind of machine learning. In this post I will talk about the general squad structure I aim for and introduce a program I use to optimise this.**
@@ -22,7 +33,7 @@ After playing FPL for a number of years, I have developed a squad structure whic
 
 Below is a picture of my squad going into gameweek 16. Hopefully the structure mentioned above is clear.
 
-<img src="/images/Making the middle count/My squad.jpg" alt="" width="600" height="450" class = "center">
+<img src="/images/Making the middle count/My squad.jpg" alt="" width="600" height="450" style="width:50%;">
 
 Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend to sit on the bench. The key decisions to make is who out of the middle men joins them. For gameweek 16, it looks like it might be Mooy, as Huddersfield face Arsenal away.
 
