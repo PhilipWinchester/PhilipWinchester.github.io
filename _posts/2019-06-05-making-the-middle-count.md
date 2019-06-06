@@ -274,8 +274,7 @@ SumMinusMax <- function(x){
 }
 
 MatrixMaker  <- function(L,DataFrame,n=5){
-  #takes a list of teams and a date frame and produces a matrix with their
-  #game difficulties. n is the number of gameweeks we are looking at.
+  #takes a list of teams and a date frame and produces a matrix with their game difficulties. n is the number of gameweeks we are looking at.
   v1 <- as.numeric(DataFrame[match(L[1],DataFrame$Team),c(2:(n+1))])
   v2 <- as.numeric(DataFrame[match(L[2],DataFrame$Team),c(2:(n+1))])
   mat <- matrix(c(v1,v2),nrow=length(v1))
@@ -315,7 +314,43 @@ Ans <- cbind(PlayerMatrix, Scores, rank(Scores),rank(Scores)/length(Scores))
 
 In Ans, we combine "Scores", a couple of useful stats and PlayerMatrix. The result is seen in Figure 3 of the Appendix.
 
+## Results
+The table below shows row 20939 of Ans which happens to be the combination of middle men I currently possess and we can hence conclude that my boys are within the top 26% of all combinations.Luckily the score of 1061.3 is consistent with what we had before.
+
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Player 1</th>
+      <th>Player 2</th>
+      <th>Player 3</th>
+      <th>Player 4</th>
+      <th>Player 5</th>
+      <th>Scores</th>
+      <th>Rank</th>
+      <th>Within (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Players</th>
+      <th>Bournemouth</th>
+      <th>Everton</th>
+      <th>Fulham</th>
+      <th>Huddersfield</th>
+      <th>West Ham</th>
+      <th>1061.3</th>
+      <th>36218</th>
+      <th>25.42</th>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 ## Appendix
 
 {% include figure image_path="/images/Making the middle count/Figure 1.jpg" alt="this is a placeholder image" caption="Figure 1. Data frame after delating teams with no interesting teams and some rearranging." %}
+
+{% include figure image_path="/images/Making the middle count/Figure 2.jpg" alt="this is a placeholder image" caption="Figure 2. The first 18 rows of PlayerMatrix." %}
+
+{% include figure image_path="/images/Making the middle count/Figure 3.jpg" alt="this is a placeholder image" caption="Figure 3. The first 18 rows of Ans" %}
