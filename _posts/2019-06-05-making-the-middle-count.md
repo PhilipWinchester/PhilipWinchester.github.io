@@ -126,7 +126,6 @@ The table on the below displays the difficulty of the next five fixtures played 
   </thead>
   <tbody>
     <tr>
-      <th>Home</th>
       <th>Wilson</th>
       <th>73.0</th>
       <th>71.5</th>
@@ -165,6 +164,9 @@ The table on the below displays the difficulty of the next five fixtures played 
       <th>44.0</th>
       <th>49.4</th>
       <th>54.6</th>
+    </tr>
+    <tr>
+      <th colspan = 6>Score: 1061.3</th>
     </tr>
   </tbody>
 </table>
