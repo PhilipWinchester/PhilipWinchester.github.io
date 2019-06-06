@@ -29,7 +29,7 @@ Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend 
 For any FPL analysis, thinking about upcoming fixtures is crucial and the table below outlines how difficult I believe each team is to face home and away (higher score = harder).
 
 <div>
-<table border="1">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>Difficulty</th>
@@ -113,7 +113,7 @@ When picking your middle men, it is desirable always to have the option to field
 The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
 
 <div>
-<table border="1">
+<table>
   <caption>Table 1. The fixture difficulty of my middle men.</caption>
   <thead>
     <tr style="text-align: right;">
@@ -174,7 +174,7 @@ The table on the below displays the difficulty of the next five fixtures played 
 **It would be useful to calculate the above score for all possible combinations of five middle men.** This will be the the goal of this section.* It is of course not necessary to consider all midfielders and forwards in £5.5m-£7.5m range, but perhaps a subset of players who are in good form and are likely to play well going forward. I have decided to look at players who have at least 48 total points or 5 in the FPL form rating. The bellow table displays which teams have players under this condition. In total, there are 30 players we wish to consider.
 
 <div>
-<table border="1">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -318,7 +318,7 @@ In Ans, we combine "Scores", a couple of useful stats and PlayerMatrix. The resu
 The table below shows row 20939 of Ans which happens to be the combination of middle men I currently possess and we can hence conclude that my boys are within the top 26% of all combinations. Luckily the score of 1061.3 is consistent with what we had before.
 
 <div>
-<table border="1">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>Player 1</th>
@@ -349,7 +349,7 @@ The table below shows row 20939 of Ans which happens to be the combination of mi
 Perhaps this suggests that my middle men are an area where we can improve my squad. If we were to change Wilson for Chicharito, we score 980.3 and fall within the top 0.3% instead. The strongest combination is shows in the table below.
 
 <div>
-<table border="1">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th>Player 1</th>
