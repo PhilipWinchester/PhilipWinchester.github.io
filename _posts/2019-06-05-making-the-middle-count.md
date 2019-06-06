@@ -114,6 +114,7 @@ The table on the below displays the difficulty of the next five fixtures played 
 
 <div>
 <table border="1" class="dataframe" style="width:43%">
+  <caption>Table 1. The fixture difficulty of my middle men.</caption>
   <thead>
     <tr style="text-align: right;">
       <th>Player</th>
@@ -249,13 +250,51 @@ for(i in 1:length(FPL$Team)){
 
 #Making matrix containing all five player combinations
 PlayerMatrix <- t(combn(TeamsVector,5))
+
+GwStart = 16 #First gameweek we consider
+GwEnd = 20 #Last gameweek we consider
+n = GwEnd - GwStart + 1 #Number of games we are looking at
+
+#Making DF only including gameweeks we consider
+FPL2 <- FPL[c(1,(GwStart+2):(GwEnd+2))]
 ```
 
-After the above code, "FPL" is a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 of the Appendix.
+After the above code, "FPL" is a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 of the Appendix. "FPL2" later becomes the equivalent dataframe only including the gameweeks we wish to consider.  
 
 The vector "TeamsVector" contains all the players we wish to consider. So far, we don't distinguish between players in the same team. So even though Wilson and King are interesting players, they both appear as "Bournemouth" in TeamsVector.
 
-The rows in the matrix "PlayerMatrix" add up to all five player combinations taken from the set of our 30 interesting players. The matrix has $$(30 \choose 5) = 142506$$ rows and the first few are displayed in Figure of the Appendix. Note that rows 5 and 6 are the same. This is because we are considering two players from Chelsea.
+The rows in the matrix "PlayerMatrix" add up to all five player combinations taken from the set of our 30 interesting players. The matrix has $${30 \choose 5} = 142506$$ rows and the first few are displayed in Figure of the Appendix. Note that rows 5 and 6 are the same. This is because we are considering two players from Chelsea.
+
+Below we introduce some functions which will be useful for our analysis. I will first present the code and then explain their structure.
+
+```r
+SumMinusMax <- function(x){
+  #Takes numeric vector and returns the cumulative value minus the largest value
+  return(sum(x)-max(x))
+}
+
+MatrixMaker  <- function(L,DataFrame,n=5){
+  #takes a list of teams and a date frame and produces a matrix with their
+  #game difficulties. n is the number of gameweeks we are looking at.
+  v1 <- as.numeric(DataFrame[match(L[1],DataFrame$Team),c(2:(n+1))])
+  v2 <- as.numeric(DataFrame[match(L[2],DataFrame$Team),c(2:(n+1))])
+  mat <- matrix(c(v1,v2),nrow=length(v1))
+  for(i in 3:length(L)){
+    vi <- as.numeric(DataFrame[match(L[i],DataFrame$Team),c(2:(n+1))])
+    mat <- cbind(mat,vi)
+  }
+  return(t(mat))
+}
+
+Score <- function(M) {
+  #Takes a matrix and return the sum of the SumMinusMax values of the columns
+  Ans <- 0
+  for(i in 1:ncol(M)){
+    Ans <- Ans + SumMinusMax(M[,i])
+  }
+  return(Ans)
+}
+```
 
 ## Appendix
 
