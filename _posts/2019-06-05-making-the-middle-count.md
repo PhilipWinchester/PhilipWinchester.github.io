@@ -1,7 +1,7 @@
 ---
 title: "Making the middle count"
 date: 2019-06-05
-tags: [FPL]
+tags: [FPL, R]
 excerpt: "But what if Salah and Aguero don't score? This post makes sure you're prepared for when they don't."
 mathjax: true
 header:
@@ -29,7 +29,7 @@ Unless they have particularly favourable fixtures, Wan-Bissaka and Bennett tend 
 For any FPL analysis, thinking about upcoming fixtures is crucial and the table below outlines how difficult I believe each team is to face home and away (higher score = harder).
 
 <div>
-<table>
+<table border="1">
   <thead>
     <tr style="text-align: right;">
       <th>Difficulty</th>
