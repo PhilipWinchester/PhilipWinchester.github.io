@@ -113,7 +113,7 @@ When picking your middle men, it is desirable always to have the option to field
 The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
 
 <div>
-<table border="1" class="dataframe" style="width:50%">
+<table border="1" class="dataframe" style="width:30%">
   <thead>
     <tr style="text-align: right;">
       <th>Player</th>
@@ -164,55 +164,6 @@ The table on the below displays the difficulty of the next five fixtures played 
       <th>44.0</th>
       <th>49.4</th>
       <th>54.6</th>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-<div>
-<table border="1" class="dataframe" style="width:50%">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date</th>
-      <th>btc_price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2018-02-10</td>
-      <td>8691.000</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2018-02-09</td>
-      <td>8300.000</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2018-02-08</td>
-      <td>8256.000</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>403</th>
-      <td>2017-01-03</td>
-      <td>1017.000</td>
-    </tr>
-    <tr>
-      <th>404</th>
-      <td>2017-01-02</td>
-      <td>1010.000</td>
-    </tr>
-    <tr>
-      <th>405</th>
-      <td>2017-01-01</td>
-      <td>970.988</td>
     </tr>
   </tbody>
 </table>
