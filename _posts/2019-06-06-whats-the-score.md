@@ -2,10 +2,10 @@
 title: "What's the score?"
 date: 2019-06-06
 tags: [FPL, R]
-excerpt: ""
+excerpt: "Combining the world’s most popular sport with everyone’s favourite discrete probability distribution, this post predicts football matches using the Poisson distribution."
 mathjax: true
 header:
-  overlay_image: "/images/Making the middle count/Richarlison.jpg"
+  overlay_image: "/images/whats the score/Header.jpg"
   overlay_filter: 0.4
 classes: wide
 ---
