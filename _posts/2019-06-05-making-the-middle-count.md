@@ -295,6 +295,21 @@ Score <- function(M) {
   return(Ans)
 }
 ```
+"SumMinusMax" is very simple. It takes any numeric vector, finds its cumulative value and subtracts its largest value.
+
+"MatrixMaker" produces a matrix similar to the one in Table 1 above. Given a list of five teams, it produces a matrix with the teams fixture difficulty over the next n games. The variable "DataFrame" needs to be in the form of FPL2.
+
+"Score" takes a matrix as the one produced by MatrixMaker and returns the score of that set of middle me. Our goals is to apply MatrixMaker to all our rows in PlayerMatrix, followed by the Score function. The code below does this and stores the results in the vector "Scores".
+
+```r
+for(i in 1:nrow(PlayerMatrix)){
+  Scores[i] <- Score(MatrixMaker(PlayerMatrix[i,],FPL2))
+
+}
+
+#Add the scores to the PlayerMatrix and a couple of interesting stats
+Ans <- cbind(PlayerMatrix, Scores, rank(Scores),rank(Scores)/length(Scores))
+```
 
 ## Appendix
 
