@@ -227,7 +227,7 @@ The table on the below displays the difficulty of the next five fixtures played 
 </table>
 </div>
 
-I have made a program in R with the above details and highlighted goal in mind. Lets break this program down and comment on some of the results. 
+I have made a program in R with the above details and highlighted goal in mind. Lets break this program down and comment on some of the results.
 
 ```r
 #Adding number of interesting players
@@ -237,4 +237,22 @@ FPL[["Players"]] <- c(0,3,2,1,1,3,2,3,2,1,1,2,1,0,1,2,1,1,2,1)
 FPL <- FPL[!(FPL$Players==0),]
 #Rearranging DF
 FPL <- FPL[,c(1,40,2:39)]
+
+#Making vector containing all the player teams
+TeamsVector <-c()
+for(i in 1:length(FPL$Team)){
+  j <- cumsum(FPL$Players)[i]-FPL$Players[i]
+  for(k in 1:FPL$Players[i]){
+    TeamsVector[j+k] <- FPL$Team[i]
+    }
+}
+
+#Making matrix containing all five player combinations
+PlayerMatrix <- t(combn(TeamsVector,5))
 ```
+
+After the above code, "FPL" is a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 in the Appendix.
+
+## Appendix
+
+<img src="/images/Making the middle count/My squad.jpg" alt="Figure 1. Data frame after delating teams with no interesting teams and some rearranging.  ">
