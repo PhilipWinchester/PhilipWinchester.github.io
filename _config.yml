@@ -108,9 +108,9 @@ analytics:
 author:
   name             : "Philip Winchester"
   avatar           : "/images/Me.jpg"
-  bio              : "Mathematician and amature data scientist who likes football"
+  bio              : "Mathematician and wannabe data scientist who likes sports and finance"
   location         : "London, UK"
-  email            :
+  email            : "philipwinchester16@gmai.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"

@@ -32,7 +32,7 @@ For any FPL analysis, thinking about upcoming fixtures is crucial and the table 
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
-      <th>Team</th>
+      <th>Difficulty</th>
       <th>MCI</th>
       <th>LIV</th>
       <th>CHE</th>
@@ -57,7 +57,7 @@ For any FPL analysis, thinking about upcoming fixtures is crucial and the table 
   </thead>
   <tbody>
     <tr>
-      <th>H Difficulty</th>
+      <th>Home</th>
       <th>80.0</th>
       <th>73.0</th>
       <th>71.0</th>
@@ -80,7 +80,7 @@ For any FPL analysis, thinking about upcoming fixtures is crucial and the table 
       <th>33.0</th>
     </tr>
     <tr>
-    <th>A Difficulty</th>
+    <th>Away</th>
     <th>104.0</th>
     <th>94.9</th>
     <th>92.3</th>
