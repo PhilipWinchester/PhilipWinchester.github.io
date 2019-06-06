@@ -251,8 +251,12 @@ for(i in 1:length(FPL$Team)){
 PlayerMatrix <- t(combn(TeamsVector,5))
 ```
 
-After the above code, "FPL" is a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 in the Appendix.
+After the above code, "FPL" is a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 of the Appendix.
+
+The vector "TeamsVector" contains all the players we wish to consider. So far, we don't distinguish between players in the same team. So even though Wilson and King are interesting players, they both appear as "Bournemouth" in TeamsVector.
+
+The rows in the matrix "PlayerMatrix" add up to all five player combinations taken from the set of our 30 interesting players. The matrix has $$(30 \choose 5) = 142506$$ rows and the first few are displayed in Figure of the Appendix. Note that rows 5 and 6 are the same. This is because we are considering two players from Chelsea.
 
 ## Appendix
 
-<img src="/images/Making the middle count/Figure 1.jpg" alt="Figure 1. Data frame after delating teams with no interesting teams and some rearranging.">
+{% include figure image_path="/images/Making the middle count/Figure 1.jpg" alt="this is a placeholder image" caption="Figure 1. Data frame after delating teams with no interesting teams and some rearranging." %}
