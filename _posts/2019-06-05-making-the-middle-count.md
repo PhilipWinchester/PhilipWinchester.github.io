@@ -113,7 +113,7 @@ When picking your middle men, it is desirable always to have the option to field
 The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
 
 <div>
-<table border="1" class="dataframe" style="width:43%">
+<table>
   <caption>Table 1. The fixture difficulty of my middle men.</caption>
   <thead>
     <tr style="text-align: right;">
@@ -174,7 +174,7 @@ The table on the below displays the difficulty of the next five fixtures played 
 **It would be useful to calculate the above score for all possible combinations of five middle men.** This will be the the goal of this section.* It is of course not necessary to consider all midfielders and forwards in £5.5m-£7.5m range, but perhaps a subset of players who are in good form and are likely to play well going forward. I have decided to look at players who have at least 48 total points or 5 in the FPL form rating. The bellow table displays which teams have players under this condition. In total, there are 30 players we wish to consider.
 
 <div>
-<table border="1" class="dataframe">
+<table>
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -315,7 +315,7 @@ Ans <- cbind(PlayerMatrix, Scores, rank(Scores),rank(Scores)/length(Scores))
 In Ans, we combine "Scores", a couple of useful stats and PlayerMatrix. The result is seen in Figure 3 of the Appendix.
 
 ## Results
-The table below shows row 20939 of Ans which happens to be the combination of middle men I currently possess and we can hence conclude that my boys are within the top 26% of all combinations.Luckily the score of 1061.3 is consistent with what we had before.
+The table below shows row 20939 of Ans which happens to be the combination of middle men I currently possess and we can hence conclude that my boys are within the top 26% of all combinations. Luckily the score of 1061.3 is consistent with what we had before.
 
 <div>
 <table>
@@ -340,11 +340,57 @@ The table below shows row 20939 of Ans which happens to be the combination of mi
       <th>West Ham</th>
       <th>1061.3</th>
       <th>36218</th>
-      <th>25.42</th>
+      <th>25.42%</th>
     </tr>
   </tbody>
 </table>
 </div>
+
+Perhaps this suggests that my middle men are an area where we can improve my squad. If we were to change Wilson for Chicharito, we score 980.3 and fall within the top 0.3% instead. The strongest combination is shows in the table below.
+
+<div>
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th>Player 1</th>
+      <th>Player 2</th>
+      <th>Player 3</th>
+      <th>Player 4</th>
+      <th>Player 5</th>
+      <th>Scores</th>
+      <th>Rank</th>
+      <th>Within (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fulham</th>
+      <th>Southampton</th>
+      <th>Watford</th>
+      <th>West Ham</th>
+      <th>West Ham</th>
+      <th>948.8</th>
+      <th>2.5</th>
+      <th>0.00%</th>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+A possible set of players which achieve this are Mitrovic, Armstrong, Pereyra, Felipe Anderson and Chicharito.
+
+## Improvement
+Lets think about how we can Improve the model!
+
+**Improvements on outputs in Ans:**
+
+- Ans could be made to distinguish between players in the same team. Rather than listing teams, players could be listed and perhaps also their total cost.
+
+**Improvements to model:**
+
+- Rather than using somewhat arbitrary values for fixture difficulty, clearly I model could be made to derive these. As mentioned, this will be covered in another post.
+- The fixture difficulty could be player dependent as well as team dependent. In this case, line 7 and 8 in Figure 3 of the Appendix might get a different score if one of the Crystal Palace players is in better form than the other.
+- The model could take into account what players already exist in the squad and hence only consider combinations of middle men which fall within the remaining budget and available places. This reduces computation time and provides a clearer view of the options available.  
 
 ## Appendix
 
