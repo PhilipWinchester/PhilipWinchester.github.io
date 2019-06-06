@@ -110,10 +110,10 @@ The figures have simply been derived from looking at what betting companies thin
 
 When picking your middle men, it is desirable always to have the option to field four with decent fixtures over the next few gameweek. The player with the hardest fixture each gameweek doesn't matter to much, as he will sit on the bench. Hence, how strong your middle men are is a function of the four easiest fixtures over next few gameweeks. lets apply this reasoning to my middle men.
 
-The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The score in the bottom right corner sums all the non coloured cells and is a representation of how strong my middle men are. The lower the score, the better.
+The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
 
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="dataframe" style="width:50%">
   <thead>
     <tr style="text-align: right;">
       <th>Player</th>
