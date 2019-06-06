@@ -226,3 +226,15 @@ The table on the below displays the difficulty of the next five fixtures played 
   </tbody>
 </table>
 </div>
+
+I have made a program in R with the above details and highlighted goal in mind. Lets break this program down and comment on some of the results. 
+
+```r
+#Adding number of interesting players
+FPL[["Players"]] <- c(0,3,2,1,1,3,2,3,2,1,1,2,1,0,1,2,1,1,2,1)
+
+#Removing teams with no interesting players
+FPL <- FPL[!(FPL$Players==0),]
+#Rearranging DF
+FPL <- FPL[,c(1,40,2:39)]
+```
