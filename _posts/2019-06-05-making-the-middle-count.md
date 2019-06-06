@@ -379,7 +379,7 @@ Perhaps this suggests that my middle men are an area where we can improve my squ
 
 A possible set of players which achieve this are Mitrovic, Armstrong, Pereyra, Felipe Anderson and Chicharito.
 
-## Improvement
+## Improvements
 Lets think about how we can Improve the model!
 
 **Improvements on outputs in Ans:**
