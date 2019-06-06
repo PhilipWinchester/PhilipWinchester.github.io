@@ -5,7 +5,7 @@ tags: [FPL, R]
 excerpt: "Combining the world’s most popular sport with everyone’s favourite discrete probability distribution, this post predicts football matches using the Poisson distribution."
 mathjax: true
 header:
-  overlay_image: "/images/whats the score/Header.jpg"
+  overlay_image: "/images/Whats the score/Header.jpg"
   overlay_filter: 0.4
 classes: wide
 ---
