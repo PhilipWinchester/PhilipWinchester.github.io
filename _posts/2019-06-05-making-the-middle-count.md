@@ -168,3 +168,52 @@ The table on the below displays the difficulty of the next five fixtures played 
   </tbody>
 </table>
 </div>
+
+<div>
+<table border="1" class="dataframe" style="width:50%">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>btc_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018-02-10</td>
+      <td>8691.000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018-02-09</td>
+      <td>8300.000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018-02-08</td>
+      <td>8256.000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>403</th>
+      <td>2017-01-03</td>
+      <td>1017.000</td>
+    </tr>
+    <tr>
+      <th>404</th>
+      <td>2017-01-02</td>
+      <td>1010.000</td>
+    </tr>
+    <tr>
+      <th>405</th>
+      <td>2017-01-01</td>
+      <td>970.988</td>
+    </tr>
+  </tbody>
+</table>
+</div>
