@@ -151,7 +151,7 @@ The table on the below displays the difficulty of the next five fixtures played 
     </tr>
     <tr>
       <th>Mooy</th>
-      <thbgcolor="#FF0000">81.9</th>
+      <th bgcolor="#FF0000">81.9</th>
       <th>40.0</th>
       <th>38.0</th>
       <th>80.6</th>
