@@ -263,7 +263,7 @@ After the above code, "FPL" is a dataframe which only includes teams with player
 
 The vector "TeamsVector" contains all the players we wish to consider. So far, we don't distinguish between players in the same team. So even though Wilson and King are interesting players, they both appear as "Bournemouth" in TeamsVector.
 
-The rows in the matrix "PlayerMatrix" add up to all five player combinations taken from the set of our 30 interesting players. The matrix has $${30 \choose 5} = 142506$$ rows and the first few are displayed in Figure of the Appendix. Note that rows 5 and 6 are the same. This is because we are considering two players from Chelsea.
+The rows in the matrix "PlayerMatrix" add up to all five player combinations taken from the set of our 30 interesting players. The matrix has $${30 \choose 5} = 142506$$ rows and the first few are displayed in Figure 2 of the Appendix. Note that rows 5 and 6 are the same. This is because we are considering two players from Chelsea.
 
 Below we introduce some functions which will be useful for our analysis. I will first present the code and then explain their structure.
 
@@ -302,6 +302,8 @@ Score <- function(M) {
 "Score" takes a matrix as the one produced by MatrixMaker and returns the score of that set of middle me. Our goals is to apply MatrixMaker to all our rows in PlayerMatrix, followed by the Score function. The code below does this and stores the results in the vector "Scores".
 
 ```r
+#Filling the vector Scores with the scores for the the set of players in the PlayerMatrix
+Scores <- c()
 for(i in 1:nrow(PlayerMatrix)){
   Scores[i] <- Score(MatrixMaker(PlayerMatrix[i,],FPL2))
 
@@ -310,6 +312,9 @@ for(i in 1:nrow(PlayerMatrix)){
 #Add the scores to the PlayerMatrix and a couple of interesting stats
 Ans <- cbind(PlayerMatrix, Scores, rank(Scores),rank(Scores)/length(Scores))
 ```
+
+In Ans, we combine "Scores", a couple of useful stats and PlayerMatrix. The result is seen in Figure 3 of the Appendix.
+
 
 ## Appendix
 
