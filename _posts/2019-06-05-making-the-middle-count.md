@@ -165,9 +165,6 @@ The table on the below displays the difficulty of the next five fixtures played 
       <th>49.4</th>
       <th>54.6</th>
     </tr>
-    <tr>
-      <th>Score: 1061.3</th>
-    </tr>
   </tbody>
 </table>
 </div>
