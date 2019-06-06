@@ -382,7 +382,7 @@ A possible set of players which achieve this are Mitrovic, Armstrong, Pereyra, F
 ## Improvements
 Lets think about how we can Improve the model!
 
-**Improvements on outputs in Ans:**
+**Improvements to outputs in Ans:**
 
 - Ans could be made to distinguish between players in the same team. Rather than listing teams, players could be listed and perhaps also their total cost.
 
