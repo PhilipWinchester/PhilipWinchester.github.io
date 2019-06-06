@@ -318,7 +318,7 @@ In Ans, we combine "Scores", a couple of useful stats and PlayerMatrix. The resu
 The table below shows row 20939 of Ans which happens to be the combination of middle men I currently possess and we can hence conclude that my boys are within the top 26% of all combinations.Luckily the score of 1061.3 is consistent with what we had before.
 
 <div>
-<table border="1" class="dataframe">
+<table border="1" class="dataframe" style="width:75%">
   <thead>
     <tr style="text-align: right;">
       <th>Player 1</th>
@@ -333,7 +333,6 @@ The table below shows row 20939 of Ans which happens to be the combination of mi
   </thead>
   <tbody>
     <tr>
-      <th>Players</th>
       <th>Bournemouth</th>
       <th>Everton</th>
       <th>Fulham</th>
