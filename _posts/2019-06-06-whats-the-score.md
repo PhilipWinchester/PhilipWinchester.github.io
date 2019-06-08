@@ -55,18 +55,24 @@ library(dplyr)
 
 # Picking the columns we are interested in and only the games played in the last 3 months
 Last_Fixture <- as.Date(gsub("/", ".", DF_Original$Date[nrow(DF)]), "%d.%m.%Y")
-DF_Recent <- DF_Original[c("HomeTeam", "AwayTeam", "FTHG", "FTAG", "Date")] %>% mutate(Date = as.Date(gsub("/", ".", Date), "%d.%m.%Y")) %>% filter(Date > (Last_Fixture - 90))
+DF_Recent <- DF_Original[c("HomeTeam", "AwayTeam", "FTHG", "FTAG", "Date")] %>%
+  mutate(Date = as.Date(gsub("/", ".", Date), "%d.%m.%Y")) %>%
+  filter(Date > (Last_Fixture - 90))
 
 # Creating the dataframe which we will use to build our model
-ModelDF_Recent <- data.frame(Team = c(DF_Recent$HomeTeam, DF_Recent$AwayTeam), Opposition =  c(DF_Recent$AwayTeam, DF_Recent$HomeTeam), HA = c(rep("H",nrow(DF_Recent)),rep("A",nrow(DF_Recent))), Goals= c(DF_Recent$FTHG, DF_Recent$FTAG))
+ModelDF_Recent <- data.frame(Team = c(DF_Recent$HomeTeam, DF_Recent$AwayTeam),
+  Opposition =  c(DF_Recent$AwayTeam, DF_Recent$HomeTeam),
+  HA = c(rep("H",nrow(DF_Recent)),rep("A",nrow(DF_Recent))),
+  Goals= c(DF_Recent$FTHG, DF_Recent$FTAG))
 ```
 
 DF_Original is the dataset taken from football-data.co.uk and it contains 62 columns, most of which we are not interested in. The first few lines of code above extract the columns we want, buts the Date column in the format we want and removes games which were played more than 90 days ago.
 
-Our aim is to build a model which takes a team, an opposition and returns a value for $$\lambda$$ depending on if the team is playing at home or away. To train such a model, we need a dataframe with the following columns "Team", "Opposition", "HA" and "Goals scored by Team", where "HA" indicates if the Team is playing at home or away. Such a dataframe is built in the last few lines of code above and is displayed below:
+Our aim is to build a model which takes a team, an opposition and returns a value for $$\lambda$$ depending on if the team is playing at home or away. To train such a model, we need a dataframe with the following columns "Team", "Opposition", "HA" and "Goals scored by Team", where "HA" indicates if the Team is playing at home or away. Such a dataframe is built in the last few lines of code above in "ModelDF_Recent" and is displayed below:
 
 <div>
 <table>
+  <caption>ModelDF_Recent</caption>
   <thead>
     <tr style="text-align: right;">
       <th>Row Num</th>
