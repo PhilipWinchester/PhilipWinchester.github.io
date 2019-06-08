@@ -28,6 +28,14 @@ The above assumptions seem to fit quite nicely to the goals scored by any team i
 
 ![image-center](/images/Whats the score/poisson3.gif){: .align-center .width-half}
 
+Granted a team is unlikely to be expected to score 9 goals in any game, but I hope the trend above is clear: The probability to score more goals increases as $$\lambda$$ increases. If we expect a team to score 1 goal in a game, it is pretty unlikely the team will score more than 3 goals. Whilst if we expect a team to score 3 goals, they may well score 5 or 6. The simplest way to find lambda is simply to take:
+
+$$ \begin{align*}  
+  P(\text{Chelsea score 0 goals}) &= \frac{1.73^{0}e^{-1.73}}{0!} = 17.7\% \\
+  P(\text{Chelsea score 1 goal}) &= \frac{1.73^{1}e^{-1.73}}{1!} = 30.7\% \\
+  P(\text{Chelsea score 2 goals}) &= \frac{1.73^{2}e^{-1.73}}{2!} = 26.5\% \\
+  P(\text{Chelsea score 3 goals or more}) &= 1 - \text{Sum of above}=25.1\%
+\end{align*}$$
 
 
 **Work in progress**
