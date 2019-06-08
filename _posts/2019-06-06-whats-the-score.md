@@ -30,7 +30,7 @@ The above assumptions seem to fit quite nicely to the goals scored by any team i
 
 Granted a team is unlikely to be expected to score 9 goals in any game, but I hope the trend above is clear: The probability to score more goals increases as $$\lambda$$ increases. If we expect a team to score 1 goal in a game, it is pretty unlikely the team will score more than 3 goals. Whilst if we expect a team to score 3 goals, they may well score 5 or 6. The simplest way to find lambda is simply to take:
 
-$$ \frac{\text{Number of goals scored in season so far}}{Number of games played}$$
+$$ \frac{\text{Number of goals scored in season so far}}{\text{Number of games played}}$$
 
 As I write this on the 10th of April, Chelsea have scored 57 goals in 33 games. Using the formula above, this equates to an average scoring rate of 1.73 goals per game. Taking this value for $$\lambda$$ gives the following probability values:
 
