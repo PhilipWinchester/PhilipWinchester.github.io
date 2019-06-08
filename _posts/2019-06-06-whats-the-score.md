@@ -22,7 +22,7 @@ The distribution is often used to model events which:
 
 1. Has x as the number of event which occur in some time interval.
 2. Occur independently.  That is, the occurrence of one event does not affect the probability that a second event will occur.
-3. The average rate it which event occur is constant. (It is actually equal to λ).
+3. The average rate it which event occur is constant. (It is actually equal to $$\lambda$$).
 
 The above assumptions seem to fit quite nicely to the goals scored by any team in a game of football. Hence, it is a Poisson distribution we will use in this post. The key is to find λ, which is the average number of goals we expect a team to score in a particular game. If the Poisson distribution is new to you, an easy example how it may be applied to football modelling is [here](https://help.smarkets.com/hc/en-gb/articles/115001457989-How-to-calculate-Poisson-distribution-for-football-betting), a good taster of what is to come. To get a feel of what probabilities the distribution gives, I have plotted the probabilities for different λ and x ranging from 0 to 20.
 
@@ -30,12 +30,25 @@ The above assumptions seem to fit quite nicely to the goals scored by any team i
 
 Granted a team is unlikely to be expected to score 9 goals in any game, but I hope the trend above is clear: The probability to score more goals increases as $$\lambda$$ increases. If we expect a team to score 1 goal in a game, it is pretty unlikely the team will score more than 3 goals. Whilst if we expect a team to score 3 goals, they may well score 5 or 6. The simplest way to find lambda is simply to take:
 
+$$ \frac{\text{Number of goals scored in season so far}}{Number of games played}$$
+
+As I write this on the 10th of April, Chelsea have scored 57 goals in 33 games. Using the formula above, this equates to an average scoring rate of 1.73 goals per game. Taking this value for $$\lambda$$ gives the following probability values:
+
 $$ \begin{align*}  
   P(\text{Chelsea score 0 goals}) &= \frac{1.73^{0}e^{-1.73}}{0!} = 17.7\% \\
   P(\text{Chelsea score 1 goal}) &= \frac{1.73^{1}e^{-1.73}}{1!} = 30.7\% \\
   P(\text{Chelsea score 2 goals}) &= \frac{1.73^{2}e^{-1.73}}{2!} = 26.5\% \\
   P(\text{Chelsea score 3 goals or more}) &= 1 - \text{Sum of above}=25.1\%
 \end{align*}$$
+
+However, given that Chelsea face Liverpool away at Anfield in their next fixture, it is probably not reasonable to assume that there is only a 17.7% chance that they will leave the game goalless. A 25.1% change that they will score 3 or more seems a little optimistic. Clearly there are some parameters we are missing. Here are three of them:
+
+1. In football there is something called **Home field advantage**, discussed [here](https://jogall.github.io/2017-05-12-home-away-pref/). Playing on you home pitch is generally seen as an advantage which is also what data from this year Premier League season suggests. To date, the average goal scoring rate is 1.58 for home teams and 1.25 for away teams. This is a significant difference and should be taking into account in our model.
+2. **The opposition** is also important. With out example for Chelsea above, not only are they playing away from home, the fact that they are playing Liverpool makes the numbers derived from our simplistic model look a little off. The goal scoring rate clearly depends on if you're playing Brighton or Liverpool.
+3. It is probably reasonable to postulate that a teams **current form** has some effect on their scoring rate in upcoming fixtures. This will be taken into account by only considering games played in the last 3 months.
+
+## Building the Model
+
 
 
 **Work in progress**
