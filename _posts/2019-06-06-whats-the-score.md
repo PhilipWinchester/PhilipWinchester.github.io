@@ -128,7 +128,9 @@ Our aim is to build a model which takes a team, an opposition and returns a valu
     </tr>
   </tbody>
 </table>
-</div>  
+</div>
+
+The game between Brighton and Liverpool on the 12 Jan (86 days before the most recent fixture) appears as our first entry above. Note that the first entry relates to Brighton scoring 0 goals against Liverpool at home. The conjugate entry in line 116 says that Liverpool scored 1 goal agains Brighton away. Each fixture has two paired entries. 
 
 
 **Work in progress**
