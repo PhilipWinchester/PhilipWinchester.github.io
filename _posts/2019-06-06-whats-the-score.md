@@ -48,7 +48,83 @@ However, given that Chelsea face Liverpool away at Anfield in their next fixture
 3. It is probably reasonable to postulate that a teams **current form** has some effect on their scoring rate in upcoming fixtures. This will be taken into account by only considering games played in the last 3 months.
 
 ## Building the Model
+We want to predict future results, so a good place to start is to look at previous results. There are a number of sources to extract this information, I get it from [football-data.co.uk](http://www.football-data.co.uk/englandm.php). Lets see what it looks like in R.
 
+```r
+library(dplyr)
+
+# Picking the columns we are interested in and only the games played in the last 3 months
+Last_Fixture <- as.Date(gsub("/", ".", DF_Original$Date[nrow(DF)]), "%d.%m.%Y")
+DF_Recent <- DF_Original[c("HomeTeam", "AwayTeam", "FTHG", "FTAG", "Date")] %>% mutate(Date = as.Date(gsub("/", ".", Date), "%d.%m.%Y")) %>% filter(Date > (Last_Fixture - 90))
+
+# Creating the dataframe which we will use to build our model
+ModelDF_Recent <- data.frame(Team = c(DF_Recent$HomeTeam, DF_Recent$AwayTeam), Opposition =  c(DF_Recent$AwayTeam, DF_Recent$HomeTeam), HA = c(rep("H",nrow(DF_Recent)),rep("A",nrow(DF_Recent))), Goals= c(DF_Recent$FTHG, DF_Recent$FTAG))
+```
+
+DF_Original is the dataset taken from football-data.co.uk and it contains 62 columns, most of which we are not interested in. The first few lines of code above extract the columns we want, buts the Date column in the format we want and removes games which were played more than 90 days ago.
+
+Our aim is to build a model which takes a team, an opposition and returns a value for $$\lambda$$ depending on if the team is playing at home or away. To train such a model, we need a dataframe with the following columns "Team", "Opposition", "HA" and "Goals scored by Team", where "HA" indicates if the Team is playing at home or away. Such a dataframe is built in the last few lines of code above and is displayed below:
+
+<div>
+<table>
+  <thead>
+    <tr style="text-align: right;">
+      <th>Row Num</th>
+      <th>Team</th>
+      <th>Opposition</th>
+      <th>HA</th>
+      <th>Goals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <th>Brighton</th>
+      <th>Liverpool</th>
+      <th>H</th>
+      <th>0</th>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>Burnley</th>
+      <th>Fulham</th>
+      <th>H</th>
+      <th>2</th>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+    </tr>
+    <tr>
+      <th>116</th>
+      <th>Liverpool</th>
+      <th>Brighton</th>
+      <th>A</th>
+      <th>1</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>117</th>
+      <th>Fulham</th>
+      <th>Burnley</th>
+      <th>A</th>
+      <th>1</th>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+    </tr>
+  </tbody>
+</table>
+</div>  
 
 
 **Work in progress**
+
+Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above
