@@ -24,7 +24,7 @@ The distribution is often used to model events which:
 2. Occur independently.  That is, the occurrence of one event does not affect the probability that a second event will occur.
 3. The average rate it which event occur is constant. (It is actually equal to $$\lambda$$).
 
-The above assumptions seem to fit quite nicely to the goals scored by any team in a game of football. Hence, it is a Poisson distribution we will use in this post. The key is to find λ, which is the average number of goals we expect a team to score in a particular game. If the Poisson distribution is new to you, an easy example how it may be applied to football modelling is [here](https://help.smarkets.com/hc/en-gb/articles/115001457989-How-to-calculate-Poisson-distribution-for-football-betting), a good taster of what is to come. To get a feel of what probabilities the distribution gives, I have plotted the probabilities for different λ and x ranging from 0 to 20.
+The above assumptions seem to fit quite nicely to the goals scored by any team in a game of football. Hence, it is a Poisson distribution we will use in this post. The key is to find λ, which is the average number of goals we expect a team to score in a particular game. If the Poisson distribution is new to you, an easy example how it may be applied to football modelling is [here](https://help.smarkets.com/hc/en-gb/articles/115001457989-How-to-calculate-Poisson-distribution-for-football-betting), a good taster of what is to come. To get a feel of what probabilities the distribution gives, I have plotted the probabilities for different $$\lambda$$ and x ranging from 0 to 20.
 
 ![image-center](/images/Whats the score/poisson3.gif){: .align-center .width-half}
 
@@ -66,7 +66,7 @@ ModelDF_Recent <- data.frame(Team = c(DF_Recent$HomeTeam, DF_Recent$AwayTeam),
   Goals= c(DF_Recent$FTHG, DF_Recent$FTAG))
 ```
 
-DF_Original is the dataset taken from football-data.co.uk and it contains 62 columns, most of which we are not interested in. The first few lines of code above extract the columns we want, buts the Date column in the format we want and removes games which were played more than 90 days ago.
+"DF_Original" is the dataset taken from football-data.co.uk and it contains 62 columns, most of which we are not interested in. The first few lines of code above extract the columns we want, buts the Date column in the format we want and removes games which were played more than 90 days ago.
 
 Our aim is to build a model which takes a team, an opposition and returns a value for $$\lambda$$ depending on if the team is playing at home or away. To train such a model, we need a dataframe with the following columns "Team", "Opposition", "HA" and "Goals scored by Team", where "HA" indicates if the Team is playing at home or away. Such a dataframe is built in the last few lines of code above in "ModelDF_Recent" and is displayed below:
 
@@ -130,7 +130,78 @@ Our aim is to build a model which takes a team, an opposition and returns a valu
 </table>
 </div>
 
-The game between Brighton and Liverpool on the 12 Jan (86 days before the most recent fixture) appears as our first entry above. Note that the first entry relates to Brighton scoring 0 goals against Liverpool at home. The conjugate entry in line 116 says that Liverpool scored 1 goal agains Brighton away. Each fixture has two paired entries. 
+The game between Brighton and Liverpool on the 12 Jan (86 days before the most recent fixture) appears as our first entry above. Note that the first entry relates to Brighton scoring 0 goals against Liverpool at home. The conjugate entry in line 116 says that Liverpool scored 1 goal agains Brighton away. Each fixture has two conjugate entries.
+
+Next we use this dataframe to train the model.
+
+```r
+# Creating the Model for recent fixtures
+attach(ModelDF_Recent)
+Model_Recent <- glm(Goals ~ Team + HA + Opposition, family=poisson(link=log))
+summary(Model_Recent) # Printing the summary
+detach(ModelDF_Recent)
+```
+
+[Call:
+glm(formula = Goals ~ Team + HA + Opposition, family = poisson(link = log))
+
+Deviance Residuals:
+    Min       1Q   Median       3Q      Max  
+-2.0608  -0.9136  -0.1114   0.5018   2.5263  
+
+Coefficients:
+                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)              -0.132610   0.423617  -0.313 0.754249    
+TeamBournemouth          -0.410482   0.367262  -1.118 0.263702    
+TeamBrighton             -0.854457   0.431366  -1.981 0.047612 *  
+TeamBurnley              -0.112327   0.338071  -0.332 0.739693    
+TeamCardiff              -0.751166   0.409125  -1.836 0.066353 .  
+TeamChelsea              -0.106657   0.332163  -0.321 0.748137    
+TeamCrystal Palace       -0.110139   0.331803  -0.332 0.739934    
+TeamEverton              -0.260379   0.350986  -0.742 0.458179    
+TeamFulham               -0.522561   0.389683  -1.341 0.179923    
+TeamHuddersfield         -1.178886   0.474592  -2.484 0.012992 *  
+TeamLeicester            -0.047993   0.328877  -0.146 0.883977    
+TeamLiverpool             0.187713   0.315719   0.595 0.552139    
+TeamMan City              0.264142   0.306663   0.861 0.389048    
+TeamMan United           -0.027127   0.348216  -0.078 0.937906    
+TeamNewcastle            -0.241388   0.345886  -0.698 0.485251    
+TeamSouthampton          -0.240801   0.359593  -0.670 0.503082    
+TeamTottenham            -0.294002   0.365137  -0.805 0.420714    
+TeamWatford              -0.034965   0.350195  -0.100 0.920468    
+TeamWest Ham             -0.545795   0.375685  -1.453 0.146279    
+TeamWolves               -0.111324   0.338343  -0.329 0.742136    
+HAH                       0.430247   0.115717   3.718 0.000201 ***
+OppositionBournemouth     0.643716   0.405659   1.587 0.112549    
+OppositionBrighton        0.586949   0.424993   1.381 0.167255    
+OppositionBurnley         0.490371   0.418789   1.171 0.241629    
+OppositionCardiff         0.684450   0.407185   1.681 0.092776 .  
+OppositionChelsea         0.614190   0.413591   1.485 0.137539    
+OppositionCrystal Palace  0.472469   0.422454   1.118 0.263400    
+OppositionEverton         0.049252   0.455130   0.108 0.913825    
+OppositionFulham          0.908161   0.390599   2.325 0.020070 *  
+OppositionHuddersfield    0.920738   0.393328   2.341 0.019238 *  
+OppositionLeicester       0.688431   0.410402   1.677 0.093453 .  
+OppositionLiverpool      -0.004021   0.466587  -0.009 0.993124    
+OppositionMan City       -0.743706   0.606242  -1.227 0.219918    
+OppositionMan United      0.038017   0.461929   0.082 0.934407    
+OppositionNewcastle       0.287249   0.432340   0.664 0.506431    
+OppositionSouthampton     0.423737   0.432959   0.979 0.327728    
+OppositionTottenham       0.187541   0.444575   0.422 0.673140    
+OppositionWatford         0.382051   0.424754   0.899 0.368406    
+OppositionWest Ham        0.493553   0.414817   1.190 0.234122    
+OppositionWolves          0.355747   0.430653   0.826 0.408767    
+---
+
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 288.01  on 229  degrees of freedom
+Residual deviance: 204.57  on 190  degrees of freedom
+AIC: 698.94
+
+Number of Fisher Scoring iterations: 5]{: .notice--primary}
+
 
 
 **Work in progress**
