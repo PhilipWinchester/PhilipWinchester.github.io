@@ -216,8 +216,8 @@ $$\begin{align*}
     \gamma^{20}& \quad \text{if Opposition}=\text{Wolves }
   \end{cases} \\
   \text{HA} &= \begin{cases}
-    \kappa& \quad \text{if HA}=\text{H} \\
-    0& \quad \text{if HA}=\text{A}
+    \kappa& \qquad \text{if HA}=\text{H} \\
+    0& \qquad \text{if HA}=\text{A}
   \end{cases}
 \end{align*}$$
 
