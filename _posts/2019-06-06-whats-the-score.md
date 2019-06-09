@@ -192,9 +192,31 @@ detach(ModelDF_Recent)
 </table>
 </div>
 
+The [glm](https://en.wikipedia.org/wiki/General_linear_model) (general linear model) takes the observations in out datarame to estimate the parameters ($$\alpha$$, $$\beta$$'s,  $$\gamma$$'s and  $$\kappa$$) in the following expression:
+
+$$ \begin{align*}
+  \lambda &= e^{\alpha+\text{Team}+\text{Opposition}+\text{HA}} \\
+  \text{Team} &= \begin{cases}
+    \beta^1 \quad \text{if Team}=\text{Bournemouth} \\
+    \beta^2 \quad \text{if Team}=\text{Brighton} \\
+    ... \\
+    \beta^{20} \quad \text{if Team}=\text{Wolves }
+  \end{cases} \\
+  \text{Opposition} &= \begin{cases}
+    \gamma^1 \quad \text{if Opposition}=\text{Bournemouth} \\
+    \gamma^2 \quad \text{if Opposition}=\text{Brighton} \\
+    ... \\
+    \gamma^{20} \quad \text{if Opposition}=\text{Wolves }
+  \end{cases} \\
+  \text{HA} &= \begin{cases}
+    \kappa \quad \text{if HA}=\text{H} \\
+    0 \quad \text{if HA}=\text{A}
+  \end{cases}
+\end{align*}$$
+
 
 
 
 **Work in progress**
 
-Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above
+Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above. could actually move positono for teams. After model stuff add the bit about form
