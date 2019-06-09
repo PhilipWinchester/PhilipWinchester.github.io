@@ -175,6 +175,13 @@ detach(ModelDF_Recent)
       <th>0.389048</th>
     </tr>
     <tr>
+      <th>HAH</th>
+      <th>0.264142</th>
+      <th>0.306663</th>
+      <th>0.861</th>
+      <th>0.389048</th>
+    </tr>
+    <tr>
       <th>OppositionCrystal Palace</th>
       <th>0.472469</th>
       <th>0.422454</th>
@@ -194,7 +201,7 @@ detach(ModelDF_Recent)
 
 The [glm](https://en.wikipedia.org/wiki/General_linear_model) (general linear model) takes the observations in out datarame to estimate the parameters ($$\alpha$$, $$\beta$$'s,  $$\gamma$$'s and  $$\kappa$$) in the following expression:
 
-$$ \begin{align*}
+$$\begin{align*}
   \lambda &= e^{\alpha+\text{Team}+\text{Opposition}+\text{HA}} \\
   \text{Team} &= \begin{cases}
     \beta^1& \quad \text{if Team}=\text{Bournemouth} \\
@@ -209,8 +216,8 @@ $$ \begin{align*}
     \gamma^{20}& \quad \text{if Opposition}=\text{Wolves }
   \end{cases} \\
   \text{HA} &= \begin{cases}
-    \kappa \quad \text{if HA}=\text{H} \\
-    0 \quad \text{if HA}=\text{A}
+    \kappa& \quad \text{if HA}=\text{H} \\
+    0& \quad \text{if HA}=\text{A}
   \end{cases}
 \end{align*}$$
 
