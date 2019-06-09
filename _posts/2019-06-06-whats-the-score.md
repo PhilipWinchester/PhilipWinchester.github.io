@@ -66,9 +66,9 @@ ModelDF_Recent <- data.frame(Team = c(DF_Recent$HomeTeam, DF_Recent$AwayTeam),
   Goals= c(DF_Recent$FTHG, DF_Recent$FTAG))
 ```
 
-"DF_Original" is the dataset taken from football-data.co.uk and it contains 62 columns, most of which we are not interested in. The first few lines of code above extract the columns we want, buts the Date column in the format we want and removes games which were played more than 90 days ago.
+`DF_Original` is the dataset taken from football-data.co.uk and it contains 62 columns, most of which we are not interested in. The first few lines of code above extract the columns we want, buts the Date column in the format we want and removes games which were played more than 90 days ago.
 
-Our aim is to build a model which takes a team, an opposition and returns a value for $$\lambda$$ depending on if the team is playing at home or away. To train such a model, we need a dataframe with the following columns "Team", "Opposition", "HA" and "Goals scored by Team", where "HA" indicates if the Team is playing at home or away. Such a dataframe is built in the last few lines of code above in "ModelDF_Recent" and is displayed below:
+Our aim is to build a model which takes a team, an opposition and returns a value for $$\lambda$$ depending on if the team is playing at home or away. To train such a model, we need a dataframe with the following columns "Team", "Opposition", "HA" and "Goals scored by Team", where "HA" indicates if the Team is playing at home or away. Such a dataframe is built in the last few lines of code above in `ModelDF_Recent` and is displayed below:
 
 <div>
 <table>
@@ -142,7 +142,7 @@ detach(ModelDF_Recent)
 ```
 <div>
 <table>
-  <caption>Some output from summary(Model_Recent)</caption>
+  <caption>Some output from `summary(Model_Recent)`</caption>
   <thead>
     <tr style="text-align: right;">
       <th>Coefficients</th>
@@ -176,10 +176,10 @@ detach(ModelDF_Recent)
     </tr>
     <tr>
       <th>HAH</th>
-      <th>0.264142</th>
-      <th>0.306663</th>
-      <th>0.861</th>
-      <th>0.389048</th>
+      <th>0.430247</th>
+      <th>0.115717</th>
+      <th>3.718</th>
+      <th>0.000201</th>
     </tr>
     <tr>
       <th>OppositionCrystal Palace</th>
@@ -199,7 +199,7 @@ detach(ModelDF_Recent)
 </table>
 </div>
 
-The [glm](https://en.wikipedia.org/wiki/General_linear_model) (general linear model) takes the observations in out datarame to estimate the parameters ($$\alpha$$, $$\beta$$'s,  $$\gamma$$'s and  $$\kappa$$) in the following expression:
+The [glm](https://en.wikipedia.org/wiki/General_linear_model) (general linear model) takes the observations in our dataframe to estimate the parameters ($$\alpha$$, $$\beta$$'s,  $$\gamma$$'s and  $$\kappa$$) in the following expression:
 
 $$\begin{align*}
   \lambda &= e^{\alpha+\text{Team}+\text{Opposition}+\text{HA}} \\
@@ -221,9 +221,16 @@ $$\begin{align*}
   \end{cases}
 \end{align*}$$
 
+At this stage there would have been room to input a "Current Form" variable into the GLM. This would have been done rather than only considering the most recent fixtures. I explored this option and the code for this is on my [GitHub page](https://github.com/PhilipWinchester). However, this varable came out with a very large [p-value](https://en.wikipedia.org/wiki/P-value) and actually increased the [AIC](https://en.wikipedia.org/wiki/Akaike_information_criterion) of the model.
 
+Man City face Crystal Palace away two gameweeks from now. Reading from what we have from the table, we have:
+$$\begin{align*}
+  \lambda_{City} &= e^{-0.133+0.264+0.472+0} = 1.83  \\
+  \lambda_{Palace} &= e^{-0.133-0.110	-0.744+0.430} = 0.573
+\end{align*}$$
 
+As expected, the model predicts City to score more goals than Palace.
 
 **Work in progress**
 
-Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above. could actually move positono for teams. After model stuff add the bit about form
+Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above. could actually move positono for teams. 
