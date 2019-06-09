@@ -110,7 +110,6 @@ Our aim is to build a model which takes a team, an opposition and returns a valu
       <th>Brighton</th>
       <th>A</th>
       <th>1</th>
-      <th></th>
     </tr>
     <tr>
       <th>117</th>
@@ -141,66 +140,58 @@ Model_Recent <- glm(Goals ~ Team + HA + Opposition, family=poisson(link=log))
 summary(Model_Recent) # Printing the summary
 detach(ModelDF_Recent)
 ```
+<div>
+<table>
+  <caption>Some output from summary(Model_Recent)</caption>
+  <thead>
+    <tr style="text-align: right;">
+      <th>Coefficients</th>
+      <th>Estimate</th>
+      <th>Std. Error</th>
+      <th>z value</th>
+      <th>Pr(>|z|)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>(Intercept)</th>
+      <th>-0.132610</th>
+      <th>0.423617</th>
+      <th>-0.313</th>
+      <th>0.754249</th>
+    </tr>
+    <tr>
+      <th>TeamCrystal Palace</th>
+      <th>-0.110139</th>
+      <th>0.331803</th>
+      <th>-0.332</th>
+      <th>0.739934</th>
+    </tr>
+    <tr>
+      <th>TeamMan City</th>
+      <th>0.264142</th>
+      <th>0.306663</th>
+      <th>0.861</th>
+      <th>0.389048</th>
+    </tr>
+    <tr>
+      <th>OppositionCrystal Palace</th>
+      <th>0.472469</th>
+      <th>0.422454</th>
+      <th>1.118</th>
+      <th>0.263400</th>
+    </tr>
+    <tr>
+      <th>OppositionMan City</th>
+      <th>-0.743706</th>
+      <th>0.606242</th>
+      <th>-1.227</th>
+      <th>0.219918</th>
+    </tr>
+  </tbody>
+</table>
+</div>
 
-[Call:
-glm(formula = Goals ~ Team + HA + Opposition, family = poisson(link = log))
-
-Deviance Residuals:
-    Min       1Q   Median       3Q      Max  
--2.0608  -0.9136  -0.1114   0.5018   2.5263  
-
-Coefficients:
-                          Estimate Std. Error z value Pr(>|z|)    
-(Intercept)              -0.132610   0.423617  -0.313 0.754249    
-TeamBournemouth          -0.410482   0.367262  -1.118 0.263702    
-TeamBrighton             -0.854457   0.431366  -1.981 0.047612 *  
-TeamBurnley              -0.112327   0.338071  -0.332 0.739693    
-TeamCardiff              -0.751166   0.409125  -1.836 0.066353 .  
-TeamChelsea              -0.106657   0.332163  -0.321 0.748137    
-TeamCrystal Palace       -0.110139   0.331803  -0.332 0.739934    
-TeamEverton              -0.260379   0.350986  -0.742 0.458179    
-TeamFulham               -0.522561   0.389683  -1.341 0.179923    
-TeamHuddersfield         -1.178886   0.474592  -2.484 0.012992 *  
-TeamLeicester            -0.047993   0.328877  -0.146 0.883977    
-TeamLiverpool             0.187713   0.315719   0.595 0.552139    
-TeamMan City              0.264142   0.306663   0.861 0.389048    
-TeamMan United           -0.027127   0.348216  -0.078 0.937906    
-TeamNewcastle            -0.241388   0.345886  -0.698 0.485251    
-TeamSouthampton          -0.240801   0.359593  -0.670 0.503082    
-TeamTottenham            -0.294002   0.365137  -0.805 0.420714    
-TeamWatford              -0.034965   0.350195  -0.100 0.920468    
-TeamWest Ham             -0.545795   0.375685  -1.453 0.146279    
-TeamWolves               -0.111324   0.338343  -0.329 0.742136    
-HAH                       0.430247   0.115717   3.718 0.000201 ***
-OppositionBournemouth     0.643716   0.405659   1.587 0.112549    
-OppositionBrighton        0.586949   0.424993   1.381 0.167255    
-OppositionBurnley         0.490371   0.418789   1.171 0.241629    
-OppositionCardiff         0.684450   0.407185   1.681 0.092776 .  
-OppositionChelsea         0.614190   0.413591   1.485 0.137539    
-OppositionCrystal Palace  0.472469   0.422454   1.118 0.263400    
-OppositionEverton         0.049252   0.455130   0.108 0.913825    
-OppositionFulham          0.908161   0.390599   2.325 0.020070 *  
-OppositionHuddersfield    0.920738   0.393328   2.341 0.019238 *  
-OppositionLeicester       0.688431   0.410402   1.677 0.093453 .  
-OppositionLiverpool      -0.004021   0.466587  -0.009 0.993124    
-OppositionMan City       -0.743706   0.606242  -1.227 0.219918    
-OppositionMan United      0.038017   0.461929   0.082 0.934407    
-OppositionNewcastle       0.287249   0.432340   0.664 0.506431    
-OppositionSouthampton     0.423737   0.432959   0.979 0.327728    
-OppositionTottenham       0.187541   0.444575   0.422 0.673140    
-OppositionWatford         0.382051   0.424754   0.899 0.368406    
-OppositionWest Ham        0.493553   0.414817   1.190 0.234122    
-OppositionWolves          0.355747   0.430653   0.826 0.408767    
----
-
-
-(Dispersion parameter for poisson family taken to be 1)
-
-    Null deviance: 288.01  on 229  degrees of freedom
-Residual deviance: 204.57  on 190  degrees of freedom
-AIC: 698.94
-
-Number of Fisher Scoring iterations: 5]{: .notice--primary}
 
 
 
