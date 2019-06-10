@@ -204,16 +204,16 @@ The [glm](https://en.wikipedia.org/wiki/General_linear_model) (general linear mo
 $$\begin{align*}
   \lambda &= e^{\alpha+\text{Team}+\text{Opposition}+\text{HA}} \\
   \text{Team} &= \begin{cases}
-    \beta^1& \quad \text{if Team}=\text{Bournemouth} \\
-    \beta^2& \quad \text{if Team}=\text{Brighton} \\
+    \beta_1& \quad \text{if Team}=\text{Bournemouth} \\
+    \beta_2& \quad \text{if Team}=\text{Brighton} \\
     ... \\
-    \beta^{20}& \quad \text{if Team}=\text{Wolves }
+    \beta_{20}& \quad \text{if Team}=\text{Wolves }
   \end{cases} \\
   \text{Opposition} &= \begin{cases}
-    \gamma^1& \quad \text{if Opposition}=\text{Bournemouth} \\
-    \gamma^2& \quad \text{if Opposition}=\text{Brighton} \\
+    \gamma_1& \quad \text{if Opposition}=\text{Bournemouth} \\
+    \gamma_2& \quad \text{if Opposition}=\text{Brighton} \\
     ... \\
-    \gamma^{20}& \quad \text{if Opposition}=\text{Wolves }
+    \gamma_{20}& \quad \text{if Opposition}=\text{Wolves }
   \end{cases} \\
   \text{HA} &= \begin{cases}
     \kappa& \qquad \text{if HA}=\text{H} \\
