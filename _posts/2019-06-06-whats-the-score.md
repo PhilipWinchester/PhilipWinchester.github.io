@@ -1,4 +1,4 @@
-distributionestimated---
+---
 title: "What's the score?"
 date: 2019-06-06
 tags: [FPL, R]
@@ -359,13 +359,13 @@ We have successfully built a model which quantifies the difficulty of upcoming f
 1. The Poisson distribution, and in particular the Skallam distribution, assumes that the goals scoring rate for each team is independent and constant throughout the game. Ie, if team 1 were to score 10 goals in the first 5 minutes, this would not effect the future scoring rate of either team.
 2. It does not account for teams motivation. Ie, it does not capture the scenario when a team is playing for draw. This is particularly common in the group stages of knockout competitions.
 
-Next we need to use the derived probabilities and see how they translate to the expected points scored by any given player. If we think Spurs are pretty likely to beat Brighton in their next game, how many points do we reckon Mr Kane to get? Of course this is a crucial question in FPL.
+Next we need to use the derived probabilities and see how they translate to the expected points scored by any given player. If we think Spurs are pretty likely to beat Brighton in their next game, how many FPL points do we expect Mr Kane to get? Of course this is a crucial question in FPL.
 
 We should also like to refine the model. Most likely we will consider a [Dixon-Coles model](http://web.math.ku.dk/~rolf/teaching/thesis/DixonColes.pdf) which has the benefit of:
 
 1. Introducing an interaction term to correct the underestimated frequency of low scoring matches
 2. Applying a time decay component so that more recent fixtures are weighted more strongly
 
-The second point is something we have already discussed in this post. Current form is something we wish to consider and it will be nice for us if this can be included naturally in the model rather than somewhat arbitrarily deciding to only consider games in the last 3 months.... 
+The second point is something we have already discussed in this post. Current form is something we wish to consider and it will be nice for us if this can be included naturally in the model rather than somewhat arbitrarily deciding to only consider games in the last 3 months....
 
 **Stay tuned!**  
