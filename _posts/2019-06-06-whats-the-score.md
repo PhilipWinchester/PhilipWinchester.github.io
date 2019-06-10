@@ -142,7 +142,7 @@ detach(ModelDF_Recent)
 ```
 <div>
 <table>
-  <caption>Some output from `summary(Model_Recent)`</caption>
+  <caption>Some output from summary(Model_Recent)</caption>
   <thead>
     <tr style="text-align: right;">
       <th>Coefficients</th>
@@ -231,6 +231,23 @@ $$\begin{align*}
 
 As expected, the model predicts City to score more goals than Palace.
 
+Next we want to make predictions for upcoming matches. `SimulateMatch`, defined below, takes a home and away team and reruns a matrix with probability values for final scores. The default, set in `Max`, is to display results up to 5 goals scored per team.
+
+```r
+# Function that takes a home team and away team and returns a matrix with score probabilities
+SimulateMatch <- function(Team, AwayTeam, Max = 5)
+  {HomeLambda <- predict(Model_Recent, data.frame(HA = "H", Team = Team, Opposition = AwayTeam), type = "response")
+  AwayLambda <- predict(Model_Recent, data.frame(HA = "A", Team = AwayTeam, Opposition = Team), type = "response")
+  return(dpois(0:Max, HomeLambda) %o% dpois(0:Max, AwayLambda))}
+```
+
+  ##            [,1]       [,2]        [,3]         [,4]         [,5]
+  ## [1,] 0.03108485 0.01272529 0.002604694 0.0003554303 3.637587e-05
+  ## [2,] 0.09517130 0.03896054 0.007974693 0.0010882074 1.113706e-04
+  ## [3,] 0.14569118 0.05964200 0.012207906 0.0016658616 1.704896e-04
+  ## [4,] 0.14868571 0.06086788 0.012458827 0.0017001016 1.739938e-04
+  ## [5,] 0.11380634 0.04658922 0.009536179 0.0013012841 1.331776e-04
+
 **Work in progress**
 
-Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above. could actually move positono for teams. 
+Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above. could actually move positono for teams.
