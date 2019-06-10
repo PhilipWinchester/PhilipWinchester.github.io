@@ -1,4 +1,4 @@
----
+distributionestimated---
 title: "What's the score?"
 date: 2019-06-06
 tags: [FPL, R]
@@ -224,9 +224,10 @@ $$\begin{align*}
 At this stage there would have been room to input a "Current Form" variable into the GLM. This would have been done rather than only considering the most recent fixtures. I explored this option and the code for this is on my [GitHub page](https://github.com/PhilipWinchester). However, this varable came out with a very large [p-value](https://en.wikipedia.org/wiki/P-value) and actually increased the [AIC](https://en.wikipedia.org/wiki/Akaike_information_criterion) of the model.
 
 Man City face Crystal Palace away two gameweeks from now. Reading from what we have from the table, we have:
+
 $$\begin{align*}
-  \lambda_{City} &= e^{-0.133+0.264+0.472+0} = 1.83  \\
-  \lambda_{Palace} &= e^{-0.133-0.110	-0.744+0.430} = 0.573
+  \lambda_{\text{City}} &= e^{-0.133+0.264+0.472+0} = 1.83  \\
+  \lambda_{\text{Palace}} &= e^{-0.133-0.110	-0.744+0.430} = 0.573
 \end{align*}$$
 
 As expected, the model predicts City to score more goals than Palace.
@@ -243,13 +244,128 @@ SimulateMatch <- function(Team, AwayTeam, Max = 5)
 SimulateMatch("Crystal Palace", "Man City", Max = 4)
 ```
 ```r
-  ##            [,1]       [,2]        [,3]         [,4]         [,5]
-  ## [1,] 0.03108485 0.01272529 0.002604694 0.0003554303 3.637587e-05
-  ## [2,] 0.09517130 0.03896054 0.007974693 0.0010882074 1.113706e-04
-  ## [3,] 0.14569118 0.05964200 0.012207906 0.0016658616 1.704896e-04
-  ## [4,] 0.14868571 0.06086788 0.012458827 0.0017001016 1.739938e-04
-  ## [5,] 0.11380634 0.04658922 0.009536179 0.0013012841 1.331776e-04
+  ##              [,1]         [,2]         [,3]         [,4]         [,5]
+  ## [1,] 0.0904638944 0.1654968919 0.1513820591 0.0923140310 0.0422203944
+  ## [2,] 0.0518701575 0.0948925525 0.0867993944 0.0529309882 0.0242083156
+  ## [3,] 0.0148706468 0.0272047300 0.0248845038 0.0151747761 0.0069402780
+  ## [4,] 0.0028421755 0.0051995463 0.0047560895 0.0029003027 0.0013264714
+  ## [5,] 0.0004074114 0.0007453285 0.0006817613 0.0004157436 0.0001901429
 ```
-**Work in progress**
 
-Need to explain what Rows_Original, Rows_Recent and Teams are. Maybe not Row_Recent as it has explcilty been put in above. could actually move positono for teams.
+At the end of the code above we have simulated the Palace - City fixture (note that we have set `Max=4`). The model reckons a 0-1 City win is the most likely outcome with probability of 16.5%.
+
+The output from `SimulateMatch` can be used to place probabilities on a home/away win or draw by noting that the digonal entries of the matrix correspond to draws, the lower diagonal entries correspond to a home win and the upper diagonal entries an away win. An alternative approach is to use the [Skellam distribution](https://en.wikipedia.org/wiki/Skellam_distribution) which takes two poisson parameters, for example $$\lambda_{\text{City}}$$ and $$\lambda_{\text{Palace}}$$, and returns the difference between two independent poisson distributions with these parameters. Ie, the Skellam distribution returns Palace goals - City goals. Using this reasoning we define the following functions to calculate the probabilities we want.  
+
+```r
+library(skellam) # Includes the skellam distribution
+
+# Function which return the probabilty of a draw
+PDraw <- function(Team, AwayTeam)
+  {HomeLambda <- predict(Model_Recent, data.frame(HA = "H", Team = Team, Opposition = AwayTeam), type = "response")
+  AwayLambda <- predict(Model_Recent, data.frame(HA = "A", Team = AwayTeam, Opposition = Team), type = "response")
+  Answer <- dskellam(0,HomeLambda,AwayLambda)
+  return(percent(Answer))}
+
+# Function which return the probabilty of a home win
+PHomeWin <- function(Team, AwayTeam)
+  {HomeLambda <- predict(Model_Recent, data.frame(HA = "H", Team = Team, Opposition = AwayTeam), type = "response")
+  AwayLambda <- predict(Model_Recent, data.frame(HA = "A", Team = AwayTeam, Opposition = Team), type = "response")
+  Answer <- pskellam(0,HomeLambda,AwayLambda, lower.tail = FALSE)
+  return(percent(Answer))}
+
+# Function which return the probabilty of an away win
+PAwayWin <- function(Team, AwayTeam)
+  {HomeLambda <- predict(Model_Recent, data.frame(HA = "H", Team = Team, Opposition = AwayTeam), type = "response")
+  AwayLambda <- predict(Model_Recent, data.frame(HA = "A", Team = AwayTeam, Opposition = Team), type = "response")
+  Answer <- pskellam(-1,HomeLambda,AwayLambda)
+  return(percent(Answer))}
+```
+
+At this stage we have good machinery to predict the outcome of future fixtures, so lets do exactly that. The `Fixtures` dataframe below contains all the remaining Premier League fixtures. In the code below, we use our functions to predict the outcome.
+
+```r
+Fixtures <- Fixtures %>% transform(HomeWinPercentage = PHomeWin(HomeTeam,AwayTeam), DrawPercentage = PDraw(HomeTeam,AwayTeam), AwayWinPercentage = PAwayWin(HomeTeam,AwayTeam))
+```
+
+<div>
+<table>
+  <caption>Fixtures</caption>
+  <thead>
+    <tr style="text-align: right;">
+      <th>HomeTeam</th>
+      <th>AwayTeam</th>
+      <th>HomeWinPercentage</th>
+      <th>DrawPercentage</th>
+      <th>AwayWinPercentage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Brighton</th>
+      <th>-Cardiff</th>
+      <th>44.9%</th>
+      <th>-31.2%</th>
+      <th>24.0%</th>
+    </tr>
+    <tr>
+      <th>Man United</th>
+      <th>-Man City</th>
+      <th>19.5%</th>
+      <th>-30.9%</th>
+      <th>49.6%</th>
+    </tr>
+    <tr>
+      <th>Watford</th>
+      <th>Southampton</th>
+      <th>60.1%</th>
+      <th>21.3%</th>
+      <th>18.6%</th>
+    </tr>
+    <tr>
+      <th>Wolves</th>
+      <th>Arsenal</th>
+      <th>35.3%</th>
+      <th>27.3%</th>
+      <th>37.4%</th>
+    </tr>
+    <tr>
+      <th>Tottenham</th>
+      <th>Brighton</th>
+      <th>70.6%</th>
+      <th>20.9%</th>
+      <th>8.5%</th>
+    </tr>
+    <tr>
+      <th>Burnley</th>
+      <th>Cardiff</th>
+      <th>75.5%</th>
+      <th>15.9%</th>
+      <th>8.7%</th>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+## Conclusion
+We have successfully built a model which quantifies the difficulty of upcoming fixtures taking into account home field advantage, the opposition and current form. Given the conditions of the Poisson distribution it is deemed to model football scores quite well. However, there are a few point the consider.
+
+1. The Poisson distribution, and in particular the Skallam distribution, assumes that the goals scoring rate for each team is independent and constant throughout the game. Ie, if team 1 were to score 10 goals in the first 5 minutes, this would not effect the future scoring rate of either team.
+2. It does not account for teams motivation. Ie, it does not capture the scenario when a team is playing for draw. This is particularly common in the group stages of knockout competitions.
+
+Next we need to use the derived probabilities and see how they translate to the expected points scored by any given player. If we think Spurs are pretty likely to beat Brighton in their next game, how many points do we reckon Mr Kane to get? Of course this is a crucial question in FPL.
+
+We should also like to refine the model. Most likely we will consider a [Dixon-Coles model](http://web.math.ku.dk/~rolf/teaching/thesis/DixonColes.pdf) which has the benefit of:
+
+1. Introducing an interaction term to correct the underestimated frequency of low scoring matches
+2. Applying a time decay component so that more recent fixtures are weighted more strongly
+
+The second point is something we have already discussed in this post. Current form is something we wish to consider and it will be nice for us if this can be included naturally in the model rather than somewhat arbitrarily deciding to only consider games in the last 3 months.... 
+
+**Stay tuned!**  
