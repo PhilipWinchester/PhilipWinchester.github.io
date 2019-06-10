@@ -284,7 +284,8 @@ PAwayWin <- function(Team, AwayTeam)
 At this stage we have good machinery to predict the outcome of future fixtures, so lets do exactly that. The `Fixtures` dataframe below contains all the remaining Premier League fixtures. In the code below, we use our functions to predict the outcome.
 
 ```r
-Fixtures <- Fixtures %>% transform(HomeWinPercentage = PHomeWin(HomeTeam,AwayTeam), DrawPercentage = PDraw(HomeTeam,AwayTeam), AwayWinPercentage = PAwayWin(HomeTeam,AwayTeam))
+Fixtures <- Fixtures %>% transform(HomeWinPercentage = PHomeWin(HomeTeam,AwayTeam),
+DrawPercentage = PDraw(HomeTeam,AwayTeam), AwayWinPercentage = PAwayWin(HomeTeam,AwayTeam))
 ```
 
 <div>
