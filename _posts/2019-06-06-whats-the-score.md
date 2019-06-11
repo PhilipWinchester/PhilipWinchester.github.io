@@ -227,7 +227,7 @@ Man City face Crystal Palace away two gameweeks from now. Reading from what we h
 
 $$\begin{align*}
   \lambda_{\text{City}} &= e^{-0.133+0.264+0.472+0} = 1.83  \\
-  \lambda_{\text{Palace}} &= e^{-0.133-0.110	-0.744+0.430} = 0.573
+  \lambda_{\text{Palace}} &= e^{-0.133-0.110	-0.744+0.430} = 0.57
 \end{align*}$$
 
 As expected, the model predicts City to score more goals than Palace.
@@ -303,16 +303,16 @@ DrawPercentage = PDraw(HomeTeam,AwayTeam), AwayWinPercentage = PAwayWin(HomeTeam
   <tbody>
     <tr>
       <th>Brighton</th>
-      <th>-Cardiff</th>
+      <th>Cardiff</th>
       <th>44.9%</th>
-      <th>-31.2%</th>
+      <th>31.2%</th>
       <th>24.0%</th>
     </tr>
     <tr>
       <th>Man United</th>
-      <th>-Man City</th>
+      <th>Man City</th>
       <th>19.5%</th>
-      <th>-30.9%</th>
+      <th>30.9%</th>
       <th>49.6%</th>
     </tr>
     <tr>
