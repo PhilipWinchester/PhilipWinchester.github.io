@@ -1,5 +1,5 @@
 ---
-title: "Lets get started!"
+title: "Lets Get Started!"
 date: 2019-06-04
 tags: [FPL]
 excerpt: ""

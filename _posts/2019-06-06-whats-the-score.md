@@ -1,5 +1,5 @@
 ---
-title: "What's the score?"
+title: "What's the Score?"
 date: 2019-06-06
 tags: [FPL, R]
 excerpt: "Combining the world’s most popular sport with everyone’s favourite discrete probability distribution, this post predicts football matches using the Poisson distribution."

@@ -1,5 +1,5 @@
 ---
-title: "Making the middle count"
+title: "Making the Middle Count"
 date: 2019-06-05
 tags: [FPL, R]
 excerpt: "But what if Salah and Aguero don't score? This post makes sure you're prepared for when they don't."
