@@ -9,3 +9,6 @@ header:
   overlay_filter: 0.4
 classes: wide
 ---
+**"I will tell you how to become rich. Close the doors. Be fearful when others are greedy. Be greedy when others are fearful." - Warren Buffett.
+
+Ok, thats sounds easy enough and Warren Buffet arguably (not really) the most successfully investor in the world, so we should probably listen to him.** 
