@@ -141,6 +141,8 @@ print(Investment_Function(FTSE100_Index, 10000, 1, 2, 2))
 
 The above table gives the first 14 iterations of our strategy. Our initial £10,000 gives us approximately 1.92 units of the FTSE 100 index. After two successive increases in the index, we sell our holding at the 9th iteration and don't invest again until 5 days later. The `Sell_Number` and `Buy_Number` are quite small for this strategy, so we will end up with quite a few transactions here. The transaction cost is illustrated nicely between the 13th and 14th iteration where our value has decreased by £1. Even though we have lost over £700 in two weeks here (ough), note that we are holding 0.03 units more compared to when we started. The strategy is therefore doing better than simply buying and holding which would results in a constant number of units held. This is because the transaction cost is trumped by the decreasing index between out Sell and Buy dates. Let's look at how the strategy does over the full time horizon.  
 
+![image-center](/images/I Will Tell You How to Become Rich/FTSE M1 Full.png){: .align-center .width-half}
+
 ## Another One
 
 ## Conclusion
