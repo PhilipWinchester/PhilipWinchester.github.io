@@ -118,11 +118,11 @@ def Investment_Function(Index_List, Start_Money, Cost_Per_Transaction, Sell_Numb
 
 In addition to `Sell_Number`, `Buy_Number` and `Cost_Per_Transaction` as discussed above `Investment_Function` takes `Index_List` as a list of index values with the most recent as its first entry. `Start_Money` is simply how much money we have to invest at time 0. The return as a matrix which illustrates how the strategy is progressing. I have managed to source the daily closing value of the FTSE 100 index between 20 October 1997 to 31 May 2019 from [The London Stock Exchange](https://www.londonstockexchange.com/statistics/ftse/ftse.htm). Lets so what the following input explains a strategy where we have £10,000 to invest, the transaction cost is £1 and the `Sell_Number` and `Buy_Number` are both 2. Lets see what it looks like.
 
-```Python
+```python
 print(Investment_Function(FTSE100_Index, 10000, 1, 2, 2))
 ```
 
-```Python
+```python
   ## ['4764.35' '1.94999951033' '9290.48016703' 'Buy']
   ## ['4863.79' '0.0' '9291.48016703' "Down, but don't buy"]
   ## ['4908.32' '0.0' '9291.48016703' "Up, so don't buy"]
