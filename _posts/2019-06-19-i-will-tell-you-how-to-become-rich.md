@@ -170,6 +170,7 @@ def Max_Ups(Index_List):
 
 Below is a heat map illustrating how many times better each strategy does in comparison to buy and hold.
 
+![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 Heat.png){: .align-center .width-half}
 
 
 ## Another One
