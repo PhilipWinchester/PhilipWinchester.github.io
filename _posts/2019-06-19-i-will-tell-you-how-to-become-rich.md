@@ -176,13 +176,13 @@ As usual, a recipe for the heat map is found on my [GitHub page](https://github.
 
 ![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 8 and 8.png){: .align-center .width-half}
 
-Due to the high Buy_Number, the strategy spends long periods out of the market, happens to spot 3 periods when the market does well and most importantly, misses the early 2000 and 2008 crashes. In addition, rather than just holding cash during the long periods where we are not invested, the strategy could invest straight into some form of fixed income, generating small but steady return. 
+Due to the high Buy_Number, the strategy spends long periods out of the market, happens to spot 3 periods when the market does well and most importantly, misses the early 2000 and 2008 crashes. In addition, rather than just holding cash during the long periods where we are not invested, the strategy could invest straight into some form of fixed income, generating small but steady return.
 
 Now lets look at some other indices. Somewhat at random, I have chosen the Japanese Nikkei 225 stock index and the gold price index. Japanese stocks because they are one of the least correlated to UK stocks and gold, because, why not. I have found Nikkei 225 between 16 May 1949 to 14 June 2019 [here](https://www.macrotrends.net/2593/nikkei-225-index-historical-chart-data) and the gold price between 29 December 1978 to 7 June 2019 from [here](https://www.gold.org/goldhub/data/gold-prices). Below I have plotted the Buy: 3, Sell: 2 strategy for both indices and their heat maps over the the full time horizon. For Nikkei 225 I have sceled the original investment down to £100 and £1000 for the gold price.
 
 <figure class="half">
     <a href="/images/I Will Tell You How to Become Rich/Japan S1 Fuller.png"><img src="/images/I Will Tell You How to Become Rich/Japan S1 Fuller.png"></a>
-    <a href="/images/I Will Tell You How to Become Rich/Gold S1 Fuller.png"><img src="/images/I Will Tell You How to Become Rich/Gold S1 Full.png"></a>
+    <a href="/images/I Will Tell You How to Become Rich/Gold S1 Fuller.png"><img src="/images/I Will Tell You How to Become Rich/Gold S1 Fuller.png"></a>
 </figure>
 
 <figure class="half">
