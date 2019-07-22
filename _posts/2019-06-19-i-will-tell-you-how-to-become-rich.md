@@ -116,7 +116,7 @@ def Investment_Function(Index_List, Start_Money, Cost_Per_Transaction, Sell_Numb
     return(np.column_stack((Index_List, Units, Value, Exp)))
 ```
 
-In addition to `Sell_Number`, `Buy_Number` and `Cost_Per_Transaction` as discussed above `Investment_Function` takes `Index_List` as a list of index values with the most recent as its first entry. `Start_Money` is simply how much money we have to invest at time 0. The return as a matrix which illustrates how the strategy is progressing. I have managed to source the daily closing value of the FTSE 100 index between 20 October 1997 to 31 May 2019 from [The London Stock Exchange](https://www.londonstockexchange.com/statistics/ftse/ftse.htm). Lets so what the following input explains a strategy where we have £10,000 to invest, the transaction cost is £1 and the `Sell_Number` and `Buy_Number` are both 2. Lets see what it looks like.
+In addition to `Sell_Number`, `Buy_Number` and `Cost_Per_Transaction` as discussed above `Investment_Function` takes `Index_List` as a list of index values with the most recent value as its first entry. `Start_Money` is simply how much money we have to invest at time 0. The return as a matrix which illustrates how the strategy is progressing. I have managed to source the daily closing value of the FTSE 100 index between 20 October 1997 to 31 May 2019 from [The London Stock Exchange](https://www.londonstockexchange.com/statistics/ftse/ftse.htm). Lets so what the following input explains a strategy where we have £10,000 to invest, the transaction cost is £1 and the `Sell_Number` and `Buy_Number` are both 2. Lets see what it looks like.
 
 ```python
 print(Investment_Function(FTSE100_Index, 10000, 1, 2, 2))
@@ -141,7 +141,14 @@ print(Investment_Function(FTSE100_Index, 10000, 1, 2, 2))
 
 The above table gives the first 14 iterations of our strategy. Our initial £10,000 gives us approximately 1.92 units of the FTSE 100 index. After two successive increases in the index, we sell our holding at the 9th iteration and don't invest again until 5 days later. The `Sell_Number` and `Buy_Number` are quite small for this strategy, so we will end up with quite a few transactions here. The transaction cost is illustrated nicely between the 13th and 14th iteration where our value has decreased by £1. Even though we have lost over £700 in two weeks here (ough), note that we are holding 0.03 units more compared to when we started. The strategy is therefore doing better than simply buying and holding which would results in a constant number of units held. This is because the transaction cost is trumped by the decreasing index between out Sell and Buy dates. Let's look at how the strategy does over the full time horizon.  
 
+<figure class="half">
+    <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Full.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Full.png"></a>
+    <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Part.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Part.png"></a>
+</figure>
+
 ![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 Full.png){: .align-center .width-half}
+
+The strategy performances significantly better than the index. Buying and holding takes our £10k to £14k whilst the strategy return £55k. Interesting!
 
 
 
