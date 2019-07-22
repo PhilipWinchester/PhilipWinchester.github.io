@@ -139,14 +139,14 @@ print(Investment_Function(FTSE100_Index, 10000, 1, 2, 2))
   ## ['5211.02' '1.91901009783' '10000.0' 'Start']]
 ```
 
-The above table gives the first 14 iterations of our strategy. Our initial £10,000 gives us approximately 1.92 units of the FTSE 100 index. After two successive ups in the index, we sell our holding at the 9th iteration and don't invest again until 5 days later. The `Sell_Number` and `Buy_Number` are quite small for this strategy, so we will end up with quite a few transactions here. The transaction cost is illustrated nicely between the 13th and 14th iteration where our value has decreased by £1. Even though we have lost over £700 in two weeks here (ough), note that we are holding 0.03 units more compared to when we started. The strategy is therefore doing better than simply buying and holding which would results in a constant number of units held. This is because the transaction cost is trumped by the decreasing index between out Sell and Buy dates. Let's look at how the strategy does over the full time horizon.  
+The above table gives the first 14 iterations of our strategy. Our initial £10,000 gives us approximately 1.92 units of the FTSE 100 index. After two successive ups in the index, we sell our holding at the 9th iteration and don't invest again until 5 days later. The `Sell_Number` and `Buy_Number` are quite small for this strategy, so we will end up with quite a few transactions here. The transaction cost is illustrated nicely between the 13th and 14th iteration where our value has decreased by £1. Even though we have lost over £700 in two weeks here (ough), note that we are holding 0.03 units more compared to when we started. The strategy is therefore doing better than simply buying and holding which would results in a constant number of units held. This is because the transaction cost is trumped by the decreasing index between our Sell and Buy dates. Let's look at how the strategy does over the full time horizon.  
 
 <figure class="half">
     <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Full.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Full.png"></a>
     <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Parter.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Parter.png"></a>
 </figure>
 
-The left image tells us that the strategy performs significantly better than the index over the full time horizon. Buying and holding takes our £10k to £14k whilst the strategy return £55k. Interestingly the strategy seems to to do particularly well during the 2008 financial crisis. This is a time where the index dropped significantly and we would not expect any strategy to do well. To illustrate this, the right image above plots the strategy had we invested in September 2008 until the end of the year. Since this is a shorter time period, we can now see buy and sell actions. The strategy is invested until the start of October. Subsequently, flat periods of the orange graph illustrate times when we are not invested. Over this period, the index dropped 24% whilst the strategy returned 20%. Interesting!
+How to produce these can be found on my [GitHub page](https://github.com/PhilipWinchester). The left image tells us that the strategy performs significantly better than the index over the full time horizon. Buying and holding takes our £10k to £14k whilst the strategy return £55k. Interestingly the strategy seems to to do particularly well during the 2008 financial crisis. This is a time where the index dropped significantly and we would not expect any strategy to do well. To illustrate this, the right image above plots the strategy had we invested in September 2008 until the end of the year. Since this is a shorter time period, we can now see buy and sell actions. The strategy is invested until the start of October. Subsequently, flat periods of the orange graph illustrate times when we are not invested. Over this period, the index dropped 24% whilst the strategy returned 20%. Interesting!
 
 The next step is to work out which strategy like this is the most successfully. To do so, firstly we need to consider which strategies are sensible to consider. Ie, it is not sensible to consider a strategy which sells after 25 ups, if the maximum number of successive ups is 10. The below code finds the maximum number of successive ups from an Index_List. There is an equivalent function for successive downs.
 
@@ -168,7 +168,7 @@ def Max_Ups(Index_List):
     return(Ans)
 ```
 
-
+Below is a heat map illustrating how many times better each strategy does in comparison to buy and hold.
 
 
 
