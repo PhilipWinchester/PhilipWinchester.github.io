@@ -143,14 +143,14 @@ The above table gives the first 14 iterations of our strategy. Our initial £10,
 
 <figure class="half">
     <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Full.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Full.png"></a>
-    <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Part.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Part.png"></a>
+    <a href="/images/I Will Tell You How to Become Rich/FTSE S1 Parter.png"><img src="/images/I Will Tell You How to Become Rich/FTSE S1 Parter.png"></a>
 </figure>
 
 The left image tells us that the strategy performs significantly better than the index over the full time horizon. Buying and holding takes our £10k to £14k whilst the strategy return £55k. Interestingly the strategy seems to to do particularly well during the 2008 financial crisis. This is a time where the index dropped significantly and we would not expect any strategy to do well. To illustrate this, the right image above plots the strategy had we invested in September 2008 until the end of the year. Since this is a shorter time period, we can now see buy and sell actions. The strategy is invested until the start of October. Subsequently, flat periods of the orange graph illustrate times when we are not invested. Over this period, the index dropped 24% whilst the strategy returned 20%. Interesting!
 
 The next step is to work out which strategy like this is the most successfully. To do so, firstly we need to consider which strategies are sensible to consider. Ie, it is not sensible to consider a strategy which sells after 25 ups, if the maximum number of successive ups is 10. The below code finds the maximum number of successive ups from an Index_List. There is an equivalent function for successive downs.
 
-```Python
+```python
 def Max_Ups(Index_List):
     """Function which takes a list of numbers and return the the maximum numbers of sucessive ups working from right to left"""  
     Ans = 0
