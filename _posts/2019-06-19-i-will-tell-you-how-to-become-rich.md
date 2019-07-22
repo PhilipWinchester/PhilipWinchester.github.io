@@ -172,6 +172,7 @@ Below is a heat map illustrating how many times better each strategy does in com
 
 ![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 Heat.png){: .align-center .width-half}
 
+Our Buy: 2, Sell: 2 strategy is the second most successful out of the bunch. 
 
 ## Another One
 
