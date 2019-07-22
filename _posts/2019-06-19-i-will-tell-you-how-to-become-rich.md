@@ -170,9 +170,13 @@ def Max_Ups(Index_List):
 
 Below is a heat map illustrating how many times better each strategy does in comparison to buy and hold.
 
-![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 Heat.png){: .align-center .width-half}
+![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 Heater.png){: .align-center .width-half}
 
-Our Buy: 2, Sell: 2 strategy is the second most successful out of the bunch. 
+Our Buy: 2, Sell: 2 strategy is the second most successful out of the bunch. Buy: 3, Sell: 2 is the best strategy and does 320% better than buy and hold. Ie, if the buy and hold strategy returned £100 after the time period, Buy: 3, Sell: 2 returns £420. Strategies which display 0 perform on par with buy and hold. Note that there are a bunch of these for high Sell_Numbers. For these strategies, you would rarely reach the high Sell_Number and you end up being invested for most of the time. This explains the on par performance. Relatively small Buy and Sell numbers seem to be the way yo go in this example. Interestingly, there seems to be a cluster of stand out strategies around Buy: 8 and Sell: 8. Just out of interest, I have plotted Buy: 8 and Sell: 8 below.
+
+![image-center](/images/I Will Tell You How to Become Rich/FTSE S1 8 and 8.png){: .align-center .width-half}
+
+
 
 ## Another One
 
