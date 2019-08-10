@@ -192,8 +192,19 @@ Now lets look at some other indices. Somewhat at random, I have chosen the Japan
 
 Whops, that doesn't look to good... In the 40 years from 1950, the Nikkei 225 index appears to have increased almost exponentially. The annualized increase is in fact 15% over this period and there are only a hand full of years with negative returns. As a result, any strategy which does not stay invested in the index throughout this period is a bad one. This is painfully obvious looking at the heat map, showing that any strategy with a Buy_Number above 3 and Sell_Number below 14 does significantly worse than the index. It may not be obvious from the plot, but it is in fact the 1950s which yield the greatest returns. The annualized increase was 23% over the decade and the index rose by almost 150% in 1952. As a result, all the strategies are doomed from the outset.
 
-Albeit less prominent, there are similar periods of inflation in the gold price.
+Albeit less prominent, there are similar periods of inflation in the gold price. However, there seems to be an area of positive return around Sell: 7, Buy: 4.
+
+To look past these extreme conditions, below I have plotted the Sell: 2, Buy: 3 strategy (which was so successful for FTSE) against the Nikkei 225 index form the start of 1993 where the index follow trends normal by todays standards. To the left of this is the associated heat map.
+
+<figure class="half">
+    <a href="/images/I Will Tell You How to Become Rich/Japan S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/Japan Half.png"></a>
+    <a href="/images/I Will Tell You How to Become Rich/Gold S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/Japan Half Heat.png"></a>
+</figure>
 
 ## Another One
+As discussed, we are trying to invest against the public opinion.    
+
 
 ## Conclusion
+Will never get anything good from a market that constantly goes up. relies on bad times.
+Brownian motion with general upwards trend
