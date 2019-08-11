@@ -201,10 +201,134 @@ To look past these extreme conditions, below I have plotted the Sell: 2, Buy: 3 
     <a href="/images/I Will Tell You How to Become Rich/Gold S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/Japan Half Heat.png"></a>
 </figure>
 
+As for the FTSE 100 Index the Sell: 2, Buy: 3 strategy does well and we see an area of positive returns in the top right corner of the heat map.
+
 ## Another One
-As discussed, we are trying to invest against the public opinion.    
+As discussed, we are trying to invest against the public opinion. The fact that the first strategy makes decisions on the back of development over the last few days is fair criticisms as public opinion may not have time to form. Here is another strategy which hopefully solves that problem:
+
+-  We invest all our money into the market at time 0 and set `Lookback` equal to a certain number of days.
+- Once the market has returned a percentage equal or greater then `Sell_Percentage` during to course of a `Lookback` period, we sell.
+- Equivalently for `Buy_Percentage`.
+- As before, we also have `Cost_Per_Transaction`.
+
+The code for this strategy is very similar for the one before and if you have understood the large block of code above, you could probably recreate it yourself. But for completeness, I have included it below.
+
+```python
+def Investment_Function2(Index_List, Start_Money, Cost_Per_Transaction, Sell_Percentage, Buy_Percentage, Lookback):
+    """Function which takes an Index_List, the money we start with, the transaction cost and our strategy.
+    Sell_Percentage is float >0, Buy_Percentage is float <0.
+    Returns a matrix with 5 columns
+    Column 1: The index
+    Column 2: Number of units held
+    Column 3: Value of investment
+    Column 4: What the comparsion is
+    Column 5: An explanation of what is happening"""
+
+    # Making the units and value lists, filling with 0's.
+    Units = zerolistmaker(len(Index_List))
+    Value = zerolistmaker(len(Index_List))
+    Exp = zerolistmaker(len(Index_List))
+    Comparison = zerolistmaker(len(Index_List))
+
+    # Caluclating how many units we start with filling the first entries in the lists
+    Start_Units = Start_Money/Index_List[-1]
+    Units[-1] = Start_Units
+    Value[-1] = Start_Money
+    Exp[-1] = "Start"
+    Comparison[-1] = 1.0
+
+    # "In" indicates if we are invested our not.
+    In = True
+
+    # Working our way up the Index_List to work out when to buy and sell
+    for i in range(-2,-len(Index_List)-1,-1):
+        # We haven't gone far enough to start looking back
+        if i>=-Lookback:
+            Units[i] = Start_Units
+            Value[i] = Start_Units*Index_List[i]
+            Exp[i] = "Not gone far enough"
+            Comparison[i] = 1.0
+        # We can start building our comparison list
+        else:
+            Comparison[i] = Index_List[i]/Index_List[i+Lookback]
+            # We are In and Index has done well enough over the Lookback, so we sell
+            if In and Comparison[i] >= (Sell_Percentage+1):
+                In = False
+                Units[i] = 0
+                Value[i] = Index_List[i]*Units[i+1] - Cost_Per_Transaction
+                # Returns 0 if we have run out of money
+                if Value[i] < 0:
+                    Value[i] = 0
+                    Units[i] = 0
+                    return(np.column_stack((Index_List, Units, Value, Comparison,Exp)))
+                    Exp[i] = "Run out of money"
+                Exp[i] = "Index has done well, sell"
+            # We are In and Index has not done well enough over the Lookback, so we do nothing
+            elif In and Comparison[i] < (Sell_Percentage+1):
+                Units[i] = Units[i+1]
+                Value[i] = Units[i]*Index_List[i]
+                Exp[i] = "Index has not done well enough to sell"
+            # We are not In and Index has done poorly enough over the Lookback, so we buy
+            elif not(In) and Comparison[i] <= (Buy_Percentage+1):
+                In = True
+                Units[i] = (Value[i+1]-Cost_Per_Transaction)/Index_List[i]
+                Value[i] = Value[i+1] - Cost_Per_Transaction
+                # Returns 0 if we have run out of money
+                if Value[i] < 0:
+                    Value[i] = 0
+                    Units[i] = 0
+                    return(np.column_stack((Index_List, Units, Value, Comparison,Exp)))
+                    Exp[i] = "Run out of money"
+                Exp[i] = "Index has done badly enough, se we buy"
+            # We are not In and Index has not done poorly enough over the Lookback, so we do nothing
+            elif not(In) and Comparison[i] > (Buy_Percentage+1):
+                Units[i] = 0
+                Value[i] = Value[i+1]
+                Exp[i] = "Index has not done badly enough to buy"
+            else:
+                print("Something strange has happened")
+
+    # Returning the matrix
+    return(np.column_stack((Index_List, Units, Value, Comparison,Exp)))
+```
+
+A sensible number for `Lookback` may be around 30, which is what I will be using in this post. As before, to work out which strategies that are sensible to consider, we need to find the extreme values for `Sell_Percentage` and `Buy_Percentage`. A function which does this for `Sell_Percentage` is below.
+
+```python
+def Max_Sell_Percentage_Func(Index_List, Lookback):
+    """Function which takes an Index_List, Lookback and returns the maximum Sell_Percentage we could consider"""
+    Comparison = zerolistmaker(len(Index_List))
+
+    for i in range(-1,-len(Index_List)-1,-1):
+        if i>=-Lookback:
+            Comparison[i] = 1.0
+        else:
+            Comparison[i] = Index_List[i]/Index_List[i+Lookback]
+
+    return(max(Comparison)-1)
+```
+
+Lets think of a sensible strategy. I don't know...lets say that we went to sell or buy if the market has gone up or down by 4% over 30 days respectively. Lets plot this strategy with the associated heat map for the FTSE 100 and Nikkei 250 (post 1993) index.
+
+<figure class="half">
+    <a href="/images/I Will Tell You How to Become Rich/Japan S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/FTSE 44.png"></a>
+    <a href="/images/I Will Tell You How to Become Rich/Gold S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/Nikkei 225 44.png"></a>
+</figure>
+
+<figure class="half">
+    <a href="/images/I Will Tell You How to Become Rich/Japan S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/FTSE Heat 2.png"></a>
+    <a href="/images/I Will Tell You How to Become Rich/Gold S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/Nikkei Heat 2.png"></a>
+</figure>
+
+Again, there is a cluster of blue tiles in the top right corner of the heat. Even though the particular Sell: 0.04, Buy: -0.04 strategy does not do for well for Nikkei 250, there are strategies with larger Sell and Buy values that do. This is somewhat expected, since the Nikkei 250 Index is more volatile. On a side note, I am not sure why the column with `Buy_Percentage` equal to 0.00 is on the right hand side of the heat maps. The function used to make the heat maps is `Make_Heatmap2()` on my [GitHub page](https://github.com/PhilipWinchester), please feel free to have a look.
 
 
-## Conclusion
-Will never get anything good from a market that constantly goes up. relies on bad times.
-Brownian motion with general upwards trend
+## Conclusions
+Investment managers are always careful to point out that past performance is not indicative of future results. I think we should point out the same cliché for the strategies we have tested. In both of our examples, we tested many variations displayed in the heat map. When many variations are tested, some are going to look good, but this may be completely coincidental. To prove that it is not, any model that looks good (say Buy: 3, Sell: 2 for FTSE) would have to be tested further. I can think of two was in which this can be done:
+
+- Buy: 3, Sell: 2 does 320% better than the FTSE 100 Index over the full period. Fantastic! 1-0 to Buy: 3, Sell: 2. It would be even better if it also beats the Index every year (or at least in a vast majority of years) in the given time period. I don't know if it does. It could be easily tested and would be significant result if it turned out to be true. Every year in which Buy: 3, Sell: 2 wins gives another point to the strategy.
+- The strategies could be tested against some [Brownian motion](https://en.wikipedia.org/wiki/Brownian_model_of_financial_markets) with a general upwards trend. Brownian models are typically used to model stock prices. In using such a model we are not limited to historic data.
+
+Another interesting point is that if the market is monotonically increasing, we can throw the strategies out the window. In such a scenario, we are better off being invested all the time. This was painfully obvious in our first with the Nikkei 250 Index and Gold price. On the contrary, the strategies rely on bad times for the market and actually flourish in these instances. This was investigated further in our analysis of the 2008 financial crisis and has a somewhat reassuring effect. The strategies can be relied on in gloomy times.
+
+have we found something here? I don't know? Maybe?... Probably not? As it stands I wouldn't be completely happy putting all of my money into one of these strategies. They definitely need more testing! But if nothing else, it is an interesting idea and I have enjoyed working around it. Thanks you Mr Buffett.  
