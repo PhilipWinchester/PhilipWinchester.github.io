@@ -201,7 +201,7 @@ To look past these extreme conditions, below I have plotted the Sell: 2, Buy: 3 
     <a href="/images/I Will Tell You How to Become Rich/Gold S1 Heat.png"><img src="/images/I Will Tell You How to Become Rich/Japan Half Heat.png"></a>
 </figure>
 
-As for the FTSE 100 Index the Sell: 2, Buy: 3 strategy does well and we see an area of positive returns in the top right corner of the heat map.
+As for the FTSE 100 Index the Sell: 2, Buy: 3 strategy does well and we see an area of positive returns in the top left corner of the heat map.
 
 ## Another One
 As discussed, we are trying to invest against the public opinion. The fact that the first strategy makes decisions on the back of development over the last few days is fair criticisms as public opinion may not have time to form. Here is another strategy which hopefully solves that problem:
