@@ -110,7 +110,7 @@ author:
   avatar           : "/images/Me.jpg"
   bio              : "Mathematician and wannabe data scientist who likes sports and finance"
   location         : "London, UK"
-  email            : "philipwinchester16@gmai.com"
+  email            : "philipwinchester16@gmail.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"

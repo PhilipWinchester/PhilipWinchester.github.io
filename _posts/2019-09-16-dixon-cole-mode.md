@@ -7,5 +7,7 @@ mathjax: true
 header:
   overlay_image: "/images/I Will Tell You How to Become Rich/Warren.jpg"
   overlay_filter: 0.4
+  cta_label: "Part 1"
+  cta_url: "https://philipwinchester.github.io/whats-the-score/"
 classes: wide
 ---
