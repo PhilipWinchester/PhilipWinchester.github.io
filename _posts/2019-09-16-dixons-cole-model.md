@@ -36,4 +36,21 @@ $$\begin{align*}
 
 Here $$X$$ and $$Y$$ are the home and away goals scored, $$\alpha_{i}$$ and $$\beta_{i}$$ is the home team attacking and defensive strength and equivalently for the away team $$j$$. $$\gamma$$ is the home team advantage factor and $$\rho$$ is the newly introduced dependance factor. Setting $$\rho = 0$$ corresponds to independence. In our work going forward, we will aim to estimate a non-zero value for $$\rho$$ which deals with the issues we have for low scoring games. In practice, $$\tau$$ multiplies our low scorlines with a non-unit value. The model remains Poisson for high scoring games. Given that $$\rho$$ is expected to be small, this is really a very minor correction.  
 
+## Time decay
+Manchester City loosing 3-2 against Norwich yesterday is more interesting to us than City beating Stoke 7-0 two years ago with regards to estimating the current attack and defensive strength of City. This is not taken into account at the moment. In fancy words: The current model is static - the attack and defense parameters of each teams are regarded as constant throughout time. Lets fix that!
+
+Lets start by ignoring the above statement. As it stands, we have $$2*n + 2$$ parameters to estimate, where $$n$$ is the number of teams in our dataset, 20 for the PL. $$n$$ $$\alpha$$'s, $$n$$ $$\beta$$'s, $$\gamma$$ and $$\rho$$. When estimating parameters we often refer to the likelihood of our observations and try to maximize this through varying our parameters. In simple terms: A bunch of games have been played, what values do we give our parameters so that the outcome of the games played were actually very likely to happen in the first place? In even simpler terms: John scored 5 goals in every single game ha played in last season. We want to model his scoring rate with a Poisson distribution. Johns Poisson parameters is probably about 5, not 1. Likelihoods are a key concept in probability theory and in this post going forward. Read up about it [here](https://en.wikipedia.org/wiki/Likelihood_function).
+
+In our case, the likelihood function takes the following form:
+
+$$\begin{align*}  
+  L &= \prod_{k=1}^{N} P(X_{i(k),j(k)}=x_k,Y_{i(k),j(k)}=y_k)
+  &= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} \lambda_k ^x_k }{x_k!}\frac{e^{-\mu_k} \mu_k^y_k }{y_k!}
+  &\propto \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)e^{-\lambda_k} \lambda_k ^x_k e^{-\mu_k} \mu_k^y_k 
+\end{align*}$$
+
+
+## Comments
 Could be a lot easier had the independance thing (which is not very strong anyway), had been included. the time dependance is strong though and should be included. All probably needed for betting and even more things as well.
+
+In the interest of keeping this post wihtin a 30 min read, we are going to take the value derived by Dixon and Cole as gospel. Please refer to their paper for an explanation of how this is derived and hit me with your strongest arguments for why team for is more or less variable now than in 1995 and I may consider writing a post on how the epsilon value is maxmeised with a more recent dataset.
