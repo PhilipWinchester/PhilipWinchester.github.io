@@ -44,17 +44,20 @@ Lets start by ignoring the above statement. As it stands, we have $$2n + 2$$ par
 In our case, the likelihood function takes the following form:
 
 $$\begin{align*}  
-  L &= \prod_{k=1}^{N} P(X_{i(k),j(k)}=x_k,Y_{i(k),j(k)}=y_k)
-  &= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} \lambda_k ^x_k }{x_k!}\frac{e^{-\mu_k} \mu_k^y_k }{y_k!}
+  L(\alpha_i, \beta, i, \gamma, \rho, i=1,...,n) &= \prod_{k=1}^{N} P(X_{i(k),j(k)}=x_k,Y_{i(k),j(k)}=y_k) \\
+  &= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} \lambda_k ^x_k }{x_k!}\frac{e^{-\mu_k} \mu_k^y_k }{y_k!} \\
+  &\propto \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)e^{-\lambda_k} \lambda_k ^x_k e^{-\mu_k} \mu_k^y_k
 \end{align*}$$
 
-The likelihood function uses all N matched in our dataset and multiply these together given out parameters where
+In the likelihood function, $$k$$ run through all N matched in our dataset and multiply these together given our parameters where $$\lambda_k = \alpha_{i(k)}\beta_{j(k)} \gamma$$ and $$\mu_k = \alpha_{j(k)}\beta_{i(k)}$$ are match dependent. In the final step above we have simply got rid of the factorial factors as these just combine to one very very big number which becomes irrelevant when we're trying to maximize the likelihood with respect to the parameters.
 
+To maximize, we find our partial derivatives of $$L$$ with respect to the parameters (gradient if you will). This looks incredibly scary and a common trick in this case is to consider $$\log_e(L)$$ instead. This works since the $$\log$$ function is a monotonically increasing function (ie, it increases as its argument increases), hence the maximums of $$L$$ are the same as those for $$\log_e(L)$$. The gain here is that logs of products become sums, which are much easier to deal with. the log likelihood is:
 
-&= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} \lambda_k ^x_k }{x_k!}\frac{e^{-\mu_k} \mu_k^y_k }{y_k!}
-&\propto \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)e^{-\lambda_k} \lambda_k ^x_k e^{-\mu_k} \mu_k^y_k
+$$\begin{align*}  
+  LL(\alpha_i, \beta, i, \gamma, \rho, i=1,...,n) &= \sum_{k=1}^{N} \log(\tau_{\lambda_k, \mu_k}(x_k,y_k))-\lambda_k+x_k\log(\lambda_k)-\mu_k+y_k\log(\mu_k)
+\end{align*}$$
 
 ## Comments
 Could be a lot easier had the independance thing (which is not very strong anyway), had been included. the time dependance is strong though and should be included. All probably needed for betting and even more things as well.
 
-In the interest of keeping this post wihtin a 30 min read, we are going to take the value derived by Dixon and Cole as gospel. Please refer to their paper for an explanation of how this is derived and hit me with your strongest arguments for why team for is more or less variable now than in 1995 and I may consider writing a post on how the epsilon value is maxmeised with a more recent dataset.
+In the interest of keeping this post wihtin a 30 min read, we are going to take the value derived by Dixon and Cole as gospel. Please refer to their paper for an explanation of how this is derived and hit me with your strongest arguments for why team for is more or less variable now than in 1995 and I may consider writing a post on how the epsilon value is maxmeised with a more recent dataset. eps looks pretty small to me actually. would not be sirpsied if we arrive at a bigger value
