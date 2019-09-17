@@ -44,7 +44,7 @@ Lets start by ignoring the above statement. As it stands, we have $$2n + 2$$ par
 In our case, the likelihood function takes the following form:
 
 $$\begin{align*}  
-  L &= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} \lambda_k ^x_k }{x_k!}\frac{e^{-\mu_k} \mu_k^y_k }{y_k!}
+  L &= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} {\lambda_{k}}^{x_k} }{x_k!}\frac{e^{-\mu_k} {\mu_{k}}^{y_k} }{y_k!}
 \end{align*}$$
 
 In the likelihood function, $$k$$ run through all N matched in our dataset and multiply these together given our parameters where $$\lambda_k = \alpha_{i(k)}\beta_{j(k)} \gamma$$ and $$\mu_k = \alpha_{j(k)}\beta_{i(k)}$$ are match dependent. In the final step above we have simply got rid of the factorial factors as these just combine to one very very big number which becomes irrelevant when we're trying to maximize the likelihood with respect to the parameters.
