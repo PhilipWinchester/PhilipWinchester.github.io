@@ -34,6 +34,6 @@ $$\begin{align*}
   \end{cases}
 \end{align*}$$
 
-Here $$X$$ and $$Y$$ are the home and away goals scored, $$\alpha_{i}$$ and $$\beta_{i}$$ is the home team attacking and defensive strength and equivalently for the away team $$j$$. $$\gamma$$ is the home team advantage factor and $$\rho$$ is the newly introduced dependance factor. Setting $$\rho = 0$$ corresponds to independence. In our work going forward, we will aim to estimate a non-zero value for $$\rho$$ which deals with the issues we have for low scoring games.
+Here $$X$$ and $$Y$$ are the home and away goals scored, $$\alpha_{i}$$ and $$\beta_{i}$$ is the home team attacking and defensive strength and equivalently for the away team $$j$$. $$\gamma$$ is the home team advantage factor and $$\rho$$ is the newly introduced dependance factor. Setting $$\rho = 0$$ corresponds to independence. In our work going forward, we will aim to estimate a non-zero value for $$\rho$$ which deals with the issues we have for low scoring games. In practice, $$\tau$$ multiplies our low scorlines with a non-unit value. The model remains Poisson for high scoring games. Given that $$\rho$$ is expected to be small, this is really a very minor correction.  
 
 Could be a lot easier had the independance thing (which is not very strong anyway), had been included. the time dependance is strong though and should be included. All probably needed for betting and even more things as well.
