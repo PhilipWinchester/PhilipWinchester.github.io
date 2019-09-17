@@ -45,6 +45,7 @@ In our case, the likelihood function takes the following form:
 
 $$\begin{align*}  
   L &= \prod_{k=1}^{N} P(X_{i(k),j(k)}=x_k,Y_{i(k),j(k)}=y_k)
+  &= \prod_{k=1}^{N} \tau_{\lambda_k, \mu_k}(x_k,y_k)\frac{e^{-\lambda_k} \lambda_k ^x_k }{x_k!}\frac{e^{-\mu_k} \mu_k^y_k }{y_k!}
 \end{align*}$$
 
 The likelihood function uses all N matched in our dataset and multiply these together given out parameters where
