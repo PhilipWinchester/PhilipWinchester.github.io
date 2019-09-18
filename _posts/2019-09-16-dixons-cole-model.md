@@ -61,11 +61,15 @@ Going back to the first paragraph, our goal was to impose some sort of time depe
 
 ![image-center](/images/Dixon Coles Model/Epsilon.jpeg){: .align-center .width-half}
 
-It is a little problematic finding an optimal value for $$\epsilon$$. Dixon and Coles choose $$\epsilon$$ to optimize outcome predictions (win, loss, draw) rather than actual scorelines, which simplifies things slightly. In their paper, they use half week units for t and arrive at a value of 0.0065 for $$\epsilon$$. For us, that translates to $$\frac{0.0065}{3.5} = 0.0019$$. In the interest of keeping this post within a 30 min read, we are going to take this value as gospel.
+It is a little problematic finding an optimal value for $$\epsilon$$. Dixon and Coles choose $$\epsilon$$ to optimize outcome predictions (win, loss, draw) rather than actual scorelines, which simplifies things slightly. In their paper, they use half week units for t and arrive at a value of 0.0065 for $$\epsilon$$. For us, that translates to $$\frac{0.0065}{3.5} = 0.0019$$. In the interest of keeping this post within a 30 min read, we are going to take this value as gospel. Adding the time decaying weighting function, or lok likelihood becomes:
+
+$$\begin{align*}  
+  LL(\alpha_i, \beta, i, \gamma, \rho, i=1,...,n) &= \sum_{k=1}^{N} e^{-\epsilon t}[\log(\tau_{\lambda_k, \mu_k}(x_k,y_k))-\lambda_k+x_k\log(\lambda_k)-\mu_k+y_k\log(\mu_k)]
+\end{align*}$$
 
 Below is some code which encapsulates the above. `MatchLL` find the contribution to the total log likelihood from any one game. This is then used in `LL` which finds the total log likelihood of our dataset given some vector of parameters.
 
-\begin{align}
+$$\begin{align*}
   \text{Parameters} &= \begin{bmatrix}
     \alpha_{1}, \\
     ..., \\
@@ -76,7 +80,7 @@ Below is some code which encapsulates the above. `MatchLL` find the contribution
     \gamma, \\
     \rho
     \end{bmatrix}
-\end{align}
+\end{align*}$$
 
 The parameters are in alphabetical order which means that for the Premier League $$\alpha_{1}$$ corresponds to the attacking strength of Arsenal.
 
@@ -137,10 +141,21 @@ LL <- function(Match_Data, Parameters){
 
 ## Maximizing the Log Likelihood
 
-Next we need to find the parameters which maximize the log likelihood. In an ideal world we would do this analytically by finding the gradient and setting this to zero, but due to the high dimensionality of the problem, we are restricted to numerical maximization. This will be done by gradient ascent, the cousin of the better known gradient descent. Read about the difference [here](https://stats.stackexchange.com/questions/258721/gradient-ascent-vs-gradient-descent-in-logistic-regression).
+Next we need to find the parameters which maximize the log likelihood. In an ideal world we would do this analytically by finding the gradient and setting this to zero, but due to the high dimensionality of the problem, we are restricted to numerical maximization. This will be done by gradient ascent, a cousin to the better known gradient descent. The two algorithms are really very similar as there is only a subtle sign change between the two. If you are unfamiliar with the concepts, read about gradient descent [here](https://en.wikipedia.org/wiki/Gradient_descent) and the difference between the two [here](https://stats.stackexchange.com/questions/258721/gradient-ascent-vs-gradient-descent-in-logistic-regression).
+
+In their paper, Dixon and Coles imposed the following condition on the attack parameters:
+
+$$\begin{align*}
+  n^{-1}\sum^{n}_{i=1} \alpha_{i} = 1.
+\end{align*}$$
+
+Ie, the average attack parameter is 1. This condition is not strictly necessary, but ensures that we arrive at the same order of maximizing perimeters whenever we run the gradient ascent.
+
+The first step in gradient ascent
 
 **Watch out!** You can also add notices by appending `{: .notice}` to a paragraph.
 {: .notice}
 
-## Comments
-Could be a lot easier had the independance thing (which is not very strong anyway), had been included. the time dependance is strong though and should be included. All probably needed for betting and even more things as well.
+## Conclusions
+
+## Appendix
