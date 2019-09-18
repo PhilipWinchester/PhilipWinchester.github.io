@@ -14,7 +14,7 @@ classes: wide
 
 **In 1995 Mark Dixon and Stuart Coles were fed up with football results being predicted by Poisson models. Because lets be honest, they probably can't. So [here it is](http://web.math.ku.dk/~rolf/teaching/thesis/DixonColes.pdf), the new and improved Dixon Coles model suitable named after the two authors. If not only for amusing quotes such as "A recently introduced type of betting, fixed odds betting, is also growing in popularity. Bookmakers offer odds on the various outcomes of a match" which certainly reveals how ancient the paper is, it is certainly worth a read. The paper suggest two improvements to the standard Poisson model which will be discussed here. As a refresher, please do head up to the header for a link to my post on Poisson models.**
 
-## Low scoring games
+## Low Scoring Games
 The heart of soul of the Poisson model is that the number of goals scored by each team can be modeled by two independent, you guessed it, Poisson distributions. At the start of the paper, Dixon and Coles discuss the suitability of this independence assumption and argue that it is not suitable for low scoring games. There seems to be some evidence for this theory in practice. Below is heat map, curtesy of David Sheehan author of an excellent [blog](https://dashee87.github.io/), which displays the average difference between actual and Poisson model predicted scorelines for the 2005/06 season all the way up to the 2017/18 season. Green cells imply the model underestimated those scorelines, while red cells suggest overestimation - the colour strength indicates the level of disagreement.
 
 ![image-center](/images/Dixon Coles Model/actual_model_diff.png){: .align-center .width-half}
@@ -36,7 +36,7 @@ $$\begin{align*}
 
 Here $$X$$ and $$Y$$ are the home and away goals scored, $$\alpha_{i}$$ and $$\beta_{i}$$ is the home team attacking and defensive strength and equivalently for the away team $$j$$. $$\gamma$$ is the home team advantage factor and $$\rho$$ is the newly introduced dependance factor. Setting $$\rho = 0$$ corresponds to independence. In our work going forward, we will aim to estimate a non-zero value for $$\rho$$ which deals with the issues we have for low scoring games. In practice, $$\tau$$ multiplies our low scorlines with a non-unit value. The model remains Poisson for high scoring games. Given that $$\rho$$ is expected to be small, this is really a very minor correction.  
 
-## Time decay
+## Time Decay
 Manchester City loosing 3-2 against Norwich yesterday is more interesting to us than City beating Stoke 7-0 two years ago with regards to estimating the current attack and defensive strength of City. This is not taken into account at the moment. In fancy words: The current model is static - the attack and defense parameters of each teams are regarded as constant throughout time. Lets fix that!
 
 Lets start by ignoring the above statement. As it stands, we have $$2n + 2$$ parameters to estimate, where $$n$$ is the number of teams in our dataset, 20 for the Premier League. $$n$$ $$\alpha$$'s, $$n$$ $$\beta$$'s, $$\gamma$$ and $$\rho$$. When estimating parameters we often refer to the likelihood of our observations and try to maximize this through varying our parameters. In simple terms: A bunch of games have been played, what values do we give our parameters so that the outcome of the games played were actually very likely to happen in the first place? In even simpler terms: John scored 5 goals in every single game ha played in last season. We want to model his scoring rate with a Poisson distribution. Johns Poisson parameters is probably about 5, not 1. Likelihoods are a key concept in probability theory and in this post going forward. Read up about it [here](https://en.wikipedia.org/wiki/Likelihood_function).
@@ -67,13 +67,13 @@ Below is some code which encapsulates the above. `MatchLL` find the contribution
 
 \begin{align}
   \text{Parameters} &= \begin{bmatrix}
-    \alpha_{1} \\
-    ... \\
-    \alpha_{n} \\
-    \beta_{1} \\
-    ... \\
-    \beta_{n} \\
-    \gamma \\
+    \alpha_{1}, \\
+    ..., \\
+    \alpha_{n}, \\
+    \beta_{1}, \\
+    ..., \\
+    \beta_{n}, \\
+    \gamma, \\
     \rho
     \end{bmatrix}
 \end{align}
@@ -134,6 +134,13 @@ LL <- function(Match_Data, Parameters){
   return(LL)
 }
 ```
+
+## Maximizing the Log Likelihood
+
+Next we need to find the parameters which maximize the log likelihood. In an ideal world we would do this analytically by finding the gradient and setting this to zero, but due to the high dimensionality of the problem, we are restricted to numerical maximization. This will be done by gradient ascent, the cousin of the better known gradient descent. Read about the difference [here](https://stats.stackexchange.com/questions/258721/gradient-ascent-vs-gradient-descent-in-logistic-regression).
+
+**Watch out!** You can also add notices by appending `{: .notice}` to a paragraph.
+{: .notice}
 
 ## Comments
 Could be a lot easier had the independance thing (which is not very strong anyway), had been included. the time dependance is strong though and should be included. All probably needed for betting and even more things as well.
