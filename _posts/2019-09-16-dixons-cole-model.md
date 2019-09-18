@@ -68,11 +68,11 @@ Below is some code which encapsulates the above. `MatchLL` find the contribution
 \begin{align}
   \text{Parameters} &= \begin{bmatrix}
     \alpha_{1} \\
-    \vdots \\
+    \hdots \\
     \alpha_{n} \\
-    \beta{1} \\
-    \vdots \\
-    \beta{n} \\
+    \beta_{1} \\
+    \hdots \\
+    \beta_{n} \\
     \gamma \\
     \rho
     \end{bmatrix}
@@ -137,5 +137,3 @@ LL <- function(Match_Data, Parameters){
 
 ## Comments
 Could be a lot easier had the independance thing (which is not very strong anyway), had been included. the time dependance is strong though and should be included. All probably needed for betting and even more things as well.
-
-In the interest of keeping this post wihtin a 30 min read, we are going to take the value derived by Dixon and Cole as gospel. Please refer to their paper for an explanation of how this is derived and hit me with your strongest arguments for why team for is more or less variable now than in 1995 and I may consider writing a post on how the epsilon value is maxmeised with a more recent dataset. eps looks pretty small to me actually. would not be sirpsied if we arrive at a bigger value
