@@ -146,8 +146,11 @@ Ie, the average attack parameter is 1. This condition is not strictly necessary,
 
 The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
 
+```r
 Optimise <- function(Match_Data){
   Creating _Parameters_ and _Gradient_ vector of length $$2n+2$$
+  Setting $$\gamma$$ and $$\rho$$ in _Parameters_ equal to 1.3 and 0 respectively
+```  
   {: .notice--primary}
 
   # Takes some match data and returns
