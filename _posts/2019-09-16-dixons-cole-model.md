@@ -71,14 +71,7 @@ Below is some code which encapsulates the above. `MatchLL` find the contribution
 
 $$\begin{align*}
   \text{Parameters} &= \begin{bmatrix}
-    \alpha_{1}, \\
-    ..., \\
-    \alpha_{n}, \\
-    \beta_{1}, \\
-    ..., \\
-    \beta_{n}, \\
-    \gamma, \\
-    \rho
+    \alpha_{1}, ..., \alpha_{n}, \beta_{1}, ..., \beta_{n}, \gamma, \rho
     \end{bmatrix}
 \end{align*}$$
 
@@ -151,10 +144,81 @@ $$\begin{align*}
 
 Ie, the average attack parameter is 1. This condition is not strictly necessary, but ensures that we arrive at the same order of maximizing perimeters whenever we run the gradient ascent.
 
-The first step in gradient ascent
+The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
 
-**Watch out!** You can also add notices by appending `{: .notice}` to a paragraph.
-{: .notice}
+Optimise <- function(Match_Data){
+  Creating _Parameters_ and _Gradient_ vector of length $$2n+2$$
+  {: .notice--primary}
+
+  # Takes some match data and returns
+
+  Teams <- sort(unique(Match_Data$HomeTeam))
+
+  # Setting all Parameters equal to 1 at first
+  Parameters <- rep(1,2*length(Teams)+2)
+
+  # Setting gamma equal to 1.4 and rho equal to 0
+  Parameters[2*length(Teams)+1] <- 1.4
+  Parameters[2*length(Teams)+2] <- -0.05
+
+  # Making StartParameters
+  StartParameters <- rep(0,2*length(Teams)+2)
+
+  Mult <- 1
+  Step <- m
+
+
+  count <- 0
+  # NMod just finds the length betweent he vectores
+  while(Step <= Max){
+
+
+    count <- count + 1
+    print(paste("count is "  ,toString(count)))
+    # Saving what wha have from the start  
+    StartParameters <- Parameters
+
+    # Finding gradient
+    GradientVector <- GradientVectorFinder(Match_Data, Parameters)
+
+    # Normalising (Avergage of alhpas is 1), and adjusting the length
+    GradientVectorNormalised <- NormalisingTheGradientVector(GradientVector,Step)
+    print(paste("step is "  ,toString(Step)))
+
+    PresentPoint <- Parameters
+    StepToPoint <- Parameters + GradientVectorNormalised
+    LLLoop <- 0
+
+    # Adding GradientVectorNormalised until we have maxemised the LL
+    while(LL(Match_Data, Parameters=StepToPoint) > LL(Match_Data, Parameters=PresentPoint)){
+      PresentPoint <- StepToPoint
+      StepToPoint <- PresentPoint + GradientVectorNormalised
+      LLLoop <- LLLoop + 1
+    }
+
+
+    print(paste("LLLoop is "  ,toString(LLLoop)))
+
+    # If there has only been one itteration, we increase the step size
+    if(LLLoop < 2){
+      Mult <- Mult + 1
+      Step <- Mult*m
+    }
+
+    Parameters <- PresentPoint
+  }
+
+  Alpha <- Parameters[1:length(Teams)]
+  Beta <- Parameters[(length(Teams)+1):(length(Teams)*2)]
+  Gamma <- Parameters[length(Teams)*2+1]
+  Rho <- Parameters[length(Teams)*2+2]
+  Results <- data.frame(Teams, Alpha, Beta, Gamma, Rho)
+
+
+  return(Results)
+
+}
+{: .notice--primary}
 
 ## Conclusions
 
