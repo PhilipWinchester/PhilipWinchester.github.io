@@ -68,10 +68,10 @@ Below is some code which encapsulates the above. `MatchLL` find the contribution
 \begin{align}
   \text{Parameters} &= \begin{bmatrix}
     \alpha_{1} \\
-    \hdots \\
+    ... \\
     \alpha_{n} \\
     \beta_{1} \\
-    \hdots \\
+    ... \\
     \beta_{n} \\
     \gamma \\
     \rho
