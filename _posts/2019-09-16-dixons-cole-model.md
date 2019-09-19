@@ -324,8 +324,8 @@ The Dixon Coles model is regarded as a pretty good one for football predictions.
 The partial derivates of the log likelihood functions are below:
 
 $$\begin{align*}  
-  frac{\partial LL}{\partial \alpha_{i}} &= \begin{cases}
-    0& \quad \text{if }i \neq i(k)\text{ and i \neq j(k)} \\
+  \frac{\partial LL}{\partial \alpha_{i}} &= \begin{cases}
+    0& \quad \text{if }i \neq i(k)\text{ and }i \neq j(k)} \\
     \frac{-\beta_{j(k)}\mu_{k}\gamma\rho}{1-\lambda_{k}\mu_{k}\rho} - \beta_{j(k)}\gamma& \quad \text{if }i = i(k)\text{ and } x_{k}=y_{k}=0 \\
     \frac{\beta_{j(k)}\gamma\rho}{1+\lambda_{k}\rho} - \beta_{j(k)}\gamma& \quad \text{if }i = i(k)\text{, } x_{k}=0 \text{ and } y_{k}=1  \\
     -\beta_{j(k)}\gamma - \frac{x_k}{\alpha_{i(k)}}& \quad \text{if }i = i(k)\text{ and } x_{k} \neq 0  \\
