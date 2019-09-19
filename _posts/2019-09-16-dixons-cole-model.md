@@ -148,66 +148,22 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 <div class="well">
   <p>Optimise <- function(Match_Data){<br>
-  &ensp;Creating <i>Parameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
-  &ensp;Setting γ and ρ in <i>Parameters</i> equal to 1.3 and -0.05 respectively<br>
-  </p>
+  &ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
+  &ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to to 1.3 and -0.05 respectively<br>
+  &ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
+  &ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
+  &ensp;&ensp;Calculating the gradient of the log likelihood using Match_Data and <i>Parameters</i> using the partial derivatives in the Appendix and setting equal to <i>Gradient</i> <br>
+  &ensp;&ensp;Imposing the condition that the average attack parameter is 1. This is done by altering the gradient in the following way: <i>Gradient</i> = <i>Gradient</i> - <i>Condition</i>, where <i>Condition</i> is a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries in <i>Gradient</i>. remaining entries are 0.<br>
+  &ensp;&ensp;Setting <i>PresentPoint</i> = <i>Parameters</i> and <i>StepPoint</i> = <i>Parameters</i> + <i>Gradient</i><br>
+  &ensp;&ensp;while(LL(Match_Data, <i>StepPoint</i>) > LL(Match_Data, <i>PresentPoint</i>)) <br>
+  &ensp;&ensp;&ensp;<i>PresentPoint</i> = <i>StepPoint</i> <br>
+  &ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
+  &ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
+  &ensp;return(<i>Parameters</i>)
+  }</p>
 </div>
 
-  Mult <- 1
-  Step <- m
-
-
-  count <- 0
-  # NMod just finds the length betweent he vectores
-  while(Step <= Max){
-
-
-    count <- count + 1
-    print(paste("count is "  ,toString(count)))
-    # Saving what wha have from the start  
-    StartParameters <- Parameters
-
-    # Finding gradient
-    GradientVector <- GradientVectorFinder(Match_Data, Parameters)
-
-    # Normalising (Avergage of alhpas is 1), and adjusting the length
-    GradientVectorNormalised <- NormalisingTheGradientVector(GradientVector,Step)
-    print(paste("step is "  ,toString(Step)))
-
-    PresentPoint <- Parameters
-    StepToPoint <- Parameters + GradientVectorNormalised
-    LLLoop <- 0
-
-    # Adding GradientVectorNormalised until we have maxemised the LL
-    while(LL(Match_Data, Parameters=StepToPoint) > LL(Match_Data, Parameters=PresentPoint)){
-      PresentPoint <- StepToPoint
-      StepToPoint <- PresentPoint + GradientVectorNormalised
-      LLLoop <- LLLoop + 1
-    }
-
-
-    print(paste("LLLoop is "  ,toString(LLLoop)))
-
-    # If there has only been one itteration, we increase the step size
-    if(LLLoop < 2){
-      Mult <- Mult + 1
-      Step <- Mult*m
-    }
-
-    Parameters <- PresentPoint
-  }
-
-  Alpha <- Parameters[1:length(Teams)]
-  Beta <- Parameters[(length(Teams)+1):(length(Teams)*2)]
-  Gamma <- Parameters[length(Teams)*2+1]
-  Rho <- Parameters[length(Teams)*2+2]
-  Results <- data.frame(Teams, Alpha, Beta, Gamma, Rho)
-
-
-  return(Results)
-
-}
-{: .notice--primary}
+Some note on length
 
 ## Conclusions
 
