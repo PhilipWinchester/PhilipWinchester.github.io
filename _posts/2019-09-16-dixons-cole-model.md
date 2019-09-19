@@ -1,4 +1,4 @@
----
+analysis---
 title: "Dixon Coles Model"
 date: 2019-09-16
 tags: [FPL, R]
@@ -75,7 +75,7 @@ $$\begin{align*}
     \end{bmatrix}
 \end{align*}$$
 
-The parameters are in alphabetical order which means that for the Premier League $$\alpha_{1}$$ corresponds to the attacking strength of Arsenal.
+The parameters are in alphabetical order which means that for the Premier League $$\alpha_{1}$$ corresponds to the attacking strength of Arsenal. Match_Data is a dataframe will all Premier League Fixtures since tha start of the 17/18 season. As usual, this data is taken from [football-data.co.uk](http://www.football-data.co.uk/englandm.php).
 
 ```r
 tau <- Vectorize(function(x, y, lambda, mu, rho){
@@ -162,11 +162,145 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
   11:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
   12:&ensp;&ensp;&ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
   13:&ensp;&ensp;return(<i>Parameters</i>)<br>
-  14: }</p>
+  14: }</p> </div>
+
+Before adding the _Gradient_ to _StepPoint_ in lines 8 and 11, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiply _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
+
+It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100|Gradient|}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
+
+As it stands, my algorithm takes about 10 seconds to optimize parameters to the closest 0.01. This time is of course dependent on the number of teams and and games in our dataset, but for comparison, there are functions in the [alabama](https://cran.r-project.org/web/packages/alabama/index.html) package such as auglag which I understand take just under 1 minute to run on a similarly sized dataset.
+
+## Results
+As at 19 September 2019
+<div>
+<table>
+  <caption>Parameters</caption>
+  <thead>
+    <tr style="text-align: right;">
+      <th>Team</th>
+      <th>α</th>
+      <th>β</th>
+      <th>Team</th>
+      <th>α</th>
+      <th>β</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Arsenal</th>
+      <th>1.44</th>
+      <th>1.15</th>
+      <th>Man City</th>
+      <th>1.93</th>
+      <th>0.60</th>
+    </tr>
+    <tr>
+      <th>Aston Villa</th>
+      <th>0.56</th>
+      <th>0.96</th>
+      <th>Man United</th>
+      <th>1.26</th>
+      <th>0.97</th>
+    </tr>
+    <tr>
+      <th>Bournemouth</th>
+      <th>1.11</th>
+      <th>1.51</th>
+      <th>Newcastle</th>
+      <th>0.82</th>
+      <th>1.00</th>  
+    </tr>
+    <tr>
+      <th>Brighton</th>
+      <th>0.68</th>
+      <th>1.26</th>
+      <th>Norwich</th>
+      <th>1.69</th>
+      <th>1.58</th>
+    </tr>
+    <tr>
+      <th>Burnley</th>
+      <th>0.87</th>
+      <th>1.24</th>
+      <th>Sheffield United</th>
+      <th>0.69</th>
+      <th>0.99</th>
+    </tr>
+    <tr>
+      <th>Cardiff</th>
+      <th>0.69</th>
+      <th>1.45</th>
+      <th>Southampton</th>
+      <th>0.87</th>
+      <th>1.32</th>
+    </tr>
+    <th>Chelsea</th>
+    <th>1.28</th>
+    <th>0.98</th>
+    <th>Stoke</th>
+    <th>0.71</th>
+    <th>1.46</th>
+  </tr>
+  <tr>
+    <th>Crystal Palace</th>
+    <th>0.99</th>
+    <th>1.16</th>
+    <th>Swansea</th>
+    <th>0.57</th>
+    <th>1.23</th>
+  </tr>
+  <tr>
+    <th>Everton</th>
+    <th>0.98</th>
+    <th>1.09</th>
+    <th>Tottenham</th>
+    <th>1.38</th>
+    <th>0.85</th>
+  </tr>
+  <tr>
+    <th>Fulham</th>
+    <th>0.68</th>
+    <th>1.70</th>
+    <th>Watford</th>
+    <th>0.92</th>
+    <th>1.39</th>
+  </tr>
+  <tr>
+    <th>Huddersfield</th>
+    <th>0.48</th>
+    <th>1.50</th>
+    <th>West Brom</th>
+    <th>0.64</th>
+    <th>1.22</th>
+  </tr>
+  <tr>
+    <th>Leicester</th>
+    <th>1.04</th>
+    <th>1.08</th>
+    <th>West Ham</th>
+    <th>1.02</th>
+    <th>1,25</th>
+  </tr>
+  <tr>
+    <th>Liverpool</th>
+    <th>1.75</th>
+    <th>0.63</th>
+    <th>Wolves</th>
+    <th>0.94</th>
+    <th>1.12</th>
+  </tr>
+  </tbody>
+</table>
 </div>
 
-Some note on length
+$$\gamma$$ = 1.28 and $$\rho$$ = -0.06.
+
 
 ## Conclusions
+Firstly, lets have a couple of notes on the results:
+
+- West Brom, Stoke, Swansea etc aren't in the Premier League? Why do they appear in the results? That's because they have been since the 17/18 season! Recall, that our dataset goes two seasons back.  
+- Are Norwich really the third biggest attacking threat in the league? Probably not, but Norwich have only played 5 games in the Premier League over the last few years and putting three goals in against Man City (who according to the results have the strongest defense in the league) in the weekend will have boosted their attacking threat massively. I expect the attacking strength for Norwich to go down as the season progresses.
+- Note about gamma
 
 ## Appendix
