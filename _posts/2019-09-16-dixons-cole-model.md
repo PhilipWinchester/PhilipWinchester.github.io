@@ -7,7 +7,7 @@ mathjax: true
 header:
   overlay_image: "/images/Whats the score/Header.jpg"
   overlay_filter: 0.4
-  cta_label: "Poisson stuff"
+  cta_label: "Poisson model"
   cta_url: "https://philipwinchester.github.io/whats-the-score/"
 classes: wide
 ---
