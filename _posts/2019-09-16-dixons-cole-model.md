@@ -147,22 +147,22 @@ Ie, the average attack parameter is 1. This condition is not strictly necessary,
 The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
 
 <div class="well">
-  <p>Optimise <- function(Match_Data){<br>
-  &ensp;&ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
-  &ensp;&ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to 1.3 and <br> &ensp;&ensp;-0.05 respectively<br>
-  &ensp;&ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
-  &ensp;&ensp;&ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
-  &ensp;&ensp;&ensp;&ensp;Calculating the gradient of the log likelihood using Match_Data and<br> &ensp;&ensp;&ensp;&ensp;<i>Parameters</i> using the partial derivatives in the Appendix and setting<br> &ensp;&ensp;&ensp;&ensp;equal to <i>Gradient</i> <br>
-  &ensp;&ensp;&ensp;&ensp;Imposing the condition that the average attack parameter is 1. This is done by<br> &ensp;&ensp;&ensp;&ensp;altering the gradient in the following way:<br>
-  &ensp;&ensp;&ensp;&ensp;<i>Gradient</i> = <i>Gradient</i> - <i>Condition</i>, where <i>Condition</i> is<br> &ensp;&ensp;&ensp;&ensp;a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries<br> &ensp;&ensp;&ensp;&ensp;in <i>Gradient</i>. remaining entries are 0.<br>
-  &ensp;&ensp;&ensp;&ensp;Setting <i>PresentPoint</i> = <i>Parameters</i> and<br>
-  &ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>Parameters</i> + <i>Gradient</i><br>
-  &ensp;&ensp;&ensp;&ensp;while(LL(Match_Data, <i>StepPoint</i>) > LL(Match_Data, <i>PresentPoint</i>)) <br>
-  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>PresentPoint</i> = <i>StepPoint</i> <br>
-  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
-  &ensp;&ensp;&ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
-  &ensp;&ensp;return(<i>Parameters</i>)
-  }</p>
+  <p>1: Optimise <- function(Match_Data){<br>
+  2:&ensp;&ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
+  3:&ensp;&ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to 1.3 and <br> &ensp;&ensp;&ensp;-0.05 respectively<br>
+  4:&ensp;&ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
+  5:&ensp;&ensp;&ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
+  6:&ensp;&ensp;&ensp;&ensp;Calculating the gradient of the log likelihood using Match_Data and<br> &ensp;&ensp;&ensp;&ensp;&ensp;<i>Parameters</i> using the partial derivatives in the Appendix and setting<br> &ensp;&ensp;&ensp;&ensp;&ensp;equal to <i>Gradient</i> <br>
+  7:&ensp;&ensp;&ensp;&ensp;Imposing the condition that the average attack parameter is 1. This is done by<br> &ensp;&ensp;&ensp;&ensp;&ensp;altering the gradient in the following way:<br>
+  &ensp;&ensp;&ensp;&ensp;&ensp;<i>Gradient</i> = <i>Gradient</i> - <i>Condition</i>, where <i>Condition</i> is<br> &ensp;&ensp;&ensp;&ensp;&ensp;a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries<br> &ensp;&ensp;&ensp;&ensp;&ensp;in <i>Gradient</i>. remaining entries are 0.<br>
+  8:&ensp;&ensp;&ensp;&ensp;Setting <i>PresentPoint</i> = <i>Parameters</i> and<br>
+  &ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>Parameters</i> + <i>Gradient</i><br>
+  9:&ensp;&ensp;&ensp;&ensp;while(LL(Match_Data, <i>StepPoint</i>) > LL(Match_Data, <i>PresentPoint</i>)) <br>
+  10:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>PresentPoint</i> = <i>StepPoint</i> <br>
+  11:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
+  12:&ensp;&ensp;&ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
+  13:&ensp;&ensp;return(<i>Parameters</i>)<br>
+  14: }</p>
 </div>
 
 Some note on length
