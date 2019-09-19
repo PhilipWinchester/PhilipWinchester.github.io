@@ -148,18 +148,20 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 <div class="well">
   <p>Optimise <- function(Match_Data){<br>
-  &ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
-  &ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to to 1.3 and -0.05 respectively<br>
-  &ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
-  &ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
-  &ensp;&ensp;Calculating the gradient of the log likelihood using Match_Data and <i>Parameters</i> using the partial derivatives in the Appendix and setting equal to <i>Gradient</i> <br>
-  &ensp;&ensp;Imposing the condition that the average attack parameter is 1. This is done by altering the gradient in the following way: <i>Gradient</i> = <i>Gradient</i> - <i>Condition</i>, where <i>Condition</i> is a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries in <i>Gradient</i>. remaining entries are 0.<br>
-  &ensp;&ensp;Setting <i>PresentPoint</i> = <i>Parameters</i> and <i>StepPoint</i> = <i>Parameters</i> + <i>Gradient</i><br>
-  &ensp;&ensp;while(LL(Match_Data, <i>StepPoint</i>) > LL(Match_Data, <i>PresentPoint</i>)) <br>
-  &ensp;&ensp;&ensp;<i>PresentPoint</i> = <i>StepPoint</i> <br>
-  &ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
-  &ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
-  &ensp;return(<i>Parameters</i>)
+  &ensp;&ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length<br> &ensp;&ensp;2n+2<br>
+  &ensp;&ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to 1.3 and <br> &ensp;&ensp;-0.05 respectively<br>
+  &ensp;&ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
+  &ensp;&ensp;&ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
+  &ensp;&ensp;&ensp;&ensp;Calculating the gradient of the log likelihood using Match_Data and<br> &ensp;&ensp;&ensp;&ensp;<i>Parameters</i> using the partial derivatives in the Appendix and setting<br> &ensp;&ensp;&ensp;&ensp;equal to <i>Gradient</i> <br>
+  &ensp;&ensp;&ensp;&ensp;Imposing the condition that the average attack parameter is 1. This is done by<br> &ensp;&ensp;&ensp;&ensp;altering the gradient in the following way:<br>
+  &ensp;&ensp;&ensp;&ensp;<i>Gradient</i> = <i>Gradient</i> - <i>Condition</i>, where <i>Condition</i> is<br> &ensp;&ensp;&ensp;&ensp;a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries<br> &ensp;&ensp;&ensp;&ensp;in <i>Gradient</i>. remaining entries are 0.<br>
+  &ensp;&ensp;&ensp;&ensp;Setting <i>PresentPoint</i> = <i>Parameters</i> and<br>
+  &ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>Parameters</i> + <i>Gradient</i><br>
+  &ensp;&ensp;&ensp;&ensp;while(LL(Match_Data, <i>StepPoint</i>) > LL(Match_Data, <i>PresentPoint</i>)) <br>
+  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>PresentPoint</i> = <i>StepPoint</i> <br>
+  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
+  &ensp;&ensp;&ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
+  &ensp;&ensp;return(<i>Parameters</i>)
   }</p>
 </div>
 
