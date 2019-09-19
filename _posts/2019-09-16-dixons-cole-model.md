@@ -147,34 +147,37 @@ Ie, the average attack parameter is 1. This condition is not strictly necessary,
 The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
 
 ```r
-Optimise <- function(Match_Data)
-  Creating Parameters, StartParameters and Gradient vectors of length 2n+2
-  Setting all entries in Parameters to 1, apart from γ and ρ which are set to 1.3 and -0.05 respectively
-
-  while(|Parameters - StartParameters| > Some small number)
-    Setting StartParameters = Parameters
-
-    Calculating the gradient of the log likelihood using Match_Data and Parameters using the partial derivatives in the Appendix and setting equal to Gradient
-
-    Imposing the condition that the average attack parameter is 1. This is done by altering the gradient in the following way:
-    Gradient = Gradient - Condition,
-    where Condition is a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries in Gradient. remaining entries are 0.
-
-    Setting PresentPoint = Parameters and
-    StepPoint = Parameters + Gradient
-
-    while(LL(Match_Data, StepPoint) > LL(Match_Data, PresentPoint))
-      Setting PresentPoint = StepPoint and
-      StepPoint = StepPoint + Gradient
-
-    Parameters = PresentPoint
-
-  return(Parameters)
+#Optimise <- function(Match_Data)
+# Creating Parameters, StartParameters and Gradient vectors of length 2n+2
+# Setting all entries in Parameters to 1, apart from γ and ρ which are set to 1.3 and -0.05 respectively
+#
+# while(|Parameters - StartParameters| > Some small number)
+#   Setting StartParameters = Parameters
+#
+#   Calculating the gradient of the log likelihood using Match_Data and Parameters using the partial
+#   derivatives in the Appendix and setting equal to Gradient
+#
+#   Imposing the condition that the average attack parameter is 1. This is done by altering the gradient in
+#   the following way:
+#   Gradient = Gradient - Condition,
+#   where Condition is a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries in
+#   Gradient. remaining entries are 0.
+#
+#   Setting PresentPoint = Parameters and
+#   StepPoint = Parameters + Gradient
+#
+#   while(LL(Match_Data, StepPoint) > LL(Match_Data, PresentPoint))
+#     Setting PresentPoint = StepPoint and
+#     StepPoint = StepPoint + Gradient
+#
+#   Parameters = PresentPoint
+#
+# return(Parameters)
 ```
 
 Before adding the _Gradient_ to _StepPoint_ in lines 8 and 11, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiply _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
 
-It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100 \abs(Gradient)}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
+It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100 \abs{Gradient}}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
 
 As it stands, my algorithm takes about 10 seconds to optimize parameters to the closest 0.01. This time is of course dependent on the number of teams and and games in our dataset, but for comparison, there are functions in the [alabama](https://cran.r-project.org/web/packages/alabama/index.html) package such as auglag which I understand take just under 1 minute to run on a similarly sized dataset.
 
@@ -304,12 +307,30 @@ As at 19 September 2019
 
 $$\gamma$$ = 1.28 and $$\rho$$ = -0.06.
 
-
 ## Conclusions
-Firstly, lets have a few notes on the results:
+Firstly, lets have a couple of notes on the results:
 
 - West Brom, Stoke, Swansea etc aren't in the Premier League? Why do they appear in the results? That's because they have been since the 17/18 season! Recall, that our dataset goes two seasons back.  
 - Are Norwich really the third biggest attacking threat in the league? Probably not, but Norwich have only played 5 games in the Premier League over the last few years and putting three goals in against Man City (who according to the results have the strongest defense in the league) in the weekend will have boosted their attacking threat massively. I expect the attacking strength for Norwich to go down as the season progresses.
-- Note about gamma
+
+The Dixon Coles model is regarded as a pretty good one for football predictions. It is certainly achieves our purpose which is to get a rough idea of which teams have favorable fixtures going forward and make FPL choices on the back of that. After speaking to friends who work in the industry, there are better models out there. These tend not to be published as companies use them to make serious money for themselves. For the time being, I will we will be using the Dixon Coles model going forward. My next to projects will most likely be to:
+
+- Write a program which estimates the value for $$\epsilon$$ in the time decaying weight function.
+- Use the model to find the expected number of goals scored by teams and the probability of holding clean sheets.
+
+**Stay tuned!**
 
 ## Appendix
+The partial derivates of the log likelihood functions are below:
+
+$$\begin{align*}  
+  frac{\partial LL}{\partial \alpha_{i}} &= \begin{cases}
+    0& \quad \text{if }i \neq i(k)\text{ and i \neq j(k)} \\
+    \frac{-\beta_{j(k)}\mu_{k}\gamma\rho}{1-\lambda_{k}\mu_{k}\rho} - \beta_{j(k)}\gamma& \quad \text{if }i = i(k)\text{ and } x_{k}=y_{k}=0 \\
+    \frac{\beta_{j(k)}\gamma\rho}{1+\lambda_{k}\rho} - \beta_{j(k)}\gamma& \quad \text{if }i = i(k)\text{, } x_{k}=0 \text{ and } y_{k}=1  \\
+    -\beta_{j(k)}\gamma - \frac{x_k}{\alpha_{i(k)}}& \quad \text{if }i = i(k)\text{ and } x_{k} \neq 0  \\
+    \frac{-\beta_{i(k)}\lambda_{k}\rho}{1-\lambda_{k}\mu_{k}\rho} - \beta_{i(k)}& \quad \text{if }i = j(k)\text{ and } x_{k}=y_{k}=0 \\
+    \frac{\beta_{i(k)}\rho}{1+\mu_{k}\rho} - \beta_{i(k)}& \quad \text{if }i = j(k)\text{, } x_{k}=1 \text{ and } y_{k}=0  \\
+    -\beta_{i(k)} - \frac{y_k}{\alpha_{j(k)}}& \quad \text{if }i = j(k)\text{ and } y_{k} \neq 0  \\
+    \end{cases}
+\end{align*}$$
