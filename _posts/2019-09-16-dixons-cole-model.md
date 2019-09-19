@@ -324,13 +324,25 @@ The Dixon Coles model is regarded as a pretty good one for football predictions.
 The partial derivates of the log likelihood functions are below:
 
 $$\begin{align*}  
-  \frac{\partial LL}{\partial \alpha_{i}} &= \begin{cases}
+  \frac{\partial LL}{\partial \alpha_{i}} &= \sum_{k=1}^{N} \phi(t_k) \begin{cases}
     0& \quad \text{if }i \neq i(k)\text{ and }i \neq j(k) \\
     \frac{-\beta_{j(k)}\mu_{k}\gamma\rho}{1-\lambda_{k}\mu_{k}\rho} - \beta_{j(k)}\gamma& \quad \text{if }i = i(k)\text{ and } x_{k}=y_{k}=0 \\
     \frac{\beta_{j(k)}\gamma\rho}{1+\lambda_{k}\rho} - \beta_{j(k)}\gamma& \quad \text{if }i = i(k)\text{, } x_{k}=0 \text{ and } y_{k}=1  \\
-    -\beta_{j(k)}\gamma - \frac{x_k}{\alpha_{i(k)}}& \quad \text{if }i = i(k)\text{ and } x_{k} \neq 0  \\
+    -\beta_{j(k)}\gamma + \frac{x_k}{\alpha_{i(k)}}& \quad \text{if }i = i(k)\text{ and } x_{k} \neq 0  \\
     \frac{-\beta_{i(k)}\lambda_{k}\rho}{1-\lambda_{k}\mu_{k}\rho} - \beta_{i(k)}& \quad \text{if }i = j(k)\text{ and } x_{k}=y_{k}=0 \\
     \frac{\beta_{i(k)}\rho}{1+\mu_{k}\rho} - \beta_{i(k)}& \quad \text{if }i = j(k)\text{, } x_{k}=1 \text{ and } y_{k}=0  \\
-    -\beta_{i(k)} - \frac{y_k}{\alpha_{j(k)}}& \quad \text{if }i = j(k)\text{ and } y_{k} \neq 0  \\
+    -\beta_{i(k)} + \frac{y_k}{\alpha_{j(k)}}& \quad \text{if }i = j(k)\text{ and } y_{k} \neq 0  \\
+  \end{cases}
+\end{align*}$$
+
+$$\begin{align*}  
+  \frac{\partial LL}{\partial \beta_{i}} &= \sum_{k=1}^{N} \phi(t_k) \begin{cases}
+    0& \quad \text{if }i \neq i(k)\text{ and }i \neq j(k) \\
+    \frac{-\alpha_{j(k)}\lambda_{k}\rho}{1-\lambda_{k}\mu_{k}\rho} - \alpha_{j(k)}& \quad \text{if }i = i(k)\text{ and } x_{k}=y_{k}=0 \\
+    \frac{\alpha_{j(k)}\rho}{1+\mu_{k}\rho} - \alpha_{j(k)}& \quad \text{if }i = i(k)\text{, } x_{k}=1 \text{ and } y_{k}=0  \\
+    -\alpha_{j(k)} + \frac{y_k}{\beta_{i(k)}}& \quad \text{if }i = i(k)\text{ and } y_{k} \neq 0  \\
+    \frac{-\alpha_{i(k)}\mu_{k}\gamma\rho}{1-\lambda_{k}\mu_{k}\rho} - \alpha_{i(k)}\gamma& \quad \text{if }i = j(k)\text{ and } x_{k}=y_{k}=0 \\
+    \frac{\alpha_{i(k)}\gamma\rho}{1+\lambda_{k}\rho} - \alpha_{i(k)}\gamma& \quad \text{if }i = j(k)\text{, } x_{k}=0 \text{ and } y_{k}=1  \\
+    -\alpha_{i(k)}\gamma + \frac{x_k}{\beta_{j(k)}}& \quad \text{if }i = j(k)\text{ and } x_{k} \neq 0  \\
   \end{cases}
 \end{align*}$$
