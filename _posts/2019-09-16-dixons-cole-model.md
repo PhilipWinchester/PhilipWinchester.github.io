@@ -146,27 +146,35 @@ Ie, the average attack parameter is 1. This condition is not strictly necessary,
 
 The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
 
-<div class="well">
-  <p>1: Optimise <- function(Match_Data){<br>
-  2:&ensp;&ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
-  3:&ensp;&ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to 1.3 and <br> &ensp;&ensp;&ensp;-0.05 respectively<br>
-  4:&ensp;&ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
-  5:&ensp;&ensp;&ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
-  6:&ensp;&ensp;&ensp;&ensp;Calculating the gradient of the log likelihood using Match_Data and<br> &ensp;&ensp;&ensp;&ensp;&ensp;<i>Parameters</i> using the partial derivatives in the Appendix and setting<br> &ensp;&ensp;&ensp;&ensp;&ensp;equal to <i>Gradient</i> <br>
-  7:&ensp;&ensp;&ensp;&ensp;Imposing the condition that the average attack parameter is 1. This is done by<br> &ensp;&ensp;&ensp;&ensp;&ensp;altering the gradient in the following way:<br>
-  &ensp;&ensp;&ensp;&ensp;&ensp;<i>Gradient</i> = <i>Gradient</i> - <i>Condition</i>, where <i>Condition</i> is<br> &ensp;&ensp;&ensp;&ensp;&ensp;a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries<br> &ensp;&ensp;&ensp;&ensp;&ensp;in <i>Gradient</i>. remaining entries are 0.<br>
-  8:&ensp;&ensp;&ensp;&ensp;Setting <i>PresentPoint</i> = <i>Parameters</i> and<br>
-  &ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>Parameters</i> + <i>Gradient</i><br>
-  9:&ensp;&ensp;&ensp;&ensp;while(LL(Match_Data, <i>StepPoint</i>) > LL(Match_Data, <i>PresentPoint</i>)) <br>
-  10:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>PresentPoint</i> = <i>StepPoint</i> <br>
-  11:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<i>StepPoint</i> = <i>StepPoint</i> + <i>Gradient</i><br>
-  12:&ensp;&ensp;&ensp;&ensp;<i>Parameters</i> = <i>PresentPoint</i><br>
-  13:&ensp;&ensp;return(<i>Parameters</i>)<br>
-  14: }</p> </div>
+```r
+Optimise <- function(Match_Data)
+  Creating Parameters, StartParameters and Gradient vectors of length 2n+2
+  Setting all entries in Parameters to 1, apart from γ and ρ which are set to 1.3 and -0.05 respectively
+
+  while(|Parameters - StartParameters| > Some small number)
+    Setting StartParameters = Parameters
+
+    Calculating the gradient of the log likelihood using Match_Data and Parameters using the partial derivatives in the Appendix and setting equal to Gradient
+
+    Imposing the condition that the average attack parameter is 1. This is done by altering the gradient in the following way:
+    Gradient = Gradient - Condition,
+    where Condition is a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries in Gradient. remaining entries are 0.
+
+    Setting PresentPoint = Parameters and
+    StepPoint = Parameters + Gradient
+
+    while(LL(Match_Data, StepPoint) > LL(Match_Data, PresentPoint))
+      Setting PresentPoint = StepPoint and
+      StepPoint = StepPoint + Gradient
+
+    Parameters = PresentPoint
+
+  return(Parameters)
+```
 
 Before adding the _Gradient_ to _StepPoint_ in lines 8 and 11, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiply _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
 
-It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
+It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100 \abs(Gradient)}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
 
 As it stands, my algorithm takes about 10 seconds to optimize parameters to the closest 0.01. This time is of course dependent on the number of teams and and games in our dataset, but for comparison, there are functions in the [alabama](https://cran.r-project.org/web/packages/alabama/index.html) package such as auglag which I understand take just under 1 minute to run on a similarly sized dataset.
 
@@ -234,61 +242,62 @@ As at 19 September 2019
       <th>0.87</th>
       <th>1.32</th>
     </tr>
-    <th>Chelsea</th>
-    <th>1.28</th>
-    <th>0.98</th>
-    <th>Stoke</th>
-    <th>0.71</th>
-    <th>1.46</th>
-  </tr>
-  <tr>
-    <th>Crystal Palace</th>
-    <th>0.99</th>
-    <th>1.16</th>
-    <th>Swansea</th>
-    <th>0.57</th>
-    <th>1.23</th>
-  </tr>
-  <tr>
-    <th>Everton</th>
-    <th>0.98</th>
-    <th>1.09</th>
-    <th>Tottenham</th>
-    <th>1.38</th>
-    <th>0.85</th>
-  </tr>
-  <tr>
-    <th>Fulham</th>
-    <th>0.68</th>
-    <th>1.70</th>
-    <th>Watford</th>
-    <th>0.92</th>
-    <th>1.39</th>
-  </tr>
-  <tr>
-    <th>Huddersfield</th>
-    <th>0.48</th>
-    <th>1.50</th>
-    <th>West Brom</th>
-    <th>0.64</th>
-    <th>1.22</th>
-  </tr>
-  <tr>
-    <th>Leicester</th>
-    <th>1.04</th>
-    <th>1.08</th>
-    <th>West Ham</th>
-    <th>1.02</th>
-    <th>1,25</th>
-  </tr>
-  <tr>
-    <th>Liverpool</th>
-    <th>1.75</th>
-    <th>0.63</th>
-    <th>Wolves</th>
-    <th>0.94</th>
-    <th>1.12</th>
-  </tr>
+    <tr>
+      <th>Chelsea</th>
+      <th>1.28</th>
+      <th>0.98</th>
+      <th>Stoke</th>
+      <th>0.71</th>
+      <th>1.46</th>
+    </tr>
+    <tr>
+      <th>Crystal Palace</th>
+      <th>0.99</th>
+      <th>1.16</th>
+      <th>Swansea</th>
+      <th>0.57</th>
+      <th>1.23</th>
+    </tr>
+    <tr>
+      <th>Everton</th>
+      <th>0.98</th>
+      <th>1.09</th>
+      <th>Tottenham</th>
+      <th>1.38</th>
+      <th>0.85</th>
+    </tr>
+    <tr>
+      <th>Fulham</th>
+      <th>0.68</th>
+      <th>1.70</th>
+      <th>Watford</th>
+      <th>0.92</th>
+      <th>1.39</th>
+    </tr>
+    <tr>
+      <th>Huddersfield</th>
+      <th>0.48</th>
+      <th>1.50</th>
+      <th>West Brom</th>
+      <th>0.64</th>
+      <th>1.22</th>
+    </tr>
+    <tr>
+      <th>Leicester</th>
+      <th>1.04</th>
+      <th>1.08</th>
+      <th>West Ham</th>
+      <th>1.02</th>
+      <th>1,25</th>
+    </tr>
+    <tr>
+      <th>Liverpool</th>
+      <th>1.75</th>
+      <th>0.63</th>
+      <th>Wolves</th>
+      <th>0.94</th>
+      <th>1.12</th>
+    </tr>
   </tbody>
 </table>
 </div>
