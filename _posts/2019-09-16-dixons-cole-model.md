@@ -157,8 +157,8 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 #   Calculating the gradient of the log likelihood using Match_Data and Parameters using the partial
 #   derivatives in the Appendix and setting equal to Gradient
 #
-#   Imposing the condition that the average attack parameter is 1. This is done by altering the gradient in
-#   the following way:
+#   Imposing the condition that the average attack parameter is 1. This is done by altering the gradient
+#   in the following way:
 #   Gradient = Gradient - Condition,
 #   where Condition is a 2n+2 vector. Entries 1 to n are equal to the average of the first n entries in
 #   Gradient. remaining entries are 0.
@@ -177,7 +177,7 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 Before adding the _Gradient_ to _StepPoint_ in lines 8 and 11, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiply _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
 
-It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100 \abs{Gradient}}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
+It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100 \text{length}(Gradient)}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
 
 As it stands, my algorithm takes about 10 seconds to optimize parameters to the closest 0.01. This time is of course dependent on the number of teams and and games in our dataset, but for comparison, there are functions in the [alabama](https://cran.r-project.org/web/packages/alabama/index.html) package such as auglag which I understand take just under 1 minute to run on a similarly sized dataset.
 
@@ -332,5 +332,5 @@ $$\begin{align*}
     \frac{-\beta_{i(k)}\lambda_{k}\rho}{1-\lambda_{k}\mu_{k}\rho} - \beta_{i(k)}& \quad \text{if }i = j(k)\text{ and } x_{k}=y_{k}=0 \\
     \frac{\beta_{i(k)}\rho}{1+\mu_{k}\rho} - \beta_{i(k)}& \quad \text{if }i = j(k)\text{, } x_{k}=1 \text{ and } y_{k}=0  \\
     -\beta_{i(k)} - \frac{y_k}{\alpha_{j(k)}}& \quad \text{if }i = j(k)\text{ and } y_{k} \neq 0  \\
-    \end{cases}
+  \end{cases}
 \end{align*}$$
