@@ -149,22 +149,16 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 Optimise <- function(Match_Data){ <br>
 <ensp>Creating _Parameters_ and _Gradient_ vector of length $$2n+2$$ <br>
-<ensp>Setting $$\gamma$$ and $$\rho$$ in _Parameters_ equal to 1.3 and -0.05 respectively
+<ensp>Setting $$\gamma$$ and $$\rho$$ in _Parameters_ equal to 1.3 and -0.05 respectively <br>
+
 {: .notice--primary}
 
-  # Takes some match data and returns
-
-  Teams <- sort(unique(Match_Data$HomeTeam))
-
-  # Setting all Parameters equal to 1 at first
-  Parameters <- rep(1,2*length(Teams)+2)
-
-  # Setting gamma equal to 1.4 and rho equal to 0
-  Parameters[2*length(Teams)+1] <- 1.4
-  Parameters[2*length(Teams)+2] <- -0.05
-
-  # Making StartParameters
-  StartParameters <- rep(0,2*length(Teams)+2)
+<div>
+  Optimise <- function(Match_Data){ <br>
+  <ensp>Creating _Parameters_ and _Gradient_ vector of length $$2n+2$$ <br>
+  <ensp>Setting $$\gamma$$ and $$\rho$$ in _Parameters_ equal to 1.3 and -0.05 respectively <br>
+</div>
+{: .notice--primary}
 
   Mult <- 1
   Step <- m
