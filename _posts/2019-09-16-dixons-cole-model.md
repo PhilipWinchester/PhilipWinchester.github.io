@@ -148,7 +148,7 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 <div class="well">
   <p>Optimise <- function(Match_Data){<br>
-  &ensp;&ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length<br> &ensp;&ensp;2n+2<br>
+  &ensp;&ensp;Creating <i>Parameters</i>, <i>StartParameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
   &ensp;&ensp;Setting all entries in <i>Parameters</i> to 1, apart from γ and ρ which are set to 1.3 and <br> &ensp;&ensp;-0.05 respectively<br>
   &ensp;&ensp;while(|<i>Parameters</i> - <i>StartParameters</i>| > Some small number) <br>
   &ensp;&ensp;&ensp;&ensp;Setting <i>StartParameters</i> = <i>Parameters</i> <br>
