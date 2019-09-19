@@ -1,4 +1,4 @@
-analysis---
+---
 title: "Dixon Coles Model"
 date: 2019-09-16
 tags: [FPL, R]
