@@ -149,7 +149,7 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 <div class="well">
   <h3>This is a heading in a div element</h3>
-  <p>This is some text in a <i>div</i> $$\rho$$ element. <br>
+  <p>This is some text in a <i>div</i> \rho element. <br>
   &ensp; &ensp; cecece<br>
   bef
 This is some text in a div element.</p>
