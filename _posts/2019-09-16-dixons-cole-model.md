@@ -166,7 +166,7 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 
 Before adding the _Gradient_ to _StepPoint_ in lines 8 and 11, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiply _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
 
-It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100|Gradient|}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
+It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
 
 As it stands, my algorithm takes about 10 seconds to optimize parameters to the closest 0.01. This time is of course dependent on the number of teams and and games in our dataset, but for comparison, there are functions in the [alabama](https://cran.r-project.org/web/packages/alabama/index.html) package such as auglag which I understand take just under 1 minute to run on a similarly sized dataset.
 
@@ -297,7 +297,7 @@ $$\gamma$$ = 1.28 and $$\rho$$ = -0.06.
 
 
 ## Conclusions
-Firstly, lets have a couple of notes on the results:
+Firstly, lets have a few notes on the results:
 
 - West Brom, Stoke, Swansea etc aren't in the Premier League? Why do they appear in the results? That's because they have been since the 17/18 season! Recall, that our dataset goes two seasons back.  
 - Are Norwich really the third biggest attacking threat in the league? Probably not, but Norwich have only played 5 games in the Premier League over the last few years and putting three goals in against Man City (who according to the results have the strongest defense in the league) in the weekend will have boosted their attacking threat massively. I expect the attacking strength for Norwich to go down as the season progresses.
