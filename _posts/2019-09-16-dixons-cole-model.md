@@ -146,21 +146,12 @@ Ie, the average attack parameter is 1. This condition is not strictly necessary,
 
 The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
 
-
 <div class="well">
-  <h3>This is a heading in a div element</h3>
-  <p>This is some text in a <i>div</i> \rho element. <br>
-  &ensp; &ensp; cecece<br>
-  bef
-This is some text in a div element.</p>
+  <p>Optimise <- function(Match_Data){<br>
+  &ensp;Creating <i>Parameters</i> and <i>Gradient</i> vectors of length 2n+2<br>
+  &ensp;Setting γ and ρ in <i>Parameters</i> equal to 1.3 and -0.05 respectively<br>
+  </p>
 </div>
-
-<div>
-  Optimise <- function(Match_Data){ <br>
-  <ensp>Creating _Parameters_ and _Gradient_ vector of length $$2n+2$$ <br>
-  <ensp>Setting $$\gamma$$ and $$\rho$$ in _Parameters_ equal to 1.3 and -0.05 respectively <br>
-</div>
-{: .notice--primary}
 
   Mult <- 1
   Step <- m
