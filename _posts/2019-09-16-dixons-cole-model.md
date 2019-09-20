@@ -12,10 +12,10 @@ header:
 classes: wide
 ---
 
-**In 1995 Mark Dixon and Stuart Coles were fed up with football results being predicted by Poisson models. Because lets be honest, they probably can't. So [here it is](http://web.math.ku.dk/~rolf/teaching/thesis/DixonColes.pdf), the new and improved Dixon Coles model suitable named after the two authors. If not only for amusing quotes such as "A recently introduced type of betting, fixed odds betting, is also growing in popularity. Bookmakers offer odds on the various outcomes of a match" which certainly reveals how ancient the paper is, it is certainly worth a read. The paper suggest two improvements to the standard Poisson model which will be discussed here. As a refresher, please do head up to the header for a link to my post on Poisson models.**
+**In 1995 Mark Dixon and Stuart Coles were fed up with football results being predicted by Poisson models. Because lets be honest, they probably can't. So [here it is](http://web.math.ku.dk/~rolf/teaching/thesis/DixonColes.pdf), the new and improved Dixon Coles model suitable named after the two authors. If not only for amusing quotes such as "A recently introduced type of betting, fixed odds betting, is also growing in popularity. Bookmakers offer odds on the various outcomes of a match" which reveals how ancient the paper is, it is certainly worth a read. The paper suggest two improvements to the standard Poisson model which will be discussed here. As a refresher, please do head up to the header for a link to my post on Poisson models.**
 
 ## Low Scoring Games
-The heart of soul of the Poisson model is that the number of goals scored by each team can be modeled by two independent, you guessed it, Poisson distributions. At the start of the paper, Dixon and Coles discuss the suitability of this independence assumption and argue that it is not suitable for low scoring games. There seems to be some evidence for this theory in practice. Below is heat map, curtesy of David Sheehan author of an excellent [blog](https://dashee87.github.io/), which displays the average difference between actual and Poisson model predicted scorelines for the 2005/06 season all the way up to the 2017/18 season. Green cells imply the model underestimated those scorelines, while red cells suggest overestimation - the colour strength indicates the level of disagreement.
+The heart of soul of the Poisson model is that the number of goals scored by each team can be modeled by two independent, you guessed it, Poisson distributions. At the start of the paper, Dixon and Coles discuss the suitability of this independence assumption and argue that it is not suitable for low scoring games. There seems to be some evidence for this theory in practice. Below is heat map, curtesy of David Sheehan author of an excellent [blog](https://dashee87.github.io/), which displays the average difference between actual and Poisson model predicted scorelines for the 2005/06 season all the way up to the 2017/18 season. Green cells imply the model underestimated those scorelines, while red cells suggest overestimation - the color strength indicates the level of disagreement.
 
 ![image-center](/images/Dixon Coles Model/actual_model_diff.png){: .align-center .width-half}
 
@@ -34,12 +34,12 @@ $$\begin{align*}
   \end{cases}
 \end{align*}$$
 
-Here $$X$$ and $$Y$$ are the home and away goals scored, $$\alpha_{i}$$ and $$\beta_{i}$$ is the home team attacking and defensive strength and equivalently for the away team $$j$$. $$\gamma$$ is the home team advantage factor and $$\rho$$ is the newly introduced dependance factor. Setting $$\rho = 0$$ corresponds to independence. In our work going forward, we will aim to estimate a non-zero value for $$\rho$$ which deals with the issues we have for low scoring games. In practice, $$\tau$$ multiplies our low scorlines with a non-unit value. The model remains Poisson for high scoring games. Given that $$\rho$$ is expected to be small, this is really a very minor correction.  
+Here $$X$$ and $$Y$$ are the home and away goals scored, $$\alpha_{i}$$ and $$\beta_{i}$$ are the home team attacking and defensive strength and equivalently for the away team $$j$$. $$\gamma$$ is the home team advantage factor and $$\rho$$ is the newly introduced dependance factor. Setting $$\rho = 0$$ corresponds to independence. In our work going forward, we will aim to estimate a non-zero value for $$\rho$$ which deals with the issues we have for low scoring games. In practice, $$\tau$$ multiplies our low scorline probabilities with a non-unit value. The model remains Poisson for high scoring games. Given that $$\rho$$ is expected to be small, this is really a very minor correction.  
 
 ## Time Decay
 Manchester City loosing 3-2 against Norwich yesterday is more interesting to us than City beating Stoke 7-0 two years ago with regards to estimating the current attack and defensive strength of City. This is not taken into account at the moment. In fancy words: The current model is static - the attack and defense parameters of each teams are regarded as constant throughout time. Lets fix that!
 
-Lets start by ignoring the above statement. As it stands, we have $$2n + 2$$ parameters to estimate, where $$n$$ is the number of teams in our dataset, 20 for the Premier League. $$n$$ $$\alpha$$'s, $$n$$ $$\beta$$'s, $$\gamma$$ and $$\rho$$. When estimating parameters we often refer to the likelihood of our observations and try to maximize this through varying our parameters. In simple terms: A bunch of games have been played, what values do we give our parameters so that the outcome of the games played were actually very likely to happen in the first place? In even simpler terms: John scored 5 goals in every single game ha played in last season. We want to model his scoring rate with a Poisson distribution. Johns Poisson parameters is probably about 5, not 1. Likelihoods are a key concept in probability theory and in this post going forward. Read up about it [here](https://en.wikipedia.org/wiki/Likelihood_function).
+Lets start by ignoring the above statement. As it stands, we have $$2n + 2$$ parameters to estimate, where $$n$$ is the number of teams in our dataset, 20 for the Premier League. $$n$$ $$\alpha$$'s, $$n$$ $$\beta$$'s, $$\gamma$$ and $$\rho$$. When estimating parameters we often refer to the likelihood of our observations and try to maximize this through varying our parameters. In simple terms: A bunch of games have been played, what values do we give our parameters so that the outcome of the games played were actually very likely to happen in the first place? In even simpler terms: Sophie scored 5 goals in every single game she played in last season. We want to model her scoring rate with a Poisson distribution. Sophies Poisson parameters is probably about 5, not 1. Likelihoods are a key concept in probability theory and in this post going forward. Read up about on [here](https://en.wikipedia.org/wiki/Likelihood_function).
 
 In our case, the likelihood function takes the following form:
 
@@ -51,7 +51,7 @@ $$\begin{align*}
 
 In the likelihood function, $$k$$ runs through all N matched in our dataset and multiply these together given our parameters where $$\lambda_k = \alpha_{i(k)}\beta_{j(k)} \gamma$$ and $$\mu_k = \alpha_{j(k)}\beta_{i(k)}$$ are match dependent for home team $$i$$ and away team $$j$$. In the final step above we have simply got rid of the factorial factors as these just combine to one very very big number which becomes irrelevant when we're trying to maximize the likelihood with respect to the parameters.
 
-To maximize, we find our partial derivatives of $$L$$ with respect to the parameters (gradient if you will). This looks incredibly scary and a common trick in this case is to consider $$\log_e(L)$$ instead. This works since the $$\log$$ function is a monotonically increasing function (ie, it increases as its argument increases), hence the maximums of $$L$$ are the same as those for $$\log_e(L)$$. The gain here is that logs of products become sums, which are much easier to deal with. the log likelihood is:
+To maximize, we find the partial derivatives of $$L$$ with respect to the parameters (gradient if you will). This looks incredibly scary and a common trick in this case is to consider $$\log_e(L)$$ instead. This works since the $$\log$$ function is a monotonically increasing function (ie, it increases as its argument increases), hence the maximums of $$L$$ are the same as those for $$\log_e(L)$$. The gain here is that logs of products become sums, which are much easier to deal with. the log likelihood is:
 
 $$\begin{align*}  
   LL(\alpha_i, \beta, i, \gamma, \rho, i=1,...,n) &= \sum_{k=1}^{N} \log(\tau_{\lambda_k, \mu_k}(x_k,y_k))-\lambda_k+x_k\log(\lambda_k)-\mu_k+y_k\log(\mu_k)
@@ -61,7 +61,7 @@ Going back to the first paragraph, our goal was to impose some sort of time depe
 
 ![image-center](/images/Dixon Coles Model/Epsilon.jpeg){: .align-center .width-half}
 
-It is a little problematic finding an optimal value for $$\epsilon$$. Dixon and Coles choose $$\epsilon$$ to optimize outcome predictions (win, loss, draw) rather than actual scorelines, which simplifies things slightly. In their paper, they use half week units for t and arrive at a value of 0.0065 for $$\epsilon$$. For us, that translates to $$\frac{0.0065}{3.5} = 0.0019$$. In the interest of keeping this post within a 30 min read, we are going to take this value as gospel. Adding the time decaying weighting function, or lok likelihood becomes:
+It is a little problematic finding an optimal value for $$\epsilon$$. Dixon and Coles choose $$\epsilon$$ to optimize outcome predictions (win, loss, draw) rather than actual scorelines, which simplifies things slightly. In their paper, they use half week units for t and arrive at a value of 0.0065 for $$\epsilon$$. For us, that translates to $$\frac{0.0065}{3.5} = 0.0019$$. In the interest of keeping this post within a 30 min read, we are going to take this value as gospel. Adding the time decaying weighting function, our log likelihood becomes:
 
 $$\begin{align*}  
   LL(\alpha_i, \beta, i, \gamma, \rho, i=1,...,n) &= \sum_{k=1}^{N} e^{-\epsilon t}[\log(\tau_{\lambda_k, \mu_k}(x_k,y_k))-\lambda_k+x_k\log(\lambda_k)-\mu_k+y_k\log(\mu_k)]
@@ -75,7 +75,7 @@ $$\begin{align*}
     \end{bmatrix}
 \end{align*}$$
 
-The parameters are in alphabetical order which means that for the Premier League $$\alpha_{1}$$ corresponds to the attacking strength of Arsenal. Match_Data is a dataframe will all Premier League Fixtures since tha start of the 17/18 season. As usual, this data is taken from [football-data.co.uk](http://www.football-data.co.uk/englandm.php).
+The parameters are in alphabetical order which means that for the Premier League $$\alpha_{1}$$ corresponds to the attacking strength of Arsenal. Match_Data is a dataframe with all Premier League Fixtures since the start of the 17/18 season. As usual, this data is taken from [football-data.co.uk](http://www.football-data.co.uk/englandm.php).
 
 ```r
 tau <- Vectorize(function(x, y, lambda, mu, rho){
@@ -88,12 +88,12 @@ tau <- Vectorize(function(x, y, lambda, mu, rho){
 })
 
 phi <- function(t, epsilon = 0.0019){
-  # Define the weight function
+  # Defining the weight function
   return(exp(-epsilon*t))
 }
 
 MatchLL <- function(x,y,ai, aj, bi, bj, gamma, rho, t){
-  # A function which calcualtes the log likelihood of some game
+  # A function which calculates the log likelihood of some game
   lambda <- ai*bj*gamma
   mu <- aj*bi
   return(phi(t)*sum(log(tau(x, y, lambda, mu, rho)) - lambda + x*log(lambda) - mu + y*log(mu)))
@@ -101,7 +101,7 @@ MatchLL <- function(x,y,ai, aj, bi, bj, gamma, rho, t){
 
 
 LL <- function(Match_Data, Parameters){
-  # Function which calclulates the LL for all the games
+  # Function which calculates the LL for all the games
   LL <- 0
 
   Teams <- sort(unique(Match_Data$HomeTeam))
@@ -144,7 +144,7 @@ $$\begin{align*}
 
 Ie, the average attack parameter is 1. This condition is not strictly necessary, but ensures that we arrive at the same order of maximizing perimeters whenever we run the gradient ascent.
 
-The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be find on my [GitHub page](https://github.com/PhilipWinchester).
+The first step in gradient ascent is to find the gradient of the log likelihood. To save you having to look at a sea of greek symbols, I have put these derivatives in the Appendix. Below is a rough sketch of the algorithm. The actual code can be found on my [GitHub page](https://github.com/PhilipWinchester).
 
 ```r
 #Optimise <- function(Match_Data)
@@ -175,9 +175,9 @@ The first step in gradient ascent is to find the gradient of the log likelihood.
 # return(Parameters)
 ```
 
-Before adding the _Gradient_ to _StepPoint_ in lines 8 and 11, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiply _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
+Before adding _Gradient_ to _StepPoint_ above, it is usual to reduce the size of _Gradient_ so that the steps we take to locate the maximum aren't too big, ie, we don't want to miss it. This is done by multiplying _Gradient_ by some constant smaller than 1, say $$\theta$$. $$\theta$$ is referred to as the step size and is allowed to change at every iteration. As we get closer to the maximum, usually we want $$\theta$$ to decrease.
 
-It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100\times \text{length}  (Gradient)}$$ throughout the algorithm is fine. Although there are ways of setting a variable $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
+It is somewhat arbitrary what we set $$\theta$$ as. For the purpose of what we're doing, setting it equal to say $$\frac{1}{100\times \text{length}  (Gradient)}$$ throughout the algorithm is fine. Although there are ways of setting $$\theta$$ to aid the speed of the algorithm. On my [GitHub page](https://github.com/PhilipWinchester), you will see that I have defined the function `NMod` which is used to decrease the size of _Gradient_ as we approach the maximum.
 
 As it stands, my algorithm takes about 10 seconds to optimize parameters to the closest 0.01. This time is of course dependent on the number of teams and and games in our dataset, but for comparison, there are functions in the [alabama](https://cran.r-project.org/web/packages/alabama/index.html) package such as auglag which I understand take just under 1 minute to run on a similarly sized dataset.
 
@@ -310,10 +310,10 @@ $$\gamma$$ = 1.28 and $$\rho$$ = -0.06.
 ## Conclusions
 Firstly, lets have a couple of notes on the results:
 
-- West Brom, Stoke, Swansea etc aren't in the Premier League? Why do they appear in the results? That's because they have been since the 17/18 season! Recall, that our dataset goes two seasons back.  
+- West Brom, Stoke, Swansea etc aren't in the Premier League? Why do they appear in the results? That's because they have been since the 17/18 season! Recall, our dataset goes two seasons back.  
 - Are Norwich really the third biggest attacking threat in the league? Probably not, but Norwich have only played 5 games in the Premier League over the last few years and putting three goals in against Man City (who according to the results have the strongest defense in the league) in the weekend will have boosted their attacking threat massively. I expect the attacking strength for Norwich to go down as the season progresses.
 
-The Dixon Coles model is regarded as a pretty good one for football predictions. It is certainly achieves our purpose which is to get a rough idea of which teams have favorable fixtures going forward and make FPL choices on the back of that. After speaking to friends who work in the industry, there are better models out there. These tend not to be published as companies use them to make serious money for themselves. For the time being, I will we will be using the Dixon Coles model going forward. My next to projects will most likely be to:
+The Dixon Coles model is regarded as a pretty good one for football predictions. It is certainly good enough for our purpose which is to get a rough idea of which teams have favorable fixtures going forward and make FPL choices on the back of that. After speaking to friends who work in the industry, there are better models out there. These tend not to be published as companies use them to make serious money for themselves. For the time being, we will be using the Dixon Coles model going forward. My next to projects will most likely be to:
 
 - Write a program which estimates the value for $$\epsilon$$ in the time decaying weight function.
 - Use the model to find the expected number of goals scored by teams and the probability of holding clean sheets.
