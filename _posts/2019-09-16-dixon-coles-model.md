@@ -134,11 +134,13 @@ LL <- function(Match_Data, Parameters){
 
 ## Maximizing the Log Likelihood
 
-Next we need to find the parameters which maximize the log likelihood. In an ideal world we would do this analytically by finding the gradient and setting this to zero, but due to the high dimensionality of the problem, we are restricted to numerical maximization. This will be done by gradient ascent, a cousin to the better known gradient descent. The two algorithms are really very similar as there is only a subtle sign change between the two. If you are unfamiliar with the concepts, read about gradient descent [here](https://en.wikipedia.org/wiki/Gradient_descent) and the difference between the two [here](https://stats.stackexchange.com/questions/258721/gradient-ascent-vs-gradient-descent-in-logistic-regression). If you can't be asked to, here is a crash course in gradient ascent: The gradient of any scalar function, say $$F: \quad \mathbb{R}^{n} \to \mathbb{R}$$, always points to a (local) maximum of $$F$$. Hence:
+Next we need to find the parameters which maximize the log likelihood. In an ideal world we would do this analytically by finding the gradient and setting this to zero, but due to the high dimensionality of the problem, we are restricted to numerical maximization. This will be done by gradient ascent, a cousin to the better known gradient descent. The two algorithms are really very similar as there is only a subtle sign change between the two. If you are unfamiliar with the concepts, read about gradient descent [here](https://en.wikipedia.org/wiki/Gradient_descent) and the difference between the two [here](https://stats.stackexchange.com/questions/258721/gradient-ascent-vs-gradient-descent-in-logistic-regression). If you can't be asked, here is a crash course in gradient ascent: The gradient of any scalar function, say $$F: \mathbb{R}^{n} \to \mathbb{R}$$, always points to a (local) maximum of $$F$$. Hence:
+
 $$\begin{align*}
   F(x+a\nabla F(x)) > F(x),
 \end{align*}$$
-Some some sufficiently small and positive $$a \in \mathbb{R}$$.
+
+for some sufficiently small and positive $$a \in \mathbb{R}$$.
 
 In their paper, Dixon and Coles imposed the following condition on the attack parameters:
 
