@@ -12,4 +12,4 @@ There may also post on other topics and projects I have been working on for fun.
 
 If you want to get in touch, drop me an email at <a href="mailto:philipwinchester16@gmail.com">philipwinchester16@gmail.com</a>.
 
-My CV can be found <a href="/Data/Curriculum Vitae, Philip Winchester.pdf">here</a>.
+My CV is <a href="/Data/Curriculum Vitae, Philip Winchester.pdf">here</a>.
