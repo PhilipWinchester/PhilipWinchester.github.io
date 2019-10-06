@@ -358,7 +358,7 @@ DrawPercentage = PDraw(HomeTeam,AwayTeam), AwayWinPercentage = PAwayWin(HomeTeam
 We have successfully built a model which quantifies the difficulty of upcoming fixtures taking into account home field advantage, the opposition and current form. Given the conditions of the Poisson distribution it is deemed to model football scores quite well. However, there are a few point to consider.
 
 1. The Poisson distribution, and in particular the Skellam distribution, assumes that the goal scoring rate for each team is independent and constant throughout the game. Ie, if team 1 were to score 10 goals in the first 5 minutes, this would not effect the future scoring rate of either team.
-2. It does not account for them teams motivation. Ie, it does not capture the scenario when a team is playing for a draw. This is particularly common in the group stages of knockout competitions.
+2. It does not account for the teams motivation. Ie, it does not capture the scenario when a team is playing for a draw. This is particularly common in the group stages of knockout competitions.
 
 Next we need to use the derived probabilities and see how they translate to the expected points scored by any given player. If we think Spurs are pretty likely to beat Brighton in their next game, how many FPL points do we expect Mr Kane to get? Of course this is a crucial question in FPL.
 
