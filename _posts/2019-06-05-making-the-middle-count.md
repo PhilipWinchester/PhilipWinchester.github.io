@@ -10,14 +10,14 @@ header:
 classes: wide
 ---
 
-**You are hopefully confident your squad will score highly in each gameweek and given your transfer limitations, perhaps also in a few gameweeks to come. How can you be confident in this? What are the factors you consider/should consider before selecting your squad? These are the ideas we need to quantify before we can move on to any kind of machine learning. In this post I will talk about the general squad structure I aim for and introduce a program I use to optimise this.**
+**You are hopefully confident your squad will score highly in each gameweek and given your transfer limitations, perhaps also in a few gameweeks to come. How can you be confident in this? What are the factors you should consider before selecting your squad? These are the ideas we need to quantify before we can move on to any kind of machine learning. In this post I will talk about the general squad structure I aim for and introduce a program I use to optimise this.**
 
 After playing FPL for a number of years, I have developed a squad structure which I am happy with and rarely diverge from. Usually I have:
 
 1. Two starting goalkeepers outside the "Big Six". In recent years I have found "Big Six" goalkeepers overpriced and having two mid-table goalkeepers to rotate with respect to favourable fixtures is usually the better option and allows you to spend money elsewhere.
 2. Three premium defenders. These players are usually accompanied by a price tag of £5.5m+, but have proven well worth the investment in recent years. In todays football, we see fullbacks bombing forwards and the likes of Alonso, Robertson, Trippier and Mendy have all been excellent selections this year.
 3. Two budget defenders. With the three premium options, there is no need to throw any more cash on the backline. Wan-Bissaka and Bennett always play for their respective teams and with their modest price tag of around £4.0m, they have been trustworthy substitutes for me this season.
-4. Three premium options. The squad is not complete without your Hazards, Agueros, Salas, and Kanes. This is where you expect to get the big points.
+4. Three premium options. The squad is not complete without your Hazards, Agueros, Salahs, and Kanes. This is where you expect to get the big points.
 5. The rest. There are five picks left spanning the attack and midfield. Usually, I select these in the £5.5m-£7.5m range depending on how much I have spent on the above. I will refer to these as the middle men and today we are going to make them count.
 
 Below is a picture of my squad going into gameweek 16. Hopefully the structure mentioned above is clear.
@@ -108,9 +108,9 @@ For any FPL analysis, thinking about upcoming fixtures is crucial and the table 
 
 The figures have simply been derived from looking at what betting companies think along with personal judgment. Analysing fixture difficulty is a topic in itself and will be covered in a later post. For the purpose of this post, the numbers above will suffice.
 
-When picking your middle men, it is desirable always to have the option to field four with decent fixtures over the next few gameweek. The player with the hardest fixture each gameweek doesn't matter to much, as he will sit on the bench. Hence, how strong your middle men are is a function of the four easiest fixtures over next few gameweeks. lets apply this reasoning to my middle men.
+When picking your middle men, it is slways desirable to have the option to field four with decent fixtures over the next few gameweeks. The player with the hardest fixture each gameweek doesn't matter too much, as he will sit on the bench. Hence, how strong your middle men are is a function of the four easiest fixtures over next few gameweeks. Lets apply this reasoning to my middle men.
 
-The table on the below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. The lower this value is the better.  
+The table below displays the difficulty of the next five fixtures played by my middle men. The fixture highlighted in red, is the toughest each gameweek and if no transfers are made over the period, the player with the red fixture will be put on the bench. The sum of the the non coloured cells represent how strong my middle men are, in this case it's 1061.3. A lower value is better.
 
 <div>
 <table>
@@ -171,7 +171,7 @@ The table on the below displays the difficulty of the next five fixtures played 
 </div>
 
 ## The code
-**It would be useful to calculate the above score for all possible combinations of five middle men.** This will be the the goal of this section.* It is of course not necessary to consider all midfielders and forwards in £5.5m-£7.5m range, but perhaps a subset of players who are in good form and are likely to play well going forward. I have decided to look at players who have at least 48 total points or 5 in the FPL form rating. The bellow table displays which teams have players under this condition. In total, there are 30 players we wish to consider.
+**It would be useful to calculate the above score for all possible combinations of five middle men.** This will be the the goal of this section.* It is of course not necessary to consider all midfielders and forwards in the £5.5m-£7.5m range, but perhaps a subset of players who are in good form and are likely to play well going forward. I have decided to look at players who have at least 48 total points or 5 in the FPL form rating. The table below displays which teams have players under this condition. In total, there are 30 players we wish to consider.
 
 <div>
 <table>
@@ -228,7 +228,7 @@ The table on the below displays the difficulty of the next five fixtures played 
 </table>
 </div>
 
-I have made a program in R with the above details and highlighted goal in mind. Lets break this program down and comment on some of the results.
+I have written a program in R with the above details and highlighted goal in mind. Lets break this program down and comment on some of the results.
 
 ```r
 #Adding number of interesting players
@@ -259,7 +259,7 @@ n = GwEnd - GwStart + 1 #Number of games we are looking at
 FPL2 <- FPL[c(1,(GwStart+2):(GwEnd+2))]
 ```
 
-After the above code, "FPL" is a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 of the Appendix. "FPL2" later becomes the equivalent dataframe only including the gameweeks we wish to consider.  
+The output from the above code is "FPL", a dataframe which only includes teams with players we wish to consider, how many interesting players there are in each team and the difficulty for these teams. See Figure 1 of the Appendix. "FPL2" later becomes the equivalent dataframe only including the gameweeks we wish to consider.  
 
 The vector "TeamsVector" contains all the players we wish to consider. So far, we don't distinguish between players in the same team. So even though Wilson and King are interesting players, they both appear as "Bournemouth" in TeamsVector.
 
@@ -298,7 +298,7 @@ Score <- function(M) {
 
 "MatrixMaker" produces a matrix similar to the one in Table 1 above. Given a list of five teams, it produces a matrix with the teams fixture difficulty over the next n games. The variable "DataFrame" needs to be in the form of FPL2.
 
-"Score" takes a matrix as the one produced by MatrixMaker and returns the score of that set of middle me. Our goals is to apply MatrixMaker to all our rows in PlayerMatrix, followed by the Score function. The code below does this and stores the results in the vector "Scores".
+"Score" takes a matrix as the one produced by MatrixMaker and returns the score of that set of middle men. Our goal is to apply MatrixMaker to all our rows in PlayerMatrix, followed by the Score function. The code below does this and stores the results in the vector "Scores".
 
 ```r
 #Filling the vector Scores with the scores for the the set of players in the PlayerMatrix
@@ -346,7 +346,7 @@ The table below shows row 20939 of Ans which happens to be the combination of mi
 </table>
 </div>
 
-Perhaps this suggests that my middle men are an area where we can improve my squad. If we were to change Wilson for Chicharito, we score 980.3 and fall within the top 0.3% instead. The strongest combination is shows in the table below.
+Perhaps this suggests that my middle men are an area where we can improve my squad. If we were to change Wilson for Chicharito, we score 980.3 and fall within the top 0.3% instead. The strongest combination is shown in the table below.
 
 <div>
 <table>
@@ -380,7 +380,7 @@ Perhaps this suggests that my middle men are an area where we can improve my squ
 A possible set of players which achieve this are Mitrovic, Armstrong, Pereyra, Felipe Anderson and Chicharito.
 
 ## Improvements
-Lets think about how we can Improve the model!
+Lets think about how we can improve the model!
 
 **Improvements to outputs in Ans:**
 
@@ -388,13 +388,13 @@ Lets think about how we can Improve the model!
 
 **Improvements to model:**
 
-- Rather than using somewhat arbitrary values for fixture difficulty, clearly I model could be made to derive these. As mentioned, this will be covered in another post.
+- Rather than using somewhat arbitrary values for fixture difficulty, clearly a model could be made to derive these. As mentioned, this will be covered in another post.
 - The fixture difficulty could be player dependent as well as team dependent. In this case, line 7 and 8 in Figure 3 of the Appendix might get a different score if one of the Crystal Palace players is in better form than the other.
 - The model could take into account what players already exist in the squad and hence only consider combinations of middle men which fall within the remaining budget and available places. This reduces computation time and provides a clearer view of the options available.  
 
 ## Appendix
 
-{% include figure image_path="/images/Making the middle count/Figure 1.jpg" alt="this is a placeholder image" caption="Figure 1. Data frame after delating teams with no interesting teams and some rearranging." %}
+{% include figure image_path="/images/Making the middle count/Figure 1.jpg" alt="this is a placeholder image" caption="Figure 1. Dataframe after deleting teams with no interesting players and some rearranging." %}
 
 {% include figure image_path="/images/Making the middle count/Figure 2.jpg" alt="this is a placeholder image" caption="Figure 2. The first 18 rows of PlayerMatrix." %}
 
